@@ -12,33 +12,19 @@ type StockResult = {
   LowestPrice: string;
 };
 
-type WatchStock = {
-  code: string;
-  name: string;
-  close: string;
-  score: number;
-  result: string;
-  ma5: number;
-  ma20: number;
-  goldenCross: string;
-  maSupport: string;
-  volumeStatus: string;
-};
-
 function App() {
   const [stockCode, setStockCode] = useState("");
   const [stockData, setStockData] = useState<StockResult | null>(null);
-  const [watchList, setWatchList] = useState<WatchStock[]>([]);
   const [message, setMessage] = useState("");
   const [score, setScore] = useState(0);
   const [ma5, setMa5] = useState(0);
   const [ma20, setMa20] = useState(0);
-  const [goldenCross, setGoldenCross] = useState("");
-  const [maSupport, setMaSupport] = useState("");
   const [volumeStatus, setVolumeStatus] = useState("");
+  const [maSupport, setMaSupport] = useState("");
+  const [goldenCross, setGoldenCross] = useState("");
 
   const toNumber = (value: string) => {
-    return Number(String(value).replace(/,/g, ""));
+    return Number(String(value).replace(/,/g, "").replace("+", ""));
   };
 
   const average = (arr: number[]) => {
@@ -56,6 +42,7 @@ function App() {
   const getStockData = async () => {
     setMessage("");
     setStockData(null);
+    setScore(0);
 
     if (!stockCode) {
       setMessage("請輸入股票代號");
@@ -63,8 +50,8 @@ function App() {
     }
 
     try {
-      const response = await fetch("/api/stock");
-      const allStocks = await response.json();
+      const stockResponse = await fetch("/api/stock");
+      const allStocks = await stockResponse.json();
 
       const stock = allStocks.find(
         (item: StockResult) => item.Code === stockCode.trim()
@@ -77,11 +64,11 @@ function App() {
 
       setStockData(stock);
 
-      const historyResponse = await fetch(`/api/history?code=${stockCode}`);
+      const historyResponse = await fetch(`/api/history?code=${stockCode.trim()}`);
       const history = await historyResponse.json();
 
       if (!history.data || history.data.length < 5) {
-        setMessage("查詢成功，但歷史資料不足，無法完整計算均線");
+        setMessage("查詢成功，但歷史資料不足，無法計算5MA");
         return;
       }
 
@@ -94,9 +81,9 @@ function App() {
       const previousMa5 = average(closes.slice(-6, -1));
       const previousMa20 = average(closes.slice(0, -1));
 
-      const avgVolume20 = average(volumes.slice(-20));
-      const todayVolume = toNumber(stock.TradeVolume);
-      const volumeRatio = todayVolume / avgVolume20;
+      const avgVolume = average(volumes);
+      const todayVolume = volumes[volumes.length - 1];
+      const volumeRatio = todayVolume / avgVolume;
 
       let autoScore = 0;
 
@@ -146,89 +133,32 @@ function App() {
       setScore(autoScore);
       setMa5(Number(currentMa5.toFixed(2)));
       setMa20(Number(currentMa20.toFixed(2)));
-      setGoldenCross(crossText);
-      setMaSupport(supportText);
       setVolumeStatus(volumeText);
+      setMaSupport(supportText);
+      setGoldenCross(crossText);
       setMessage("查詢成功，已自動評分");
     } catch (error) {
-      setMessage("API錯誤");
+      console.log(error);
+      setMessage("API錯誤，請檢查 /api/stock 或 /api/history");
     }
   };
 
-  const addToWatchList = () => {
-    if (!stockData) return;
-
-    const newStock: WatchStock = {
-      code: stockData.Code,
-      name: stockData.Name,
-      close: stockData.ClosingPrice,
-      score,
-      result: getResult(score),
-      ma5,
-      ma20,
-      goldenCross,
-      maSupport,
-      volumeStatus,
-    };
-
-    const filtered = watchList.filter((s) => s.code !== stockData.Code);
-    const sorted = [...filtered, newStock].sort((a, b) => b.score - a.score);
-
-    setWatchList(sorted);
-  };
-
-  const clearWatchList = () => {
-    setWatchList([]);
-  };
-
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#07122b",
-        color: "white",
-        padding: "30px",
-        fontFamily: "sans-serif",
-      }}
-    >
+    <div style={{ minHeight: "100vh", background: "#07122b", color: "white", padding: "30px", fontFamily: "sans-serif" }}>
       <h1 style={{ textAlign: "center" }}>📡 股票戰情中心 v2</h1>
 
-      <div
-        style={{
-          maxWidth: "650px",
-          margin: "auto",
-          background: "#1b2942",
-          padding: "25px",
-          borderRadius: "20px",
-        }}
-      >
+      <div style={{ maxWidth: "650px", margin: "auto", background: "#1b2942", padding: "25px", borderRadius: "20px" }}>
         <input
           type="text"
           placeholder="輸入股票代號，例如 2330"
           value={stockCode}
           onChange={(e) => setStockCode(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "15px",
-            marginBottom: "15px",
-            borderRadius: "10px",
-            border: "none",
-            fontSize: "18px",
-          }}
+          style={{ width: "100%", padding: "15px", marginBottom: "15px", borderRadius: "10px", border: "none", fontSize: "18px" }}
         />
 
         <button
           onClick={getStockData}
-          style={{
-            width: "100%",
-            padding: "15px",
-            background: "#3264e6",
-            color: "white",
-            border: "none",
-            borderRadius: "10px",
-            fontSize: "20px",
-            cursor: "pointer",
-          }}
+          style={{ width: "100%", padding: "15px", background: "#3264e6", color: "white", border: "none", borderRadius: "10px", fontSize: "20px", cursor: "pointer" }}
         >
           查詢並自動評分
         </button>
@@ -238,99 +168,18 @@ function App() {
         <p style={{ color: "#ffd54f" }}>{message}</p>
 
         {stockData && (
-          <div
-            style={{
-              marginTop: "25px",
-              background: "#26354f",
-              padding: "20px",
-              borderRadius: "15px",
-            }}
-          >
-            <h2>
-              {stockData.Name} ({stockData.Code})
-            </h2>
-
+          <div style={{ marginTop: "25px", background: "#26354f", padding: "20px", borderRadius: "15px" }}>
+            <h2>{stockData.Name} ({stockData.Code})</h2>
             <p>收盤價：{stockData.ClosingPrice}</p>
             <p>漲跌：{stockData.Change}</p>
             <p>成交量：{stockData.TradeVolume}</p>
             <p>5MA：{ma5}</p>
-            <p>20MA：{ma20}</p>
+            <p>近月均線：{ma20}</p>
             <p>量能判斷：{volumeStatus}</p>
             <p>5MA判斷：{maSupport}</p>
-            <p>黃金交叉：{goldenCross}</p>
-
-            <button
-              onClick={addToWatchList}
-              style={{
-                width: "100%",
-                padding: "12px",
-                background: "#22c55e",
-                color: "white",
-                border: "none",
-                borderRadius: "10px",
-                fontSize: "18px",
-                cursor: "pointer",
-              }}
-            >
-              加入主攻排行榜
-            </button>
+            <p>均線判斷：{goldenCross}</p>
           </div>
         )}
-      </div>
-
-      <div
-        style={{
-          maxWidth: "650px",
-          margin: "30px auto",
-          background: "#111827",
-          padding: "20px",
-          borderRadius: "20px",
-        }}
-      >
-        <h2>🏆 主攻排行榜</h2>
-
-        <button
-          onClick={clearWatchList}
-          style={{
-            background: "#ef4444",
-            color: "white",
-            border: "none",
-            padding: "10px",
-            borderRadius: "8px",
-            marginBottom: "15px",
-            cursor: "pointer",
-          }}
-        >
-          清空排行榜
-        </button>
-
-        {watchList.map((stock, index) => (
-          <div
-            key={stock.code}
-            style={{
-              background: "#26354f",
-              marginBottom: "15px",
-              padding: "15px",
-              borderRadius: "12px",
-              borderLeft:
-                stock.score >= 80
-                  ? "6px solid #22c55e"
-                  : stock.score >= 60
-                  ? "6px solid #facc15"
-                  : "6px solid #ef4444",
-            }}
-          >
-            <h3>
-              #{index + 1} {stock.name} ({stock.code})
-            </h3>
-            <p>收盤價：{stock.close}</p>
-            <p>分數：{stock.score}</p>
-            <p>結果：{stock.result}</p>
-            <p>{stock.volumeStatus}</p>
-            <p>{stock.maSupport}</p>
-            <p>{stock.goldenCross}</p>
-          </div>
-        ))}
       </div>
     </div>
   );
