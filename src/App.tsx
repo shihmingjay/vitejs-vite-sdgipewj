@@ -80,7 +80,7 @@ function App() {
       const historyResponse = await fetch(`/api/history?code=${stockCode}`);
       const history = await historyResponse.json();
 
-      if (!history.data || history.data.length < 20) {
+      if (!history.data || history.data.length < 5) {
         setMessage("查詢成功，但歷史資料不足，無法完整計算均線");
         return;
       }
@@ -90,9 +90,9 @@ function App() {
 
       const lastClose = closes[closes.length - 1];
       const currentMa5 = average(closes.slice(-5));
-      const currentMa20 = average(closes.slice(-20));
+      const currentMa20 = average(closes);
       const previousMa5 = average(closes.slice(-6, -1));
-      const previousMa20 = average(closes.slice(-21, -1));
+      const previousMa20 = average(closes.slice(0, -1));
 
       const avgVolume20 = average(volumes.slice(-20));
       const todayVolume = toNumber(stock.TradeVolume);
