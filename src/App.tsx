@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import RankingBoard from "./components/RankingBoard";
 import type { ScoreItem, StockApiItem, WatchStock } from "./types";
 import "./App.css";
-
+// selling pressure scoring checkpoint
 function App() {
   const [stockCode, setStockCode] = useState("");
   const [stockData, setStockData] = useState<StockApiItem | null>(null);
