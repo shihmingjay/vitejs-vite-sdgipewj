@@ -259,8 +259,21 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
           {loading ? "掃描中..." : "查詢並自動評分"}
         </button>
 
-        <h2>目前分數：{totalScore}</h2>
-        <h2>目前結果：{getResult(totalScore)}</h2>
+        <h2
+  className={
+    totalScore >= 80
+      ? "score-high result-glow"
+      : totalScore >= 60
+      ? "score-medium result-glow"
+      : "score-low result-glow"
+  }
+>
+  目前分數：{totalScore}
+</h2>
+
+<h2 className="result-glow">
+  目前結果：{getResult(totalScore)}
+</h2>
         <p>{message}</p>
 
         {stockData && (
