@@ -31,7 +31,7 @@ export type StockApiItem = {
 
     pressureStatus: string;
     pressureScore: number;
-    
+    pressurePercent: number;
     attackScore: number;
     attackStatus: string;
   };

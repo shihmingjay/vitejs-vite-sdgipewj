@@ -68,7 +68,30 @@ function RankingBoard({
   賣壓：
   {stock.pressureStatus}
 </p>
-
+<div
+  style={{
+    width: "100%",
+    height: "14px",
+    background: "#222",
+    borderRadius: "10px",
+    overflow: "hidden",
+    marginTop: "8px",
+  }}
+>
+  <div
+    style={{
+      width: `${stock.pressurePercent}%`,
+      height: "100%",
+      background:
+        stock.pressurePercent >= 80
+          ? "#dc2626"
+          : stock.pressurePercent >= 50
+          ? "#f59e0b"
+          : "#16a34a",
+      transition: "0.3s",
+    }}
+  />
+</div>
 <p>
   賣壓分：
   {stock.pressureScore}/100
