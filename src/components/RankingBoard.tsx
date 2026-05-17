@@ -80,14 +80,14 @@ function RankingBoard({
 >
   <div
     style={{
-      width: `${stock.pressurePercent}%`,
+      width: `${stock.pressurePercent ?? stock.pressureScore ?? 0}%`,
       height: "100%",
       background:
-        stock.pressurePercent >= 80
-          ? "#dc2626"
-          : stock.pressurePercent >= 50
-          ? "#f59e0b"
-          : "#16a34a",
+  (stock.pressurePercent ?? stock.pressureScore ?? 0) >= 80
+    ? "#dc2626"
+    : (stock.pressurePercent ?? stock.pressureScore ?? 0) >= 50
+    ? "#f59e0b"
+    : "#16a34a",
       transition: "0.3s",
     }}
   />
