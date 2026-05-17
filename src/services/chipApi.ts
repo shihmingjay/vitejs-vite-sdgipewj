@@ -2,6 +2,7 @@ export async function getChipData(
     stockCode: string
   ) {
     try {
+        console.log("查詢籌碼:", stockCode);
       // 🚧 V3 預留 API 架構
   
       return {
