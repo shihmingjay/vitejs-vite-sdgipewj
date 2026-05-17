@@ -37,6 +37,7 @@ function App() {
   const [stockData, setStockData] = useState<StockApiItem | null>(null);
   const [message, setMessage] = useState("輸入股票代號，啟動戰情掃描。");
   const [loading, setLoading] = useState(false);
+  const [scanLoading, setScanLoading] = useState(false);
 
   const [watchList, setWatchList] = useState<WatchStock[]>([]);
 
@@ -54,9 +55,7 @@ function App() {
 
   useEffect(() => {
     const saved = localStorage.getItem("stock-war-room-watchlist");
-    if (saved) {
-      setWatchList(JSON.parse(saved));
-    }
+    if (saved) setWatchList(JSON.parse(saved));
   }, []);
 
   useEffect(() => {
@@ -80,21 +79,152 @@ function App() {
   };
 
   const getColor = (score: number) => {
-    if (score >= 80) return "#22c55e";
-    if (score >= 70) return "#38bdf8";
-    if (score >= 60) return "#facc15";
-    return "#fb7185";
+    if (score >= 80) return "#16a34a";
+    if (score >= 70) return "#0284c7";
+    if (score >= 60) return "#ca8a04";
+    return "#dc2626";
+  };
+
+  const analyzeStock = async (
+    stock: StockApiItem,
+    manualScores = {
+      mainChip,
+      institution,
+      chipClean,
+      bigHolder,
+    }
+  ): Promise<WatchStock | null> => {
+    const historyRes = await fetch(`/api/history?code=${stock.Code}`);
+    const history = await historyRes.json();
+
+    if (!history || !Array.isArray(history.data) || history.data.length < 5) {
+      return null;
+    }
+
+    const closes = history.data.map((row: any[]) => toNumber(row[6]));
+    const volumes = history.data.map((row: any[]) => toNumber(row[1]));
+
+    const lastClose = closes[closes.length - 1];
+    const currentMa5 = average(closes.slice(-5));
+    const monthAverage = average(closes);
+
+    const open = toNumber(stock.OpeningPrice);
+    const high = toNumber(stock.HighestPrice);
+    const low = toNumber(stock.LowestPrice);
+    const close = toNumber(stock.ClosingPrice);
+
+    const avgVolume = average(volumes);
+    const todayVolume = volumes[volumes.length - 1];
+    const volumeRatio = todayVolume / avgVolume;
+
+    let volumeScore = 5;
+    let volumeText = "量能普通";
+    if (volumeRatio >= 1.2 && volumeRatio <= 1.5) {
+      volumeScore = 10;
+      volumeText = "健康增量";
+    } else if (volumeRatio > 1 && volumeRatio < 2) {
+      volumeScore = 7;
+      volumeText = "量能尚可";
+    } else if (volumeRatio >= 3) {
+      volumeScore = 2;
+      volumeText = "爆量過熱";
+    } else if (volumeRatio < 0.8) {
+      volumeScore = 6;
+      volumeText = "量縮整理";
+    }
+
+    let positionScore = 5;
+    if (close >= currentMa5 && close >= monthAverage) positionScore = 9;
+    else if (close >= currentMa5) positionScore = 7;
+    else if (close < currentMa5) positionScore = 4;
+
+    let technicalScore = 5;
+    if (currentMa5 > monthAverage) technicalScore = 9;
+    else if (Math.abs(currentMa5 - monthAverage) / monthAverage <= 0.02) technicalScore = 7;
+
+    const range = high - low || 1;
+    const body = Math.abs(close - open);
+    const lowerShadow = Math.min(open, close) - low;
+
+    let candleScore = 5;
+    let candleReason = "K線普通";
+    if (close >= open && lowerShadow / range >= 0.3) {
+      candleScore = 9;
+      candleReason = "紅K帶下引線";
+    } else if (close >= open) {
+      candleScore = 8;
+      candleReason = "紅K收盤";
+    } else if (lowerShadow / range >= 0.35 && body / range <= 0.5) {
+      candleScore = 8;
+      candleReason = "下引線承接";
+    } else if (close < open && body / range > 0.65) {
+      candleScore = 3;
+      candleReason = "長黑K偏弱";
+    }
+
+    const nearMa5 = Math.abs(lastClose - currentMa5) / currentMa5;
+
+    let pullbackScore = 5;
+    let supportText = "未回5MA";
+    if (lastClose >= currentMa5 && nearMa5 <= 0.03 && lowerShadow / range >= 0.25) {
+      pullbackScore = 10;
+      supportText = "回5MA不破＋下引線";
+    } else if (lastClose >= currentMa5 && nearMa5 <= 0.03) {
+      pullbackScore = 9;
+      supportText = "回5MA不破";
+    } else if (lastClose > currentMa5) {
+      pullbackScore = 7;
+      supportText = "站上5MA";
+    }
+
+    let goldenScore = 5;
+    let trendText = "均線普通";
+    if (currentMa5 > monthAverage) {
+      goldenScore = 9;
+      trendText = "5MA高於近月均線";
+    } else if (Math.abs(currentMa5 - monthAverage) / monthAverage <= 0.02) {
+      goldenScore = 8;
+      trendText = "接近黃金交叉";
+    }
+
+    const items: ScoreItem[] = [
+      { name: "成交量", score: volumeScore, reason: volumeText, auto: true },
+      { name: "主力籌碼", score: manualScores.mainChip, reason: "目前先手動輸入", auto: false },
+      { name: "法人動向", score: manualScores.institution, reason: "目前先手動輸入", auto: false },
+      { name: "位階", score: positionScore, reason: close >= currentMa5 ? "站上短均" : "短線偏弱", auto: true },
+      { name: "技術面", score: technicalScore, reason: trendText, auto: true },
+      { name: "K線品質", score: candleScore, reason: candleReason, auto: true },
+      { name: "回檔型態", score: pullbackScore, reason: supportText, auto: true },
+      { name: "籌碼乾淨度", score: manualScores.chipClean, reason: "目前先手動輸入", auto: false },
+      { name: "大戶持股", score: manualScores.bigHolder, reason: "目前先手動輸入", auto: false },
+      { name: "黃金交叉趨勢", score: goldenScore, reason: trendText, auto: true },
+    ];
+
+    const totalScore = items.reduce((sum, item) => sum + item.score, 0);
+
+    return {
+      code: stock.Code,
+      name: stock.Name,
+      close: stock.ClosingPrice,
+      totalScore,
+      result: getResult(totalScore),
+      items,
+      ma5: Number(currentMa5.toFixed(2)),
+      maMonth: Number(monthAverage.toFixed(2)),
+      volumeStatus: volumeText,
+      maSupport: supportText,
+      trendStatus: trendText,
+    };
   };
 
   const scanStock = async () => {
     try {
       setLoading(true);
-      setMessage("AI 戰情雷達掃描中...");
+      setMessage("單股雷達掃描中...");
       setStockData(null);
       setScoreItems([]);
 
       const code = stockCode.trim();
-
       if (!code) {
         setMessage("請先輸入股票代號。");
         setLoading(false);
@@ -104,12 +234,6 @@ function App() {
       const stockRes = await fetch("/api/stock");
       const allStocks = await stockRes.json();
 
-      if (!Array.isArray(allStocks)) {
-        setMessage("stock API 格式錯誤。");
-        setLoading(false);
-        return;
-      }
-
       const stock = allStocks.find((item: StockApiItem) => item.Code === code);
 
       if (!stock) {
@@ -118,128 +242,71 @@ function App() {
         return;
       }
 
-      const historyRes = await fetch(`/api/history?code=${code}`);
-      const history = await historyRes.json();
+      const result = await analyzeStock(stock);
 
-      if (!history || !Array.isArray(history.data) || history.data.length < 5) {
-        setMessage("歷史資料不足，無法完整計算均線。");
+      if (!result) {
+        setMessage("歷史資料不足，無法完整計算。");
         setLoading(false);
         return;
       }
 
-      const closes = history.data.map((row: any[]) => toNumber(row[6]));
-      const volumes = history.data.map((row: any[]) => toNumber(row[1]));
-
-      const lastClose = closes[closes.length - 1];
-      const currentMa5 = average(closes.slice(-5));
-      const monthAverage = average(closes);
-
-      const open = toNumber(stock.OpeningPrice);
-      const high = toNumber(stock.HighestPrice);
-      const low = toNumber(stock.LowestPrice);
-      const close = toNumber(stock.ClosingPrice);
-
-      const avgVolume = average(volumes);
-      const todayVolume = volumes[volumes.length - 1];
-      const volumeRatio = todayVolume / avgVolume;
-
-      let volumeScore = 5;
-      let volumeText = "量能普通";
-      if (volumeRatio >= 1.2 && volumeRatio <= 1.5) {
-        volumeScore = 10;
-        volumeText = "健康增量";
-      } else if (volumeRatio > 1 && volumeRatio < 2) {
-        volumeScore = 7;
-        volumeText = "量能尚可";
-      } else if (volumeRatio >= 3) {
-        volumeScore = 2;
-        volumeText = "爆量過熱";
-      } else if (volumeRatio < 0.8) {
-        volumeScore = 6;
-        volumeText = "量縮整理";
-      }
-
-      let positionScore = 5;
-      if (close >= currentMa5 && close >= monthAverage) positionScore = 9;
-      else if (close >= currentMa5) positionScore = 7;
-      else if (close < currentMa5) positionScore = 4;
-
-      let technicalScore = 5;
-      if (currentMa5 > monthAverage) technicalScore = 9;
-      else if (Math.abs(currentMa5 - monthAverage) / monthAverage <= 0.02) technicalScore = 7;
-
-      const range = high - low || 1;
-      const body = Math.abs(close - open);
-      const lowerShadow = Math.min(open, close) - low;
-
-      let candleScore = 5;
-      let candleReason = "K線普通";
-      if (close >= open && lowerShadow / range >= 0.3) {
-        candleScore = 9;
-        candleReason = "紅K帶下引線";
-      } else if (close >= open) {
-        candleScore = 8;
-        candleReason = "紅K收盤";
-      } else if (lowerShadow / range >= 0.35 && body / range <= 0.5) {
-        candleScore = 8;
-        candleReason = "下引線承接";
-      } else if (close < open && body / range > 0.65) {
-        candleScore = 3;
-        candleReason = "長黑K偏弱";
-      }
-
-      const nearMa5 = Math.abs(lastClose - currentMa5) / currentMa5;
-
-      let pullbackScore = 5;
-      let supportText = "未回5MA";
-      if (lastClose >= currentMa5 && nearMa5 <= 0.03 && lowerShadow / range >= 0.25) {
-        pullbackScore = 10;
-        supportText = "回5MA不破＋下引線";
-      } else if (lastClose >= currentMa5 && nearMa5 <= 0.03) {
-        pullbackScore = 9;
-        supportText = "回5MA不破";
-      } else if (lastClose > currentMa5) {
-        pullbackScore = 7;
-        supportText = "站上5MA";
-      }
-
-      let goldenScore = 5;
-      let trendText = "均線普通";
-      if (currentMa5 > monthAverage) {
-        goldenScore = 9;
-        trendText = "5MA高於近月均線";
-      } else if (Math.abs(currentMa5 - monthAverage) / monthAverage <= 0.02) {
-        goldenScore = 8;
-        trendText = "接近黃金交叉";
-      }
-
-      const items: ScoreItem[] = [
-        { name: "成交量", score: volumeScore, reason: volumeText, auto: true },
-        { name: "主力籌碼", score: mainChip, reason: "目前先手動輸入，之後接籌碼資料", auto: false },
-        { name: "法人動向", score: institution, reason: "目前先手動輸入，之後接外資/投信", auto: false },
-        { name: "位階", score: positionScore, reason: close >= currentMa5 ? "站上短均" : "短線偏弱", auto: true },
-        { name: "技術面", score: technicalScore, reason: trendText, auto: true },
-        { name: "K線品質", score: candleScore, reason: candleReason, auto: true },
-        { name: "回檔型態", score: pullbackScore, reason: supportText, auto: true },
-        { name: "籌碼乾淨度", score: chipClean, reason: "目前先手動輸入，之後接散戶/融資資料", auto: false },
-        { name: "大戶持股", score: bigHolder, reason: "目前先手動輸入，之後接大戶持股", auto: false },
-        { name: "黃金交叉趨勢", score: goldenScore, reason: trendText, auto: true },
-      ];
-
-      const total = items.reduce((sum, item) => sum + item.score, 0);
-
       setStockData(stock);
-      setScoreItems(items);
-      setMa5(Number(currentMa5.toFixed(2)));
-      setMaMonth(Number(monthAverage.toFixed(2)));
-      setVolumeStatus(volumeText);
-      setMaSupport(supportText);
-      setTrendStatus(trendText);
-      setMessage(`掃描完成，總分 ${total}，${getResult(total)}`);
+      setScoreItems(result.items);
+      setMa5(result.ma5);
+      setMaMonth(result.maMonth);
+      setVolumeStatus(result.volumeStatus);
+      setMaSupport(result.maSupport);
+      setTrendStatus(result.trendStatus);
+      setMessage(`掃描完成，總分 ${result.totalScore}，${result.result}`);
       setLoading(false);
     } catch (error: any) {
       setMessage(`API錯誤：${error.message}`);
       setLoading(false);
+    }
+  };
+
+  const autoScanMarket = async () => {
+    try {
+      setScanLoading(true);
+      setMessage("盤後自動掃描中，先掃 70 元以下前 80 檔...");
+
+      const stockRes = await fetch("/api/stock");
+      const allStocks: StockApiItem[] = await stockRes.json();
+
+      const candidates = allStocks
+        .filter((stock) => {
+          const price = toNumber(stock.ClosingPrice);
+          const volume = toNumber(stock.TradeVolume);
+          return stock.Code.length === 4 && price > 0 && price <= 70 && volume > 0;
+        })
+        .slice(0, 80);
+
+      const results: WatchStock[] = [];
+
+      for (const stock of candidates) {
+        try {
+          const result = await analyzeStock(stock, {
+            mainChip: 5,
+            institution: 5,
+            chipClean: 5,
+            bigHolder: 5,
+          });
+
+          if (result && result.totalScore >= 60) {
+            results.push(result);
+          }
+        } catch {
+          // 單檔失敗就略過，不讓整個掃描炸掉
+        }
+      }
+
+      const sorted = results.sort((a, b) => b.totalScore - a.totalScore).slice(0, 30);
+      setWatchList(sorted);
+      setMessage(`盤後掃描完成，共找到 ${sorted.length} 檔 60 分以上股票。`);
+      setScanLoading(false);
+    } catch (error: any) {
+      setMessage(`盤後掃描失敗：${error.message}`);
+      setScanLoading(false);
     }
   };
 
@@ -266,23 +333,27 @@ function App() {
     setWatchList([...filtered, newStock].sort((a, b) => b.totalScore - a.totalScore));
   };
 
+  const deleteOneStock = (code: string) => {
+    setWatchList(watchList.filter((stock) => stock.code !== code));
+  };
+
   const clearWatchList = () => {
     setWatchList([]);
   };
 
   const pageStyle: React.CSSProperties = {
     minHeight: "100vh",
-    color: "white",
+    color: "#0f172a",
     padding: "24px",
     fontFamily: "Arial, sans-serif",
     background:
-      "radial-gradient(circle at top left, rgba(56,189,248,0.35), transparent 30%), radial-gradient(circle at top right, rgba(34,197,94,0.25), transparent 25%), linear-gradient(135deg, #e0f2fe 0%, #0f172a 38%, #020617 100%)",
+      "linear-gradient(135deg, #f8fafc 0%, #e0f2fe 42%, #dbeafe 100%)",
   };
 
   const cardStyle: React.CSSProperties = {
-    background: "rgba(15, 23, 42, 0.76)",
-    border: "1px solid rgba(255,255,255,0.15)",
-    boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
+    background: "rgba(255, 255, 255, 0.82)",
+    border: "1px solid rgba(148,163,184,0.35)",
+    boxShadow: "0 18px 45px rgba(15,23,42,0.16)",
     backdropFilter: "blur(14px)",
     borderRadius: "24px",
     padding: "22px",
@@ -290,23 +361,37 @@ function App() {
 
   return (
     <div style={pageStyle}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
         <div
           style={{
             ...cardStyle,
-            minHeight: "220px",
+            minHeight: "230px",
             marginBottom: "22px",
+            color: "white",
             background:
-              "linear-gradient(135deg, rgba(14,165,233,0.38), rgba(15,23,42,0.88)), url('https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=1400&q=80') center/cover",
+              "linear-gradient(135deg, rgba(14,165,233,0.50), rgba(15,23,42,0.65)), url('https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=1400&q=80') center/cover",
           }}
         >
-          <h1 style={{ fontSize: "38px", margin: 0 }}>📡 股票戰情中心 v2</h1>
-          <p style={{ fontSize: "18px", color: "#dbeafe" }}>
-            10項評分 · 主攻排行榜 · AI戰情雷達 · 回5MA / 黃金交叉偵測
+          <h1 style={{ fontSize: "40px", margin: 0 }}>📡 股票戰情中心 v2</h1>
+          <p style={{ fontSize: "18px", color: "#e0f2fe" }}>
+            10項評分 · 盤後掃描 · 主攻排行榜 · 回5MA / 黃金交叉偵測
           </p>
-          <p style={{ color: "#bae6fd" }}>
-            自動資料目前支援上市股；籌碼、法人、大戶先用手動分數，之後逐步接 API。
-          </p>
+          <button
+            onClick={autoScanMarket}
+            disabled={scanLoading}
+            style={{
+              padding: "14px 18px",
+              borderRadius: "14px",
+              border: "none",
+              background: scanLoading ? "#64748b" : "#22c55e",
+              color: "white",
+              fontSize: "18px",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+          >
+            {scanLoading ? "盤後掃描中..." : "啟動盤後自動掃描"}
+          </button>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "22px" }}>
@@ -321,7 +406,7 @@ function App() {
                 width: "100%",
                 padding: "14px",
                 borderRadius: "14px",
-                border: "none",
+                border: "1px solid #cbd5e1",
                 fontSize: "18px",
                 marginBottom: "14px",
               }}
@@ -359,7 +444,7 @@ function App() {
                 padding: "15px",
                 borderRadius: "14px",
                 border: "none",
-                background: loading ? "#64748b" : "#2563eb",
+                background: loading ? "#94a3b8" : "#2563eb",
                 color: "white",
                 fontSize: "18px",
                 fontWeight: "bold",
@@ -369,7 +454,7 @@ function App() {
               {loading ? "掃描中..." : "查詢並套用10項評分"}
             </button>
 
-            <p style={{ color: "#fde68a" }}>{message}</p>
+            <p style={{ color: "#92400e", fontWeight: "bold" }}>{message}</p>
           </div>
 
           <div style={cardStyle}>
@@ -401,7 +486,7 @@ function App() {
                     padding: "13px",
                     borderRadius: "14px",
                     border: "none",
-                    background: "#22c55e",
+                    background: "#16a34a",
                     color: "white",
                     fontSize: "18px",
                     fontWeight: "bold",
@@ -425,13 +510,13 @@ function App() {
                 style={{
                   padding: "14px",
                   borderRadius: "16px",
-                  background: "rgba(255,255,255,0.08)",
+                  background: "#f8fafc",
                   borderLeft: `6px solid ${getColor(item.score * 10)}`,
                 }}
               >
                 <h3>{item.name}</h3>
                 <h2>{item.score}/10</h2>
-                <p style={{ color: "#cbd5e1" }}>{item.reason}</p>
+                <p style={{ color: "#475569" }}>{item.reason}</p>
                 <small>{item.auto ? "自動判斷" : "手動輸入"}</small>
               </div>
             ))}
@@ -452,11 +537,11 @@ function App() {
                 cursor: "pointer",
               }}
             >
-              清空
+              清空全部
             </button>
           </div>
 
-          {watchList.length === 0 && <p style={{ color: "#cbd5e1" }}>尚未加入股票。</p>}
+          {watchList.length === 0 && <p style={{ color: "#475569" }}>尚未加入股票。</p>}
 
           {watchList.map((stock, index) => (
             <div
@@ -465,7 +550,7 @@ function App() {
                 marginTop: "14px",
                 padding: "16px",
                 borderRadius: "18px",
-                background: "rgba(255,255,255,0.08)",
+                background: "#f8fafc",
                 borderLeft: `8px solid ${getColor(stock.totalScore)}`,
               }}
             >
@@ -477,6 +562,20 @@ function App() {
               </h2>
               <p>收盤價：{stock.close}</p>
               <p>{stock.volumeStatus} ｜ {stock.maSupport} ｜ {stock.trendStatus}</p>
+
+              <button
+                onClick={() => deleteOneStock(stock.code)}
+                style={{
+                  padding: "9px 12px",
+                  borderRadius: "10px",
+                  border: "none",
+                  background: "#f97316",
+                  color: "white",
+                  cursor: "pointer",
+                }}
+              >
+                刪除此股
+              </button>
             </div>
           ))}
         </div>
