@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RankingBoard from "./components/RankingBoard";
 import type { ScoreItem, StockApiItem, WatchStock } from "./types";
 import "./App.css";
+import { getChipData } from "./services/chipApi";
 // selling pressure scoring checkpoint
 function App() {
   const [stockCode, setStockCode] = useState("");
@@ -55,6 +56,13 @@ const [attackStatus, setAttackStatus] =
 
   const scanStock = async () => {
     try {
+      const chipData =
+  await getChipData(stockCode);
+
+console.log(
+  "籌碼資料:",
+  chipData
+);
       setLoading(true);
       setMessage("掃描中...");
       setStockData(null);
