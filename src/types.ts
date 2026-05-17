@@ -28,4 +28,7 @@ export type StockApiItem = {
     volumeStatus: string;
     maSupport: string;
     trendStatus: string;
+
+    pressureStatus: string;
+    pressureScore: number;
   };

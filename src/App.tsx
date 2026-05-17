@@ -16,7 +16,11 @@ function App() {
   const [volumeStatus, setVolumeStatus] = useState("-");
   const [maSupport, setMaSupport] = useState("-");
   const [trendStatus, setTrendStatus] = useState("-");
+  const [pressureStatus, setPressureStatus] =
+  useState("-");
 
+  const [pressureScore, setPressureScore] =
+  useState(0);
   useEffect(() => {
     const saved = localStorage.getItem("stock-war-room-watchlist");
     if (saved) setWatchList(JSON.parse(saved));
@@ -168,7 +172,67 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
       }
 
       const nearMa5 = Math.abs(close - currentMa5) / currentMa5;
-
+      const recentHighs = historyData.data.map(
+        (row: any[]) => ({
+          high: toNumber(row[4]),
+          volume: toNumber(row[1]),
+        })
+      );
+      
+      let sellingPressure = 0;
+      let pressureText = "上方壓力較小";
+      
+      for (
+        let i = recentHighs.length - 10;
+        i < recentHighs.length;
+        i++
+      ) {
+        if (i < 1) continue;
+      
+        const peak = recentHighs[i];
+      
+        const priceGap =
+          (peak.high - close) / close;
+      
+        if (priceGap <= 0 || priceGap > 0.1)
+          continue;
+      
+        const daysAgo =
+          recentHighs.length - i;
+      
+        const timeWeight =
+          Math.max(0.2, 1 - daysAgo * 0.08);
+      
+        const volumeWeight =
+          peak.volume / avgVolume;
+      
+        let peakPressure =
+          (1 - priceGap) *
+          40 *
+          timeWeight *
+          Math.min(volumeWeight, 2);
+      
+        sellingPressure += peakPressure;
+      }
+      
+      sellingPressure = Math.min(
+        100,
+        Math.round(sellingPressure)
+      );
+      
+      if (sellingPressure >= 80) {
+        pressureText =
+          "🔴 極高賣壓，容易遇到解套賣盤";
+      } else if (sellingPressure >= 50) {
+        pressureText =
+          "🟡 中度賣壓，需觀察是否爆量突破";
+      } else {
+        pressureText =
+          "🟢 上方壓力較小";
+      }
+      
+      setPressureScore(sellingPressure);
+      setPressureStatus(pressureText);
       let pullbackScore = 5;
       let supportText = "未回5MA";
 
@@ -194,6 +258,17 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
         { name: "籌碼乾淨度", score: 5, reason: "尚未接融資/散戶 API，暫給中性分", auto: false },
         { name: "大戶持股", score: 5, reason: "尚未接大戶 API，暫給中性分", auto: false },
         { name: "平均線觀察", score: technicalScore, reason: trendText, auto: true },
+        {
+          name: "近10日賣壓",
+          score:
+            sellingPressure >= 80
+              ? 2
+              : sellingPressure >= 50
+              ? 5
+              : 9,
+          reason: pressureText,
+          auto: true,
+        },
       ];
 
       const newTotalScore = items.reduce((sum, item) => sum + item.score, 0);
@@ -228,6 +303,8 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
       volumeStatus,
       maSupport,
       trendStatus,
+      pressureStatus,
+pressureScore,
     };
 
     setWatchList((prev) => {
@@ -289,7 +366,15 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
             <p>量能判斷：{volumeStatus}</p>
             <p>5MA判斷：{maSupport}</p>
             <p>平均線觀察：{trendStatus}</p>
+            <p>
+  近10日賣壓：
+  {pressureStatus}
+</p>
 
+<p>
+  賣壓警示分：
+  {pressureScore}/100
+</p>
             <button onClick={addToWatchList}>加入主攻排行榜</button>
           </>
         )}
