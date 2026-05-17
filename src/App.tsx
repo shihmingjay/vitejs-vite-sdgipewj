@@ -124,13 +124,27 @@ function App() {
       let technicalScore = 5;
       let trendText = "均線普通";
 
-      if (currentMa5 > currentMonthMa) {
-        technicalScore = 9;
-        trendText = "5MA高於近月均線";
-      } else if (Math.abs(currentMa5 - currentMonthMa) / currentMonthMa <= 0.02) {
-        technicalScore = 8;
-        trendText = "接近黃金交叉";
-      }
+      const previousMa5 = average(closes.slice(-6, -1));
+const shortMaUp = currentMa5 > previousMa5;
+const monthMaUp = currentMonthMa >= average(closes.slice(0, -1));
+const nearCross = Math.abs(currentMa5 - currentMonthMa) / currentMonthMa <= 0.02;
+
+if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
+  technicalScore = 10;
+  trendText = "多頭上彎交叉 ✨ 黃金交叉!!";
+} else if (currentMa5 > currentMonthMa && shortMaUp) {
+  technicalScore = 8;
+  trendText = "短均轉強，長均待確認";
+} else if (nearCross && shortMaUp && monthMaUp) {
+  technicalScore = 8;
+  trendText = "接近黃金交叉!!";
+} else if (nearCross && !monthMaUp) {
+  technicalScore = 4;
+  trendText = "疑似假交叉，長均仍下彎";
+} else if (currentMa5 < currentMonthMa && !shortMaUp) {
+  technicalScore = 2;
+  trendText = "均線轉弱，接近死亡交叉";
+}
 
       const range = high - low || 1;
       const body = Math.abs(close - open);
