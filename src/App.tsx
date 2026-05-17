@@ -21,6 +21,11 @@ function App() {
 
   const [pressureScore, setPressureScore] =
   useState(0);
+  const [attackScore, setAttackScore] =
+  useState(0);
+
+const [attackStatus, setAttackStatus] =
+  useState("-");
   useEffect(() => {
     const saved = localStorage.getItem("stock-war-room-watchlist");
     if (saved) setWatchList(JSON.parse(saved));
@@ -219,7 +224,55 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
         100,
         Math.round(sellingPressure)
       );
-      
+      let attack = 0;
+
+const candleBody =
+  Math.abs(close - openPrice);
+
+const upperShadow =
+  highPrice -
+  Math.max(close, openPrice);
+
+const bodyRatio =
+  candleBody / close;
+
+const closeNearHigh =
+  (highPrice - close) / close <
+  0.01;
+
+const attackVolume =
+  volume / avgVolume;
+
+if (closeNearHigh) attack += 2;
+
+if (attackVolume >= 1.5)
+  attack += 3;
+
+if (bodyRatio >= 0.03)
+  attack += 2;
+
+if (
+  upperShadow <
+  candleBody * 0.5
+)
+  attack += 2;
+
+if (sellingPressure >= 70)
+  attack += 1;
+
+let attackText =
+  "⚠ 假突破風險";
+
+if (attack >= 8) {
+  attackText =
+    "🚀 強攻擊結構";
+} else if (attack >= 5) {
+  attackText =
+    "🟡 普通攻擊結構";
+}
+
+setAttackScore(attack);
+setAttackStatus(attackText);
       if (sellingPressure >= 80) {
         pressureText =
           "🔴 極高賣壓，容易遇到解套賣盤";
@@ -257,6 +310,7 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
         { name: "回檔型態", score: pullbackScore, reason: supportText, auto: true },
         {
           name: "近10日賣壓",
+          
           score:
             sellingPressure >= 80
               ? 2
@@ -268,13 +322,76 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
           reason: pressureText,
           auto: true,
         },
+        {
+          name: "攻擊結構",
+          score: attack,
+          reason: attackText,
+          auto: true,
+        },
         { name: "籌碼乾淨度", score: 5, reason: "尚未接融資/散戶 API，暫給中性分", auto: false },
         { name: "大戶持股", score: 5, reason: "尚未接大戶 API，暫給中性分", auto: false },
         { name: "平均線觀察", score: technicalScore, reason: trendText, auto: true },
         
       ];
 
-      const newTotalScore = items.reduce((sum, item) => sum + item.score, 0);
+      let newTotalScore =
+  items.reduce(
+    (sum, item) => sum + item.score,
+    0
+  );
+
+// 🔴 高賣壓覆蓋機制
+if (
+  sellingPressure >= 80 &&
+  attack < 5
+) {
+  newTotalScore -= 10;
+}
+
+// ⚠ 高賣壓降低回檔型態可信度
+if (sellingPressure >= 80) {
+  items.forEach((item) => {
+    if (
+      item.name === "回檔型態" &&
+      item.score > 5
+    ) {
+      item.score = 5;
+      item.reason =
+        "⚠ 高賣壓壓制，回檔支撐可信度下降";
+    }
+
+    if (
+      item.name === "位階" &&
+      item.score > 6
+    ) {
+      item.score = 6;
+      item.reason =
+        "⚠ 接近壓力區，位階優勢下降";
+    }
+  });
+}
+
+// 🚨 壓力區長上影線重扣
+if (
+  sellingPressure >= 70 &&
+  upperShadow >
+    candleBody * 1.5
+) {
+  newTotalScore -= 8;
+}
+
+// 🚀 強攻擊結構補回分數
+if (
+  attack >= 8 &&
+  attackVolume >= 1.5
+) {
+  newTotalScore += 5;
+}
+
+newTotalScore = Math.max(
+  0,
+  Math.round(newTotalScore)
+);
 
       setStockData(stock);
       setScoreItems(items);
