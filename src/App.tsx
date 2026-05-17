@@ -227,21 +227,22 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
       let attack = 0;
 
 const candleBody =
-  Math.abs(close - openPrice);
+  Math.abs(close - open);
 
 const upperShadow =
-  highPrice -
-  Math.max(close, openPrice);
+  high -
+  Math.max(close, open);
 
 const bodyRatio =
   candleBody / close;
 
 const closeNearHigh =
-  (highPrice - close) / close <
+  (high - close) / close <
   0.01;
 
-const attackVolume =
-  volume / avgVolume;
+  const attackVolume =
+  volumes[volumes.length - 1] /
+  avgVolume;
 
 if (closeNearHigh) attack += 2;
 
@@ -424,7 +425,10 @@ newTotalScore = Math.max(
       maSupport,
       trendStatus,
       pressureStatus,
-pressureScore,
+      pressureScore,
+
+      attackScore,
+      attackStatus,
     };
 
     setWatchList((prev) => {
