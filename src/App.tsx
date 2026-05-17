@@ -287,6 +287,12 @@ setAttackStatus(attackText);
       
       setPressureScore(sellingPressure);
       setPressureStatus(pressureText);
+
+      const pressurePercent =
+  Math.min(
+    100,
+    Math.max(0, sellingPressure)
+  );
       let pullbackScore = 5;
       let supportText = "未回5MA";
 
@@ -426,7 +432,8 @@ newTotalScore = Math.max(
       trendStatus,
       pressureStatus,
       pressureScore,
-
+      pressurePercent,
+      
       attackScore,
       attackStatus,
     };
