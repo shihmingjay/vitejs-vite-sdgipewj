@@ -255,9 +255,6 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
         { name: "技術面", score: technicalScore, reason: trendText, auto: true },
         { name: "K線品質", score: candleScore, reason: candleReason, auto: true },
         { name: "回檔型態", score: pullbackScore, reason: supportText, auto: true },
-        { name: "籌碼乾淨度", score: 5, reason: "尚未接融資/散戶 API，暫給中性分", auto: false },
-        { name: "大戶持股", score: 5, reason: "尚未接大戶 API，暫給中性分", auto: false },
-        { name: "平均線觀察", score: technicalScore, reason: trendText, auto: true },
         {
           name: "近10日賣壓",
           score:
@@ -265,10 +262,16 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
               ? 2
               : sellingPressure >= 50
               ? 5
+              : sellingPressure >= 30
+              ? 7
               : 9,
           reason: pressureText,
           auto: true,
         },
+        { name: "籌碼乾淨度", score: 5, reason: "尚未接融資/散戶 API，暫給中性分", auto: false },
+        { name: "大戶持股", score: 5, reason: "尚未接大戶 API，暫給中性分", auto: false },
+        { name: "平均線觀察", score: technicalScore, reason: trendText, auto: true },
+        
       ];
 
       const newTotalScore = items.reduce((sum, item) => sum + item.score, 0);
