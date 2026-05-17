@@ -64,7 +64,15 @@ function RankingBoard({
           <p>
             平均線：{stock.trendStatus}
           </p>
+          <p>
+  賣壓：
+  {stock.pressureStatus}
+</p>
 
+<p>
+  賣壓分：
+  {stock.pressureScore}/100
+</p>
           <button
             onClick={() =>
               removeStock(stock.code)
