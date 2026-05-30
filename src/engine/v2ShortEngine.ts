@@ -28,11 +28,25 @@ type BreakerResult = {
 };
 
 export function getV2Result(score: number) {
-  if (score >= 80) return "🔥 主攻級";
-  if (score >= 70) return "⚡ 強觀察";
-  if (score >= 60) return "🟡 觀察";
-  return "❌ 淘汰";
-}
+
+    if (score >= 90) {
+      return "🔥 S級主攻";
+    }
+  
+    if (score >= 80) {
+      return "🚀 A級觀察";
+    }
+  
+    if (score >= 70) {
+      return "⚡ B級追蹤";
+    }
+  
+    if (score >= 60) {
+      return "🟡 C級觀察";
+    }
+  
+    return "❌ 淘汰";
+  }
 
 export function toNumber(value: any) {
   return Number(
@@ -554,7 +568,14 @@ export function analyzeV2ShortStock(
     finalScore += 5;
   }
 
-  finalScore = Math.max(0, Math.round(finalScore));
+  const MAX_SCORE = 133;
+
+finalScore = Math.max(
+  0,
+  Math.round(
+    (finalScore / MAX_SCORE) * 100
+  )
+);
 
   return {
     finalScore,
