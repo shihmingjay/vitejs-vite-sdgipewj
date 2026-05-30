@@ -4,6 +4,12 @@ import type { ScoreItem, StockApiItem, WatchStock } from "./types";
 import "./App.css";
 import { getChipData } from "./services/chipApi";
 
+type ScreenshotItem = {
+  id: string;
+  name: string;
+  url: string;
+};
+
 function App() {
   const [stockCode, setStockCode] = useState("");
   const [stockData, setStockData] = useState<StockApiItem | null>(null);
@@ -21,6 +27,9 @@ function App() {
   const [pressureScore, setPressureScore] = useState(0);
   const [attackScore, setAttackScore] = useState(0);
   const [attackStatus, setAttackStatus] = useState("-");
+
+  const [screenshots, setScreenshots] = useState<ScreenshotItem[]>([]);
+  const [screenshotNote, setScreenshotNote] = useState("");
 
   const goV2 = () => {
     window.location.href = "/";
@@ -56,6 +65,35 @@ function App() {
   };
 
   const totalScore = scoreItems.reduce((sum, item) => sum + item.score, 0);
+
+  const handleScreenshotUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+
+    const imageFiles = files.filter((file) => file.type.startsWith("image/"));
+
+    const nextImages = imageFiles.map((file) => ({
+      id: `${file.name}-${Date.now()}-${Math.random()}`,
+      name: file.name,
+      url: URL.createObjectURL(file),
+    }));
+
+    setScreenshots((prev) => [...prev, ...nextImages]);
+    event.target.value = "";
+  };
+
+  const removeScreenshot = (id: string) => {
+    setScreenshots((prev) => {
+      const target = prev.find((item) => item.id === id);
+      if (target) URL.revokeObjectURL(target.url);
+      return prev.filter((item) => item.id !== id);
+    });
+  };
+
+  const clearScreenshots = () => {
+    screenshots.forEach((item) => URL.revokeObjectURL(item.url));
+    setScreenshots([]);
+    setScreenshotNote("");
+  };
 
   const scanStock = async () => {
     try {
@@ -390,71 +428,127 @@ function App() {
         </button>
       </div>
 
-      <h1>📡 股票戰情中心 V2</h1>
+      <section className="hero-panel">
+        <p className="eyebrow">Stock War Room</p>
+        <h1>📡 股票戰情中心 V2</h1>
+        <p className="hero-text">
+          短線爆發掃描、賣壓判斷、攻擊結構與臨時截圖輔助區。
+        </p>
+      </section>
 
-      <div className="stock-card">
-        <input
-          value={stockCode}
-          onChange={(e) => setStockCode(e.target.value)}
-          placeholder="輸入股票代號，例如 2330"
-        />
+      <div className="dashboard-grid">
+        <div className="stock-card main-card">
+          <h2>🔥 短線掃描器</h2>
 
-        <button onClick={scanStock} disabled={loading}>
-          {loading ? "掃描中..." : "查詢並自動評分"}
-        </button>
+          <input
+            value={stockCode}
+            onChange={(e) => setStockCode(e.target.value)}
+            placeholder="輸入股票代號，例如 2330"
+          />
 
-        <h2
-          className={
-            totalScore >= 80
-              ? "score-high result-glow"
-              : totalScore >= 60
-              ? "score-medium result-glow"
-              : "score-low result-glow"
-          }
-        >
-          目前分數：{totalScore}
-        </h2>
+          <button onClick={scanStock} disabled={loading}>
+            {loading ? "掃描中..." : "查詢並自動評分"}
+          </button>
 
-        <h2 className="result-glow">目前結果：{getResult(totalScore)}</h2>
+          <h2
+            className={
+              totalScore >= 80
+                ? "score-high result-glow"
+                : totalScore >= 60
+                ? "score-medium result-glow"
+                : "score-low result-glow"
+            }
+          >
+            目前分數：{totalScore}
+          </h2>
 
-        <p>{message}</p>
+          <h2 className="result-glow">目前結果：{getResult(totalScore)}</h2>
 
-        {stockData && (
-          <>
-            <h2>
-              {stockData.Name} ({stockData.Code})
-            </h2>
-            <p>收盤價：{stockData.ClosingPrice}</p>
-            <p>漲跌：{stockData.Change}</p>
-            <p>成交量：{stockData.TradeVolume}</p>
-            <p>5MA：{ma5}</p>
-            <p>近月均線：{maMonth}</p>
-            <p>量能判斷：{volumeStatus}</p>
-            <p>5MA判斷：{maSupport}</p>
-            <p>平均線觀察：{trendStatus}</p>
-            <p>近10日賣壓：{pressureStatus}</p>
-            <p>賣壓警示分：{pressureScore}/100</p>
+          <p>{message}</p>
 
-            <button onClick={addToWatchList}>加入主攻排行榜</button>
-          </>
-        )}
+          {stockData && (
+            <div className="info-panel">
+              <h2>
+                {stockData.Name} ({stockData.Code})
+              </h2>
+              <p>收盤價：{stockData.ClosingPrice}</p>
+              <p>漲跌：{stockData.Change}</p>
+              <p>成交量：{stockData.TradeVolume}</p>
+              <p>5MA：{ma5}</p>
+              <p>近月均線：{maMonth}</p>
+              <p>量能判斷：{volumeStatus}</p>
+              <p>5MA判斷：{maSupport}</p>
+              <p>平均線觀察：{trendStatus}</p>
+              <p>近10日賣壓：{pressureStatus}</p>
+              <p>賣壓警示分：{pressureScore}/100</p>
+
+              <button onClick={addToWatchList}>加入主攻排行榜</button>
+            </div>
+          )}
+        </div>
+
+        <div className="stock-card screenshot-card">
+          <h2>📷 截圖臨時 API 區</h2>
+          <p className="helper-text">
+            先放籌碼、K線或大戶圖做臨時觀察。這區目前只負責上傳預覽與備註，不自動判讀。
+          </p>
+
+          <label className="upload-box">
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleScreenshotUpload}
+            />
+            <span>點我上傳截圖</span>
+            <small>支援多張圖片，僅在本次瀏覽器暫存</small>
+          </label>
+
+          <textarea
+            value={screenshotNote}
+            onChange={(e) => setScreenshotNote(e.target.value)}
+            placeholder="臨時備註，例如：大戶紅棒增加、散戶下降、K線回5MA不破..."
+          />
+
+          {screenshots.length > 0 && (
+            <>
+              <div className="preview-grid">
+                {screenshots.map((item) => (
+                  <div className="preview-card" key={item.id}>
+                    <img src={item.url} alt={item.name} />
+                    <p>{item.name}</p>
+                    <button onClick={() => removeScreenshot(item.id)}>
+                      移除
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <button className="danger-button" onClick={clearScreenshots}>
+                清空截圖區
+              </button>
+            </>
+          )}
+        </div>
       </div>
 
-      <div className="stock-card">
+      <div className="stock-card wide-card">
         <h2>📊 10項評分明細</h2>
 
         {scoreItems.length === 0 ? (
           <p>尚未評分</p>
         ) : (
-          scoreItems.map((item) => (
-            <div key={item.name}>
-              <h3>
-                {item.name}：{item.score}/10
-              </h3>
-              <p>{item.reason}</p>
-              <small>{item.auto ? "自動判斷" : "暫時中性分"}</small>
-            </div>
-          ))
+          <div className="score-grid">
+            {scoreItems.map((item) => (
+              <div className="score-item" key={item.name}>
+                <h3>
+                  {item.name}：{item.score}/10
+                </h3>
+                <p>{item.reason}</p>
+                <small>{item.auto ? "自動判斷" : "暫時中性分"}</small>
+              </div>
+            ))}
+          </div>
         )}
       </div>
 
