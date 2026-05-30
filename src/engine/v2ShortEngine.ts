@@ -101,8 +101,8 @@ function calcVolumePressureMultiplier(
 
   if (!isDownDay) {
     return {
-      multiplier: 0.5,
-      label: "平盤整理，賣壓折半",
+      multiplier: 0.3,
+      label: "平盤整理，微弱賣壓",
     };
   }
 
@@ -276,7 +276,8 @@ function analyzeTrigger(
   const upperShadow = calcUpperShadowRatio(open, high, low, close);
   const body = calcBodyRatio(open, high, low, close);
   const closePosition = calcClosePosition(high, low, close);
-  const nearMa5 = currentMa5 > 0 ? Math.abs(close - currentMa5) / currentMa5 <= 0.03 : false;
+  const nearMa5 =
+    currentMa5 > 0 ? Math.abs(close - currentMa5) / currentMa5 <= 0.03 : false;
 
   if (
     close < open &&
@@ -383,7 +384,8 @@ function analyzeSellingPressure(
   close: number,
   avgVolume: number
 ) {
-  let rawPressure = 0;
+  let weightedPressureVolume = 0;
+  let weightedTotalVolume = 0;
   const pressureNotes: string[] = [];
   const rows = historyData.data;
 
@@ -399,7 +401,7 @@ function analyzeSellingPressure(
     const dayClose = toNumber(row[6]);
     const prevClose = toNumber(previousRow[6]);
 
-    if (close <= 0) continue;
+    if (close <= 0 || volume <= 0) continue;
 
     const priceGap = (high - close) / close;
 
@@ -409,6 +411,8 @@ function analyzeSellingPressure(
 
     const daysAgo = rows.length - i;
     const timeWeight = calcTimeDecayWeight(daysAgo);
+    const distanceWeight = Math.max(0, 1 - priceGap / 0.1);
+
     const volumeFilter = calcVolumePressureMultiplier(
       open,
       dayClose,
@@ -417,32 +421,35 @@ function analyzeSellingPressure(
       avgVolume
     );
 
+    const weightedVolume = volume * timeWeight * distanceWeight;
+
+    weightedTotalVolume += weightedVolume;
+
     if (volumeFilter.multiplier <= 0) {
       continue;
     }
 
-    const distanceWeight = Math.max(0, 1 - priceGap / 0.1);
-    const volumeWeight = avgVolume > 0 ? Math.min(volume / avgVolume, 2) : 1;
+    weightedPressureVolume += weightedVolume * volumeFilter.multiplier;
 
-    const pressure =
-      distanceWeight *
-      40 *
-      timeWeight *
-      volumeWeight *
-      volumeFilter.multiplier;
-
-    rawPressure += pressure;
-
-    pressureNotes.push(
-      `${daysAgo}日前:${volumeFilter.label}`
-    );
+    pressureNotes.push(`${daysAgo}日前:${volumeFilter.label}`);
   }
 
-  const compressedPressure = Math.round(
-    Math.sqrt(Math.max(0, rawPressure)) * 10
-  );
+  if (weightedTotalVolume <= 0) {
+    return {
+      pressureScore: 0,
+      pressureNotes: [],
+    };
+  }
 
-  const pressureScore = Math.min(100, compressedPressure);
+  const pressureRatio = weightedPressureVolume / weightedTotalVolume;
+
+  const pressureScore = Math.max(
+    0,
+    Math.min(
+      100,
+      Math.round(pressureRatio * 100)
+    )
+  );
 
   return {
     pressureScore,
