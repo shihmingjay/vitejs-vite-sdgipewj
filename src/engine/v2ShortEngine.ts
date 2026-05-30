@@ -28,25 +28,12 @@ type BreakerResult = {
 };
 
 export function getV2Result(score: number) {
-
-    if (score >= 90) {
-      return "🔥 S級主攻";
-    }
-  
-    if (score >= 80) {
-      return "🚀 A級觀察";
-    }
-  
-    if (score >= 70) {
-      return "⚡ B級追蹤";
-    }
-  
-    if (score >= 60) {
-      return "🟡 C級觀察";
-    }
-  
-    return "❌ 淘汰";
-  }
+  if (score >= 90) return "🔥 S級主攻";
+  if (score >= 80) return "🚀 A級觀察";
+  if (score >= 70) return "⚡ B級追蹤";
+  if (score >= 60) return "🟡 C級觀察";
+  return "❌ 淘汰";
+}
 
 export function toNumber(value: any) {
   return Number(
@@ -88,6 +75,64 @@ function calcBodyRatio(open: number, high: number, low: number, close: number) {
   const range = high - low;
   if (range <= 0) return 0;
   return Math.abs(close - open) / range;
+}
+
+function calcTimeDecayWeight(daysAgo: number) {
+  const safeDaysAgo = Math.min(Math.max(daysAgo, 1), 10);
+  return 1.0 - ((safeDaysAgo - 1) / 9) * 0.8;
+}
+
+function calcVolumePressureMultiplier(
+  open: number,
+  close: number,
+  prevClose: number,
+  volume: number,
+  avgVolume: number
+) {
+  const isUpDay = close > open || close > prevClose;
+  const isDownDay = close < open || close < prevClose;
+
+  if (isUpDay) {
+    return {
+      multiplier: 0,
+      label: "上漲日不列賣壓",
+    };
+  }
+
+  if (!isDownDay) {
+    return {
+      multiplier: 0.5,
+      label: "平盤整理，賣壓折半",
+    };
+  }
+
+  if (avgVolume <= 0) {
+    return {
+      multiplier: 0.8,
+      label: "下跌日，量能未知",
+    };
+  }
+
+  const volumeRatio = volume / avgVolume;
+
+  if (volumeRatio < 0.7) {
+    return {
+      multiplier: 0.4,
+      label: "量縮回測，賣壓打折",
+    };
+  }
+
+  if (volumeRatio <= 1.1) {
+    return {
+      multiplier: 0.8,
+      label: "普通下跌賣壓",
+    };
+  }
+
+  return {
+    multiplier: 1.2,
+    label: "放量下跌，真賣壓",
+  };
 }
 
 function analyzeVolume(volumeRatio: number) {
@@ -333,6 +378,78 @@ function analyzeBreaker(
   };
 }
 
+function analyzeSellingPressure(
+  historyData: any,
+  close: number,
+  avgVolume: number
+) {
+  let rawPressure = 0;
+  const pressureNotes: string[] = [];
+  const rows = historyData.data;
+
+  const start = Math.max(1, rows.length - 10);
+
+  for (let i = start; i < rows.length; i++) {
+    const row = rows[i];
+    const previousRow = rows[i - 1];
+
+    const volume = toNumber(row[1]);
+    const open = toNumber(row[3]);
+    const high = toNumber(row[4]);
+    const dayClose = toNumber(row[6]);
+    const prevClose = toNumber(previousRow[6]);
+
+    if (close <= 0) continue;
+
+    const priceGap = (high - close) / close;
+
+    if (priceGap <= 0 || priceGap > 0.1) {
+      continue;
+    }
+
+    const daysAgo = rows.length - i;
+    const timeWeight = calcTimeDecayWeight(daysAgo);
+    const volumeFilter = calcVolumePressureMultiplier(
+      open,
+      dayClose,
+      prevClose,
+      volume,
+      avgVolume
+    );
+
+    if (volumeFilter.multiplier <= 0) {
+      continue;
+    }
+
+    const distanceWeight = Math.max(0, 1 - priceGap / 0.1);
+    const volumeWeight = avgVolume > 0 ? Math.min(volume / avgVolume, 2) : 1;
+
+    const pressure =
+      distanceWeight *
+      40 *
+      timeWeight *
+      volumeWeight *
+      volumeFilter.multiplier;
+
+    rawPressure += pressure;
+
+    pressureNotes.push(
+      `${daysAgo}日前:${volumeFilter.label}`
+    );
+  }
+
+  const compressedPressure = Math.round(
+    Math.sqrt(Math.max(0, rawPressure)) * 10
+  );
+
+  const pressureScore = Math.min(100, compressedPressure);
+
+  return {
+    pressureScore,
+    pressureNotes,
+  };
+}
+
 export function analyzeV2ShortStock(
   stock: StockApiItem,
   historyData: any
@@ -398,44 +515,26 @@ export function analyzeV2ShortStock(
   const nearMa5 =
     currentMa5 > 0 ? Math.abs(close - currentMa5) / currentMa5 : 999;
 
-  const recentHighs = historyData.data.map((row: any[]) => ({
-    high: toNumber(row[4]),
-    volume: toNumber(row[1]),
-  }));
+  const sellingPressureResult = analyzeSellingPressure(
+    historyData,
+    close,
+    avgVolume
+  );
 
-  let sellingPressure = 0;
-  let pressureText = "上方壓力較小";
+  const sellingPressure = sellingPressureResult.pressureScore;
 
-  for (let i = recentHighs.length - 10; i < recentHighs.length; i++) {
-    if (i < 1) continue;
-
-    const peak = recentHighs[i];
-    const priceGap = close > 0 ? (peak.high - close) / close : 0;
-
-    if (priceGap <= 0 || priceGap > 0.1) continue;
-
-    const daysAgo = recentHighs.length - i;
-    const timeWeight = Math.max(0.2, 1 - daysAgo * 0.08);
-    const volumeWeight = avgVolume > 0 ? peak.volume / avgVolume : 0;
-
-    const peakPressure =
-      (1 - priceGap) *
-      40 *
-      timeWeight *
-      Math.min(volumeWeight, 2);
-
-    sellingPressure += peakPressure;
-  }
-
-  sellingPressure = Math.min(100, Math.round(sellingPressure));
+  let pressureText = "🟢 上方壓力較小";
 
   if (sellingPressure >= 80) {
     pressureText = "🔴 極高賣壓，容易遇到解套賣盤";
   } else if (sellingPressure >= 50) {
     pressureText = "🟡 中度賣壓，需觀察是否爆量突破";
-  } else {
-    pressureText = "🟢 上方壓力較小";
   }
+
+  const pressureNoteText =
+    sellingPressureResult.pressureNotes.length > 0
+      ? sellingPressureResult.pressureNotes.slice(0, 3).join("｜")
+      : "近10日未偵測明顯實質賣壓";
 
   const candleBody = Math.abs(close - open);
   const upperShadow = high - Math.max(close, open);
@@ -511,7 +610,7 @@ export function analyzeV2ShortStock(
           : sellingPressure >= 30
           ? 7
           : 9,
-      reason: pressureText,
+      reason: `${pressureText}｜${pressureNoteText}`,
       auto: true,
     },
     {
@@ -551,31 +650,32 @@ export function analyzeV2ShortStock(
     });
   }
 
-  let finalScore = items.reduce((sum, item) => sum + item.score, 0);
+  let rawScore = items.reduce((sum, item) => sum + item.score, 0);
 
-  finalScore += trigger.bonus;
-  finalScore -= breaker.penalty;
+  rawScore += trigger.bonus;
+  rawScore -= breaker.penalty;
 
   if (sellingPressure >= 80 && attack < 5) {
-    finalScore -= 10;
+    rawScore -= 10;
   }
 
   if (sellingPressure >= 70 && upperShadow > candleBody * 1.5) {
-    finalScore -= 8;
+    rawScore -= 8;
   }
 
   if (attack >= 8 && attackVolume >= 1.5) {
-    finalScore += 5;
+    rawScore += 5;
   }
 
   const MAX_SCORE = 133;
 
-finalScore = Math.max(
-  0,
-  Math.round(
-    (finalScore / MAX_SCORE) * 100
-  )
-);
+  const finalScore = Math.max(
+    0,
+    Math.min(
+      100,
+      Math.round((rawScore / MAX_SCORE) * 100)
+    )
+  );
 
   return {
     finalScore,
@@ -586,7 +686,7 @@ finalScore = Math.max(
     volumeStatus: `${volume.text}｜量比 ${volumeRatio.toFixed(2)}`,
     maSupport: supportText,
     trendStatus: `${maTrend.text}｜5MA斜率 ${(maTrend.ma5Slope * 100).toFixed(2)}%`,
-    pressureStatus: pressureText,
+    pressureStatus: `${pressureText}｜${pressureNoteText}`,
     pressureScore: sellingPressure,
     pressurePercent: sellingPressure,
     attackScore: attack,
