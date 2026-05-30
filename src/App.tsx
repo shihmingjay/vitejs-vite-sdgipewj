@@ -3,7 +3,7 @@ import RankingBoard from "./components/RankingBoard";
 import type { ScoreItem, StockApiItem, WatchStock } from "./types";
 import "./App.css";
 import { getChipData } from "./services/chipApi";
-// selling pressure scoring checkpoint
+
 function App() {
   const [stockCode, setStockCode] = useState("");
   const [stockData, setStockData] = useState<StockApiItem | null>(null);
@@ -17,16 +17,19 @@ function App() {
   const [volumeStatus, setVolumeStatus] = useState("-");
   const [maSupport, setMaSupport] = useState("-");
   const [trendStatus, setTrendStatus] = useState("-");
-  const [pressureStatus, setPressureStatus] =
-  useState("-");
+  const [pressureStatus, setPressureStatus] = useState("-");
+  const [pressureScore, setPressureScore] = useState(0);
+  const [attackScore, setAttackScore] = useState(0);
+  const [attackStatus, setAttackStatus] = useState("-");
 
-  const [pressureScore, setPressureScore] =
-  useState(0);
-  const [attackScore, setAttackScore] =
-  useState(0);
+  const goV2 = () => {
+    window.location.href = "/";
+  };
 
-const [attackStatus, setAttackStatus] =
-  useState("-");
+  const goV3 = () => {
+    window.location.href = "/v3_index.html";
+  };
+
   useEffect(() => {
     const saved = localStorage.getItem("stock-war-room-watchlist");
     if (saved) setWatchList(JSON.parse(saved));
@@ -56,13 +59,9 @@ const [attackStatus, setAttackStatus] =
 
   const scanStock = async () => {
     try {
-      const chipData =
-  await getChipData(stockCode);
+      const chipData = await getChipData(stockCode);
+      console.log("籌碼資料:", chipData);
 
-console.log(
-  "籌碼資料:",
-  chipData
-);
       setLoading(true);
       setMessage("掃描中...");
       setStockData(null);
@@ -142,26 +141,26 @@ console.log(
       let trendText = "均線普通";
 
       const previousMa5 = average(closes.slice(-6, -1));
-const shortMaUp = currentMa5 > previousMa5;
-const monthMaUp = currentMonthMa >= average(closes.slice(0, -1));
-const nearCross = Math.abs(currentMa5 - currentMonthMa) / currentMonthMa <= 0.02;
+      const shortMaUp = currentMa5 > previousMa5;
+      const monthMaUp = currentMonthMa >= average(closes.slice(0, -1));
+      const nearCross = Math.abs(currentMa5 - currentMonthMa) / currentMonthMa <= 0.02;
 
-if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
-  technicalScore = 10;
-  trendText = "多頭上彎交叉 ✨ 黃金交叉!!";
-} else if (currentMa5 > currentMonthMa && shortMaUp) {
-  technicalScore = 8;
-  trendText = "短均轉強，長均待確認";
-} else if (nearCross && shortMaUp && monthMaUp) {
-  technicalScore = 8;
-  trendText = "接近黃金交叉!!";
-} else if (nearCross && !monthMaUp) {
-  technicalScore = 4;
-  trendText = "疑似假交叉，長均仍下彎";
-} else if (currentMa5 < currentMonthMa && !shortMaUp) {
-  technicalScore = 2;
-  trendText = "均線轉弱，接近死亡交叉";
-}
+      if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
+        technicalScore = 10;
+        trendText = "多頭上彎交叉 ✨ 黃金交叉!!";
+      } else if (currentMa5 > currentMonthMa && shortMaUp) {
+        technicalScore = 8;
+        trendText = "短均轉強，長均待確認";
+      } else if (nearCross && shortMaUp && monthMaUp) {
+        technicalScore = 8;
+        trendText = "接近黃金交叉!!";
+      } else if (nearCross && !monthMaUp) {
+        technicalScore = 4;
+        trendText = "疑似假交叉，長均仍下彎";
+      } else if (currentMa5 < currentMonthMa && !shortMaUp) {
+        technicalScore = 2;
+        trendText = "均線轉弱，接近死亡交叉";
+      }
 
       const range = high - low || 1;
       const body = Math.abs(close - open);
@@ -185,118 +184,73 @@ if (currentMa5 > currentMonthMa && shortMaUp && monthMaUp) {
       }
 
       const nearMa5 = Math.abs(close - currentMa5) / currentMa5;
-      const recentHighs = historyData.data.map(
-        (row: any[]) => ({
-          high: toNumber(row[4]),
-          volume: toNumber(row[1]),
-        })
-      );
-      
+      const recentHighs = historyData.data.map((row: any[]) => ({
+        high: toNumber(row[4]),
+        volume: toNumber(row[1]),
+      }));
+
       let sellingPressure = 0;
       let pressureText = "上方壓力較小";
-      
-      for (
-        let i = recentHighs.length - 10;
-        i < recentHighs.length;
-        i++
-      ) {
+
+      for (let i = recentHighs.length - 10; i < recentHighs.length; i++) {
         if (i < 1) continue;
-      
+
         const peak = recentHighs[i];
-      
-        const priceGap =
-          (peak.high - close) / close;
-      
-        if (priceGap <= 0 || priceGap > 0.1)
-          continue;
-      
-        const daysAgo =
-          recentHighs.length - i;
-      
-        const timeWeight =
-          Math.max(0.2, 1 - daysAgo * 0.08);
-      
-        const volumeWeight =
-          peak.volume / avgVolume;
-      
-        let peakPressure =
+        const priceGap = (peak.high - close) / close;
+
+        if (priceGap <= 0 || priceGap > 0.1) continue;
+
+        const daysAgo = recentHighs.length - i;
+        const timeWeight = Math.max(0.2, 1 - daysAgo * 0.08);
+        const volumeWeight = peak.volume / avgVolume;
+
+        const peakPressure =
           (1 - priceGap) *
           40 *
           timeWeight *
           Math.min(volumeWeight, 2);
-      
+
         sellingPressure += peakPressure;
       }
-      
-      sellingPressure = Math.min(
-        100,
-        Math.round(sellingPressure)
-      );
+
+      sellingPressure = Math.min(100, Math.round(sellingPressure));
+
       let attack = 0;
 
-const candleBody =
-  Math.abs(close - open);
+      const candleBody = Math.abs(close - open);
+      const upperShadow = high - Math.max(close, open);
+      const bodyRatio = candleBody / close;
+      const closeNearHigh = (high - close) / close < 0.01;
+      const attackVolume = volumes[volumes.length - 1] / avgVolume;
 
-const upperShadow =
-  high -
-  Math.max(close, open);
+      if (closeNearHigh) attack += 2;
+      if (attackVolume >= 1.5) attack += 3;
+      if (bodyRatio >= 0.03) attack += 2;
+      if (upperShadow < candleBody * 0.5) attack += 2;
+      if (sellingPressure >= 70) attack += 1;
 
-const bodyRatio =
-  candleBody / close;
+      let attackText = "⚠ 假突破風險";
 
-const closeNearHigh =
-  (high - close) / close <
-  0.01;
-
-  const attackVolume =
-  volumes[volumes.length - 1] /
-  avgVolume;
-
-if (closeNearHigh) attack += 2;
-
-if (attackVolume >= 1.5)
-  attack += 3;
-
-if (bodyRatio >= 0.03)
-  attack += 2;
-
-if (
-  upperShadow <
-  candleBody * 0.5
-)
-  attack += 2;
-
-if (sellingPressure >= 70)
-  attack += 1;
-
-let attackText =
-  "⚠ 假突破風險";
-
-if (attack >= 8) {
-  attackText =
-    "🚀 強攻擊結構";
-} else if (attack >= 5) {
-  attackText =
-    "🟡 普通攻擊結構";
-}
-
-setAttackScore(attack);
-setAttackStatus(attackText);
-      if (sellingPressure >= 80) {
-        pressureText =
-          "🔴 極高賣壓，容易遇到解套賣盤";
-      } else if (sellingPressure >= 50) {
-        pressureText =
-          "🟡 中度賣壓，需觀察是否爆量突破";
-      } else {
-        pressureText =
-          "🟢 上方壓力較小";
+      if (attack >= 8) {
+        attackText = "🚀 強攻擊結構";
+      } else if (attack >= 5) {
+        attackText = "🟡 普通攻擊結構";
       }
-      
+
+      setAttackScore(attack);
+      setAttackStatus(attackText);
+
+      if (sellingPressure >= 80) {
+        pressureText = "🔴 極高賣壓，容易遇到解套賣盤";
+      } else if (sellingPressure >= 50) {
+        pressureText = "🟡 中度賣壓，需觀察是否爆量突破";
+      } else {
+        pressureText = "🟢 上方壓力較小";
+      }
+
       setPressureScore(sellingPressure);
       setPressureStatus(pressureText);
 
-      
       let pullbackScore = 5;
       let supportText = "未回5MA";
 
@@ -321,7 +275,6 @@ setAttackStatus(attackText);
         { name: "回檔型態", score: pullbackScore, reason: supportText, auto: true },
         {
           name: "近10日賣壓",
-          
           score:
             sellingPressure >= 80
               ? 2
@@ -342,67 +295,37 @@ setAttackStatus(attackText);
         { name: "籌碼乾淨度", score: 5, reason: "尚未接融資/散戶 API，暫給中性分", auto: false },
         { name: "大戶持股", score: 5, reason: "尚未接大戶 API，暫給中性分", auto: false },
         { name: "平均線觀察", score: technicalScore, reason: trendText, auto: true },
-        
       ];
 
-      let newTotalScore =
-  items.reduce(
-    (sum, item) => sum + item.score,
-    0
-  );
+      let newTotalScore = items.reduce((sum, item) => sum + item.score, 0);
 
-// 🔴 高賣壓覆蓋機制
-if (
-  sellingPressure >= 80 &&
-  attack < 5
-) {
-  newTotalScore -= 10;
-}
+      if (sellingPressure >= 80 && attack < 5) {
+        newTotalScore -= 10;
+      }
 
-// ⚠ 高賣壓降低回檔型態可信度
-if (sellingPressure >= 80) {
-  items.forEach((item) => {
-    if (
-      item.name === "回檔型態" &&
-      item.score > 5
-    ) {
-      item.score = 5;
-      item.reason =
-        "⚠ 高賣壓壓制，回檔支撐可信度下降";
-    }
+      if (sellingPressure >= 80) {
+        items.forEach((item) => {
+          if (item.name === "回檔型態" && item.score > 5) {
+            item.score = 5;
+            item.reason = "⚠ 高賣壓壓制，回檔支撐可信度下降";
+          }
 
-    if (
-      item.name === "位階" &&
-      item.score > 6
-    ) {
-      item.score = 6;
-      item.reason =
-        "⚠ 接近壓力區，位階優勢下降";
-    }
-  });
-}
+          if (item.name === "位階" && item.score > 6) {
+            item.score = 6;
+            item.reason = "⚠ 接近壓力區，位階優勢下降";
+          }
+        });
+      }
 
-// 🚨 壓力區長上影線重扣
-if (
-  sellingPressure >= 70 &&
-  upperShadow >
-    candleBody * 1.5
-) {
-  newTotalScore -= 8;
-}
+      if (sellingPressure >= 70 && upperShadow > candleBody * 1.5) {
+        newTotalScore -= 8;
+      }
 
-// 🚀 強攻擊結構補回分數
-if (
-  attack >= 8 &&
-  attackVolume >= 1.5
-) {
-  newTotalScore += 5;
-}
+      if (attack >= 8 && attackVolume >= 1.5) {
+        newTotalScore += 5;
+      }
 
-newTotalScore = Math.max(
-  0,
-  Math.round(newTotalScore)
-);
+      newTotalScore = Math.max(0, Math.round(newTotalScore));
 
       setStockData(stock);
       setScoreItems(items);
@@ -437,7 +360,6 @@ newTotalScore = Math.max(
       pressureStatus,
       pressureScore,
       pressurePercent: pressureScore,
-
       attackScore,
       attackStatus,
     };
@@ -458,6 +380,16 @@ newTotalScore = Math.max(
 
   return (
     <div className="app">
+      <div className="mode-switch">
+        <button className="mode-button active" onClick={goV2}>
+          🔥 V2 短線爆發
+        </button>
+
+        <button className="mode-button" onClick={goV3}>
+          🚀 V3 中長期波段
+        </button>
+      </div>
+
       <h1>📡 股票戰情中心 V2</h1>
 
       <div className="stock-card">
@@ -472,20 +404,19 @@ newTotalScore = Math.max(
         </button>
 
         <h2
-  className={
-    totalScore >= 80
-      ? "score-high result-glow"
-      : totalScore >= 60
-      ? "score-medium result-glow"
-      : "score-low result-glow"
-  }
->
-  目前分數：{totalScore}
-</h2>
+          className={
+            totalScore >= 80
+              ? "score-high result-glow"
+              : totalScore >= 60
+              ? "score-medium result-glow"
+              : "score-low result-glow"
+          }
+        >
+          目前分數：{totalScore}
+        </h2>
 
-<h2 className="result-glow">
-  目前結果：{getResult(totalScore)}
-</h2>
+        <h2 className="result-glow">目前結果：{getResult(totalScore)}</h2>
+
         <p>{message}</p>
 
         {stockData && (
@@ -501,15 +432,9 @@ newTotalScore = Math.max(
             <p>量能判斷：{volumeStatus}</p>
             <p>5MA判斷：{maSupport}</p>
             <p>平均線觀察：{trendStatus}</p>
-            <p>
-  近10日賣壓：
-  {pressureStatus}
-</p>
+            <p>近10日賣壓：{pressureStatus}</p>
+            <p>賣壓警示分：{pressureScore}/100</p>
 
-<p>
-  賣壓警示分：
-  {pressureScore}/100
-</p>
             <button onClick={addToWatchList}>加入主攻排行榜</button>
           </>
         )}
@@ -517,6 +442,7 @@ newTotalScore = Math.max(
 
       <div className="stock-card">
         <h2>📊 10項評分明細</h2>
+
         {scoreItems.length === 0 ? (
           <p>尚未評分</p>
         ) : (
@@ -540,5 +466,5 @@ newTotalScore = Math.max(
     </div>
   );
 }
-// update
+
 export default App;

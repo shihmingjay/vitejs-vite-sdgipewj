@@ -125,3 +125,28 @@ button:hover {
     margin: 8px 0;
   }
 }
+.mode-switch {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px auto 10px;
+  flex-wrap: wrap;
+}
+
+.mode-button {
+  border: 1px solid rgba(192, 132, 252, 0.5);
+  background: rgba(192, 132, 252, 0.12);
+  color: inherit;
+  padding: 10px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.mode-button:hover {
+  transform: translateY(-1px);
+}
+
+.mode-button.active {
+  background: rgba(192, 132, 252, 0.28);
+}

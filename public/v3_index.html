@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>V3 中長期波段戰報</title>
+
+<style>
+
+body{
+    background:#0f172a;
+    color:#f8fafc;
+    font-family:"Microsoft JhengHei",sans-serif;
+    margin:0;
+    padding:24px;
+}
+
+h1{
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#cbd5e1;
+    margin-bottom:24px;
+}
+
+.summary,
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.box{
+    background:#1e293b;
+    padding:16px;
+    border-radius:12px;
+    min-width:180px;
+}
+
+.box b{
+    font-size:28px;
+}
+
+input,
+select{
+    width:100%;
+    margin-top:8px;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #334155;
+    background:#0f172a;
+    color:white;
+}
+
+.count{
+    color:#60a5fa;
+    margin-bottom:16px;
+    font-weight:bold;
+}
+
+.card{
+    background:#1e293b;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:16px;
+}
+
+.main_watch{
+    border-left:6px solid #22c55e;
+}
+
+.follow_watch{
+    border-left:6px solid #f59e0b;
+}
+
+.hidden{
+    border-left:6px solid #ef4444;
+}
+
+.score{
+    font-size:30px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.trigger{
+    font-size:20px;
+    margin-top:8px;
+    color:#fbbf24;
+}
+
+.position{
+    margin-top:12px;
+    color:#93c5fd;
+    font-size:16px;
+}
+
+.section{
+    margin-top:16px;
+}
+
+.tag{
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:999px;
+    margin:4px;
+    background:#334155;
+}
+
+.tag-warning{
+    background:#7c2d12;
+    color:#fed7aa;
+}
+
+.tag-danger{
+    background:#7f1d1d;
+    color:#fecaca;
+}
+
+.metric{
+    margin-top:12px;
+    color:#cbd5e1;
+    line-height:1.8;
+}
+
+.warning-box{
+    margin-top:12px;
+    padding:12px;
+    border-radius:10px;
+    background:#0f172a;
+    border:1px solid #334155;
+    color:#cbd5e1;
+    line-height:1.8;
+}
+
+.warning-normal{
+    color:#94a3b8;
+}
+
+.warning-orange{
+    color:#fb923c;
+    font-weight:bold;
+}
+
+.warning-red{
+    color:#f87171;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>V3 中長期波段戰報</h1>
+
+<div class="subtitle">
+盤後策略版｜RS + ATR + 大盤濾網 + Trigger + Failed Breakout + 持有管理
+</div>
+
+<div class="summary" id="summary"></div>
+
+<div class="filters">
+
+    <div class="box">
+        狀態篩選
+        <select id="groupFilter">
+            <option value="all">全部</option>
+            <option value="main_watch">主觀察</option>
+            <option value="follow_watch">追蹤</option>
+            <option value="hidden">隱藏</option>
+        </select>
+    </div>
+
+    <div class="box">
+        最低分數
+        <input id="scoreFilter" type="number" value="0">
+    </div>
+
+    <div class="box">
+        搜尋代號 / 名稱
+        <input id="keywordFilter" placeholder="例如 4562 或 穎漢">
+    </div>
+
+</div>
+
+<div class="count" id="count"></div>
+
+<div id="list"></div>
+
+<script>
+
+let allItems=[];
+
+function fmt(value,digits=2){
+    const num=Number(value);
+    if(Number.isNaN(num)){
+        return "-";
+    }
+    return num.toFixed(digits);
+}
+
+function text(value){
+    if(value===undefined || value===null){
+        return "無";
+    }
+
+    const t=String(value).trim();
+
+    if(t==="" || t==="nan" || t==="None"){
+        return "無";
+    }
+
+    return t;
+}
+
+function warningClass(flags){
+    const value=text(flags);
+
+    if(value.includes("SERIOUS_BREAKOUT_TRAP")){
+        return "warning-red";
+    }
+
+    if(value.includes("MULTIPLE_FAILED_BREAKOUT")){
+        return "warning-orange";
+    }
+
+    return "warning-normal";
+}
+
+function warningLabel(flags){
+    const value=text(flags);
+
+    if(value.includes("SERIOUS_BREAKOUT_TRAP")){
+        return "🚨 嚴重假突破陷阱";
+    }
+
+    if(value.includes("MULTIPLE_FAILED_BREAKOUT")){
+        return "⚠ 多次假突破";
+    }
+
+    return "無";
+}
+
+function renderSummary(data){
+
+    document.getElementById("summary").innerHTML=`
+
+    <div class="box">
+        🟢 主觀察<br>
+        <b>${data.summary.main_watch}</b>
+    </div>
+
+    <div class="box">
+        🟡 追蹤<br>
+        <b>${data.summary.follow_watch}</b>
+    </div>
+
+    <div class="box">
+        🔴 隱藏<br>
+        <b>${data.summary.hidden}</b>
+    </div>
+
+    `;
+}
+
+function renderList(items){
+
+    document.getElementById("count").innerText=
+    `目前顯示：${items.length} 檔`;
+
+    const list=document.getElementById("list");
+
+    list.innerHTML="";
+
+    items.forEach(item=>{
+
+        const card=document.createElement("div");
+
+        card.className=`card ${item.group}`;
+
+        const flags=text(item.warningFlags);
+        const triggerWarnings=text(item.triggerWarnings);
+
+        card.innerHTML=`
+
+        <h2>${item.id} ${item.name}</h2>
+
+        <div class="score">
+            Rank：${fmt(item.rankScore)}
+        </div>
+
+        <div>
+            V3：${fmt(item.score)}
+        </div>
+
+        <div class="trigger">
+            Trigger：${fmt(item.triggerScore)}
+            (${item.triggerLevel})
+        </div>
+
+        <div class="section">
+
+            <span class="tag">
+                Compression：${fmt(item.compressionScore,0)}
+            </span>
+
+            <span class="tag">
+                Ignition：${fmt(item.ignitionScore,0)}
+            </span>
+
+            <span class="tag">
+                Confirmation：${fmt(item.confirmationScore,0)}
+            </span>
+
+            <span class="tag">
+                Event：${fmt(item.eventBonus,0)}
+            </span>
+
+            <span class="tag">
+                Raw Event：${fmt(item.eventRawBonus,0)}
+            </span>
+
+        </div>
+
+        <div class="warning-box">
+
+            <b>Failed Breakout 假突破記憶</b><br>
+
+            假突破次數：${fmt(item.failedBreakoutCount,0)} 次<br>
+            假突破扣分：-${fmt(item.failedBreakoutPenalty,0)}<br>
+            最後試壓高點：${fmt(item.lastTestHigh)}<br>
+
+            警示旗標：
+            <span class="${warningClass(flags)}">
+                ${warningLabel(flags)}
+            </span><br>
+
+            Trigger 警示：
+            <span class="${warningClass(triggerWarnings)}">
+                ${triggerWarnings}
+            </span>
+
+        </div>
+
+        <div class="position">
+            持有建議：${item.positionAction}
+        </div>
+
+        <div class="metric">
+
+            股價：${fmt(item.price)}<br>
+            啟動停損：${fmt(item.activeStop)}<br>
+            初始停損：${fmt(item.initialStop)}<br>
+            成本保護：${fmt(item.breakevenStop)}<br>
+            移動停利：${fmt(item.trailingStop)}
+
+        </div>
+
+        `;
+
+        list.appendChild(card);
+
+    });
+
+}
+
+function applyFilters(){
+
+    const group=
+    document.getElementById("groupFilter").value;
+
+    const score=
+    Number(
+        document.getElementById("scoreFilter").value
+    );
+
+    const keyword=
+    document.getElementById("keywordFilter")
+    .value
+    .trim();
+
+    const result=allItems.filter(item=>{
+
+        const okGroup=
+        group==="all" ||
+        item.group===group;
+
+        const okScore=
+        Number(item.score)>=score;
+
+        const okKeyword=
+        keyword==="" ||
+        String(item.id).includes(keyword) ||
+        String(item.name).includes(keyword);
+
+        return (
+            okGroup &&
+            okScore &&
+            okKeyword
+        );
+
+    });
+
+    renderList(result);
+
+}
+
+async function loadData(){
+
+    const res=
+    await fetch(
+        "v3_web_light.json?ts="+Date.now()
+    );
+
+    const data=
+    await res.json();
+
+    allItems=data.items || [];
+
+    renderSummary(data);
+
+    renderList(allItems);
+
+    document
+    .getElementById("groupFilter")
+    .addEventListener(
+        "change",
+        applyFilters
+    );
+
+    document
+    .getElementById("scoreFilter")
+    .addEventListener(
+        "input",
+        applyFilters
+    );
+
+    document
+    .getElementById("keywordFilter")
+    .addEventListener(
+        "input",
+        applyFilters
+    );
+
+}
+
+loadData();
+
+</script>
+
+</body>
+</html>
