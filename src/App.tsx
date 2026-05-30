@@ -4,82 +4,11 @@ import type { ScoreItem, StockApiItem, WatchStock } from "./types";
 import "./App.css";
 import { getChipData } from "./services/chipApi";
 
-type ScreenshotSlotKey =
-  | "kline"
-  | "mainForce"
-  | "institution"
-  | "bigHolder"
-  | "chipDistribution"
-  | "volumePrice"
-  | "liveMa";
-
-type ScreenshotSlot = {
-  key: ScreenshotSlotKey;
-  title: string;
-  hint: string;
+type ScreenshotItem = {
+  id: string;
   fileName: string;
   imageUrl: string;
-  note: string;
 };
-
-const createScreenshotSlots = (): ScreenshotSlot[] => [
-  {
-    key: "kline",
-    title: "📈 K線圖",
-    hint: "放日K、5MA、10MA、20MA截圖",
-    fileName: "",
-    imageUrl: "",
-    note: "",
-  },
-  {
-    key: "mainForce",
-    title: "🧲 主力圖",
-    hint: "放主力買賣、主力成本線",
-    fileName: "",
-    imageUrl: "",
-    note: "",
-  },
-  {
-    key: "institution",
-    title: "🏦 法人圖",
-    hint: "放外資、投信、自營商",
-    fileName: "",
-    imageUrl: "",
-    note: "",
-  },
-  {
-    key: "bigHolder",
-    title: "🐋 大戶圖",
-    hint: "放大戶持股、散戶持股",
-    fileName: "",
-    imageUrl: "",
-    note: "",
-  },
-  {
-    key: "chipDistribution",
-    title: "🧩 籌碼分布",
-    hint: "放籌碼集中、分布區間",
-    fileName: "",
-    imageUrl: "",
-    note: "",
-  },
-  {
-    key: "volumePrice",
-    title: "⚖️ 量價分布",
-    hint: "放成交量分布、壓力支撐",
-    fileName: "",
-    imageUrl: "",
-    note: "",
-  },
-  {
-    key: "liveMa",
-    title: "⚡ 即時均線",
-    hint: "放盤中5MA/10MA/20MA截圖",
-    fileName: "",
-    imageUrl: "",
-    note: "",
-  },
-];
 
 function App() {
   const [stockCode, setStockCode] = useState("");
@@ -99,8 +28,8 @@ function App() {
   const [attackScore, setAttackScore] = useState(0);
   const [attackStatus, setAttackStatus] = useState("-");
 
-  const [screenshotSlots, setScreenshotSlots] =
-    useState<ScreenshotSlot[]>(createScreenshotSlots());
+  const [screenshots, setScreenshots] = useState<ScreenshotItem[]>([]);
+  const [screenshotNote, setScreenshotNote] = useState("");
 
   const goV2 = () => {
     window.location.href = "/";
@@ -121,13 +50,11 @@ function App() {
 
   useEffect(() => {
     return () => {
-      screenshotSlots.forEach((slot) => {
-        if (slot.imageUrl) {
-          URL.revokeObjectURL(slot.imageUrl);
-        }
+      screenshots.forEach((item) => {
+        URL.revokeObjectURL(item.imageUrl);
       });
     };
-  }, [screenshotSlots]);
+  }, [screenshots]);
 
   const toNumber = (value: any) => {
     return Number(String(value || "0").replace(/,/g, "").replace("+", "").trim());
@@ -147,76 +74,46 @@ function App() {
 
   const totalScore = scoreItems.reduce((sum, item) => sum + item.score, 0);
 
-  const uploadSlotImage = (
-    key: ScreenshotSlotKey,
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = event.target.files?.[0];
+  const uploadScreenshots = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
 
-    if (!file || !file.type.startsWith("image/")) {
+    const imageFiles = files.filter((file) => file.type.startsWith("image/"));
+
+    if (!imageFiles.length) {
       event.target.value = "";
       return;
     }
 
-    setScreenshotSlots((prev) =>
-      prev.map((slot) => {
-        if (slot.key !== key) return slot;
+    const nextImages = imageFiles.map((file) => ({
+      id: `${file.name}-${Date.now()}-${Math.random()}`,
+      fileName: file.name,
+      imageUrl: URL.createObjectURL(file),
+    }));
 
-        if (slot.imageUrl) {
-          URL.revokeObjectURL(slot.imageUrl);
-        }
-
-        return {
-          ...slot,
-          fileName: file.name,
-          imageUrl: URL.createObjectURL(file),
-        };
-      })
-    );
+    setScreenshots((prev) => [...prev, ...nextImages]);
 
     event.target.value = "";
   };
 
-  const updateSlotNote = (key: ScreenshotSlotKey, note: string) => {
-    setScreenshotSlots((prev) =>
-      prev.map((slot) =>
-        slot.key === key
-          ? {
-              ...slot,
-              note,
-            }
-          : slot
-      )
-    );
-  };
+  const removeScreenshot = (id: string) => {
+    setScreenshots((prev) => {
+      const target = prev.find((item) => item.id === id);
 
-  const clearSlot = (key: ScreenshotSlotKey) => {
-    setScreenshotSlots((prev) =>
-      prev.map((slot) => {
-        if (slot.key !== key) return slot;
-
-        if (slot.imageUrl) {
-          URL.revokeObjectURL(slot.imageUrl);
-        }
-
-        return {
-          ...slot,
-          fileName: "",
-          imageUrl: "",
-          note: "",
-        };
-      })
-    );
-  };
-
-  const clearAllSlots = () => {
-    screenshotSlots.forEach((slot) => {
-      if (slot.imageUrl) {
-        URL.revokeObjectURL(slot.imageUrl);
+      if (target) {
+        URL.revokeObjectURL(target.imageUrl);
       }
+
+      return prev.filter((item) => item.id !== id);
+    });
+  };
+
+  const clearScreenshots = () => {
+    screenshots.forEach((item) => {
+      URL.revokeObjectURL(item.imageUrl);
     });
 
-    setScreenshotSlots(createScreenshotSlots());
+    setScreenshots([]);
+    setScreenshotNote("");
   };
 
   const scanStock = async () => {
@@ -556,7 +453,7 @@ function App() {
         <p className="eyebrow">Stock War Room</p>
         <h1>📡 股票戰情中心 V2</h1>
         <p className="hero-text">
-          短線爆發掃描、賣壓判斷、攻擊結構與七格截圖工作台。
+          短線爆發掃描、賣壓判斷、攻擊結構與一般截圖輔助區。
         </p>
       </section>
 
@@ -614,53 +511,52 @@ function App() {
         <div className="stock-card screenshot-card">
           <div className="screenshot-header">
             <div>
-              <h2>📷 七格截圖工作台</h2>
+              <h2>📷 截圖輔助區</h2>
               <p className="helper-text">
-                先把盤中圖片固定放位，未來 AI 判讀才不會像抽籤仙。
+                不用分類，直接把籌碼、K線、主力、法人或任何股票截圖丟進來。
               </p>
             </div>
 
-            <button className="danger-button" onClick={clearAllSlots}>
-              清空七格
+            <button className="danger-button" onClick={clearScreenshots}>
+              清空截圖
             </button>
           </div>
 
-          <div className="screenshot-grid">
-            {screenshotSlots.map((slot) => (
-              <div className="slot-card" key={slot.key}>
-                <div className="slot-title">
-                  <h3>{slot.title}</h3>
-                  <small>{slot.hint}</small>
+          <label className="simple-upload">
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={uploadScreenshots}
+            />
+            <span>點我上傳截圖</span>
+            <small>支援多張圖片，適合新手直接使用</small>
+          </label>
+
+          <textarea
+            className="main-note"
+            value={screenshotNote}
+            onChange={(event) => setScreenshotNote(event.target.value)}
+            placeholder="可輸入臨時觀察，例如：主力連買、散戶下降、今天回5MA、上影線偏長..."
+          />
+
+          {screenshots.length > 0 && (
+            <div className="preview-grid">
+              {screenshots.map((item) => (
+                <div className="preview-card" key={item.id}>
+                  <img src={item.imageUrl} alt={item.fileName} />
+                  <p className="file-name">{item.fileName}</p>
+
+                  <button
+                    className="small-button"
+                    onClick={() => removeScreenshot(item.id)}
+                  >
+                    移除
+                  </button>
                 </div>
-
-                <label className={slot.imageUrl ? "slot-upload has-image" : "slot-upload"}>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(event) => uploadSlotImage(slot.key, event)}
-                  />
-
-                  {slot.imageUrl ? (
-                    <img src={slot.imageUrl} alt={slot.title} />
-                  ) : (
-                    <span>上傳截圖</span>
-                  )}
-                </label>
-
-                {slot.fileName && <p className="file-name">{slot.fileName}</p>}
-
-                <textarea
-                  value={slot.note}
-                  onChange={(event) => updateSlotNote(slot.key, event.target.value)}
-                  placeholder="輸入臨時觀察，例如：大戶增加、散戶下降、回5MA不破..."
-                />
-
-                <button className="small-button" onClick={() => clearSlot(slot.key)}>
-                  清除本格
-                </button>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

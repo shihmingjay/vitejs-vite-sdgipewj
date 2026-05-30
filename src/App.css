@@ -52,7 +52,7 @@ textarea {
 }
 
 textarea {
-  min-height: 88px;
+  min-height: 110px;
   resize: vertical;
   margin-top: 12px;
   line-height: 1.55;
@@ -140,7 +140,7 @@ button:disabled {
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(320px, 0.75fr) minmax(0, 1.25fr);
+  grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
   gap: 22px;
   align-items: start;
 }
@@ -217,55 +217,67 @@ button:disabled {
   margin-bottom: 16px;
 }
 
-.screenshot-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.slot-card {
-  padding: 16px;
-  border-radius: 24px;
-  background: rgba(241, 245, 249, 0.88);
-  border: 1px solid rgba(148, 163, 184, 0.32);
-}
-
-.slot-title h3 {
-  margin: 0 0 4px;
-}
-
-.slot-title small {
-  display: block;
-  min-height: 36px;
-}
-
-.slot-upload {
+.simple-upload {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 7px;
+  width: 100%;
   min-height: 180px;
-  margin-top: 14px;
+  padding: 26px;
   border: 2px dashed rgba(37, 99, 235, 0.38);
-  border-radius: 20px;
+  border-radius: 24px;
   background: rgba(239, 246, 255, 0.72);
   color: #1d4ed8;
   cursor: pointer;
-  overflow: hidden;
+  transition: 0.2s;
+  text-align: center;
 }
 
-.slot-upload input {
+.simple-upload:hover {
+  border-color: #2563eb;
+  background: rgba(219, 234, 254, 0.9);
+}
+
+.simple-upload input {
   display: none;
 }
 
-.slot-upload span {
-  font-size: 18px;
+.simple-upload span {
+  font-size: 22px;
   font-weight: 900;
 }
 
-.slot-upload img {
+.simple-upload small {
+  font-size: 14px;
+}
+
+.main-note {
   width: 100%;
-  height: 220px;
+  margin-top: 16px;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.preview-card {
+  padding: 14px;
+  border-radius: 22px;
+  background: rgba(241, 245, 249, 0.88);
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  text-align: center;
+}
+
+.preview-card img {
+  width: 100%;
+  height: 260px;
   object-fit: contain;
+  border-radius: 18px;
   background: #0f172a;
 }
 
@@ -314,7 +326,7 @@ button:disabled {
 }
 
 @media (max-width: 760px) {
-  .screenshot-grid,
+  .preview-grid,
   .score-grid {
     grid-template-columns: 1fr;
   }
