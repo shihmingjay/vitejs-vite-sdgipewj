@@ -15,11 +15,17 @@ import {
   type AiScreenshotResult,
   type V2HybridScores,
 } from "./engine/v2AiScreenshotSchema";
+import {
+  buildScreenshotPayload,
+  type ScreenshotPayloadItem,
+} from "./engine/v2ImagePayload";
 
 type ScreenshotItem = {
   id: string;
   fileName: string;
   imageUrl: string;
+  mimeType: string;
+  base64: string;
 };
 
 function App() {
@@ -68,7 +74,9 @@ function App() {
     };
   }, [screenshots]);
 
-  const uploadScreenshots = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const uploadScreenshots = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const files = Array.from(event.target.files || []);
     const imageFiles = files.filter((file) => file.type.startsWith("image/"));
 
@@ -77,17 +85,45 @@ function App() {
       return;
     }
 
-    const nextImages = imageFiles.map((file) => ({
-      id: `${file.name}-${Date.now()}-${Math.random()}`,
-      fileName: file.name,
-      imageUrl: URL.createObjectURL(file),
-    }));
+    try {
+      setAiMessage("正在整理截圖資料...");
 
-    setScreenshots((prev) => [...prev, ...nextImages]);
-    setAiResult(null);
-    setHybridScores(null);
-    setIsAiApplied(false);
-    setAiMessage("已上傳截圖，尚未進行 AI 截圖辨識。");
+      const payload: ScreenshotPayloadItem[] = await buildScreenshotPayload(
+        imageFiles
+      );
+
+      const nextImages: ScreenshotItem[] = imageFiles
+        .map((file, index) => {
+          const imagePayload = payload[index];
+
+          if (!imagePayload || !imagePayload.base64) {
+            return null;
+          }
+
+          return {
+            id: `${file.name}-${Date.now()}-${Math.random()}`,
+            fileName: file.name,
+            imageUrl: URL.createObjectURL(file),
+            mimeType: imagePayload.mimeType,
+            base64: imagePayload.base64,
+          };
+        })
+        .filter((item): item is ScreenshotItem => item !== null);
+
+      if (!nextImages.length) {
+        setAiMessage("截圖讀取失敗，請重新上傳。");
+        event.target.value = "";
+        return;
+      }
+
+      setScreenshots((prev) => [...prev, ...nextImages]);
+      setAiResult(null);
+      setHybridScores(null);
+      setIsAiApplied(false);
+      setAiMessage("已上傳截圖，尚未進行 AI 截圖辨識。");
+    } catch (error: any) {
+      setAiMessage(`截圖讀取失敗：${error.message}`);
+    }
 
     event.target.value = "";
   };
@@ -218,6 +254,11 @@ function App() {
           inputCode: code,
           imageCount: screenshots.length,
           note: screenshotNote,
+          images: screenshots.map((item) => ({
+            fileName: item.fileName,
+            mimeType: item.mimeType,
+            base64: item.base64,
+          })),
         }),
       });
 
