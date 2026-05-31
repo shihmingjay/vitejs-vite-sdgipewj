@@ -11,7 +11,7 @@ import {
 import {
   checkApplicability,
   convertAiResultToScores,
-  createMockAiScreenshotResult,
+  normalizeAiScreenshotResult,
   type AiScreenshotResult,
   type V2HybridScores,
 } from "./engine/v2AiScreenshotSchema";
@@ -38,6 +38,7 @@ function App() {
   const [aiResult, setAiResult] = useState<AiScreenshotResult | null>(null);
   const [hybridScores, setHybridScores] = useState<V2HybridScores | null>(null);
   const [aiMessage, setAiMessage] = useState("尚未進行 AI 截圖辨識。");
+  const [aiLoading, setAiLoading] = useState(false);
 
   const totalScore = analysis?.finalScore ?? 0;
 
@@ -186,7 +187,7 @@ function App() {
     }
   };
 
-  const mockAnalyzeScreenshot = () => {
+  const analyzeScreenshotByApi = async () => {
     const code = stockCode.trim();
 
     if (!code) {
@@ -199,19 +200,51 @@ function App() {
       return;
     }
 
-    const mockResult = createMockAiScreenshotResult(code);
-    const applyStatus = checkApplicability(mockResult);
-    const nextHybridScores = convertAiResultToScores(mockResult);
+    try {
+      setAiLoading(true);
+      setAiMessage("正在呼叫後端 AI 截圖辨識 API...");
 
-    setAiResult(mockResult);
-    setHybridScores(nextHybridScores);
+      const response = await fetch("/api/analyze-screenshot", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          inputCode: code,
+          imageCount: screenshots.length,
+          note: screenshotNote,
+        }),
+      });
 
-    if (applyStatus === "CAN_APPLY") {
-      setAiMessage("Mock AI 辨識成功，可套用到 V2 評分。");
-    } else if (applyStatus === "NEEDS_CONFIRMATION") {
-      setAiMessage("Mock AI 辨識完成，但需要使用者確認後再套用。");
-    } else {
-      setAiMessage("Mock AI 辨識結果不可套用，請檢查截圖股號。");
+      const data = await response.json();
+
+      if (!response.ok) {
+        setAiMessage(
+          `AI 截圖辨識 API 錯誤：${data?.message || data?.error || "未知錯誤"}`
+        );
+        setAiLoading(false);
+        return;
+      }
+
+      const normalizedResult = normalizeAiScreenshotResult(data);
+      const applyStatus = checkApplicability(normalizedResult);
+      const nextHybridScores = convertAiResultToScores(normalizedResult);
+
+      setAiResult(normalizedResult);
+      setHybridScores(nextHybridScores);
+
+      if (applyStatus === "CAN_APPLY") {
+        setAiMessage("AI 截圖辨識成功，可套用到 V2 評分。");
+      } else if (applyStatus === "NEEDS_CONFIRMATION") {
+        setAiMessage("AI 截圖辨識完成，但需要使用者確認後再套用。");
+      } else {
+        setAiMessage("AI 截圖辨識結果不可套用，請檢查截圖股號。");
+      }
+
+      setAiLoading(false);
+    } catch (error: any) {
+      setAiMessage(`AI 截圖辨識失敗：${error.message}`);
+      setAiLoading(false);
     }
   };
 
@@ -385,8 +418,8 @@ function App() {
             <h3>AI 截圖辨識狀態</h3>
             <p>{aiMessage}</p>
 
-            <button onClick={mockAnalyzeScreenshot}>
-              模擬 AI 辨識截圖
+            <button onClick={analyzeScreenshotByApi} disabled={aiLoading}>
+              {aiLoading ? "辨識中..." : "AI 辨識截圖"}
             </button>
 
             <button
