@@ -892,3 +892,106 @@ button:disabled {
 .preview-card img {
   box-shadow: 0 0 24px rgba(34, 211, 238, 0.08);
 }
+.score-grid {
+  margin-top: 22px;
+}
+
+.score-item {
+  position: relative;
+  overflow: hidden;
+  padding: 18px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(34, 211, 238, 0.12), transparent 32%),
+    linear-gradient(145deg, rgba(15, 23, 42, 0.92), rgba(2, 6, 23, 0.8));
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.score-item::before {
+  content: "";
+  position: absolute;
+  right: -42px;
+  top: -42px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid rgba(34, 211, 238, 0.14);
+  box-shadow: inset 0 0 24px rgba(124, 58, 237, 0.12);
+  pointer-events: none;
+}
+
+.score-item::after {
+  content: "MODULE";
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  color: rgba(148, 163, 184, 0.18);
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 2px;
+}
+
+.score-item h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  color: #e0f2fe;
+  font-size: 17px;
+}
+
+.score-item h3::before {
+  content: "◆";
+  color: #67e8f9;
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.65);
+}
+
+.score-item p {
+  margin-top: 10px;
+  color: #cbd5e1;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.score-item small {
+  display: inline-flex;
+  margin-top: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.14);
+  border: 1px solid rgba(196, 181, 253, 0.18);
+  color: #c4b5fd;
+  font-weight: 850;
+}
+
+.wide-card > h2 {
+  width: fit-content;
+  margin: 0 auto 6px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgba(34, 211, 238, 0.14), rgba(124, 58, 237, 0.16));
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: #e0f2fe;
+  box-shadow:
+    0 0 26px rgba(34, 211, 238, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.wide-card > p {
+  width: fit-content;
+  margin: 18px auto 0;
+  padding: 14px 20px;
+  border-radius: 18px;
+  background: rgba(2, 6, 23, 0.54);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  color: #94a3b8;
+  font-weight: 800;
+}
