@@ -1,0 +1,239 @@
+@media (max-width: 980px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .hero-panel {
+      width: 100%;
+    }
+  
+    .ranking-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 760px) {
+    .app {
+      padding: 22px 14px 38px;
+    }
+  
+    .mode-switch {
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+  
+    .mode-button {
+      padding: 10px 14px;
+      font-size: 14px;
+    }
+  
+    .assassin-hero-panel {
+      min-height: 430px;
+      align-items: flex-end;
+      border-radius: 26px;
+    }
+  
+    .assassin-hero-image {
+      object-position: 58% 20%;
+      opacity: 0.84;
+    }
+  
+    .assassin-hero-shade {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(2, 6, 23, 0.1) 0%,
+          rgba(2, 6, 23, 0.72) 46%,
+          rgba(2, 6, 23, 0.98) 100%
+        ),
+        linear-gradient(
+          90deg,
+          rgba(2, 6, 23, 0.7),
+          rgba(2, 6, 23, 0.28)
+        );
+    }
+  
+    .assassin-hero-content {
+      width: 100%;
+      padding: 34px 24px;
+    }
+  
+    .assassin-hero-content h1 {
+      font-size: clamp(42px, 13vw, 72px);
+      letter-spacing: 2px;
+    }
+  
+    .assassin-hero-subtitle {
+      font-size: 24px !important;
+    }
+  
+    .assassin-hero-text {
+      font-size: 20px !important;
+    }
+  
+    .screenshot-header {
+      flex-direction: column;
+    }
+  
+    .screenshot-card .info-panel button {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  
+    .preview-grid,
+    .score-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .ranking-header {
+      text-align: center;
+    }
+  
+    .ranking-eyebrow,
+    .ranking-header h2,
+    .ranking-header .helper-text {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .ranking-clear-button {
+      width: 100%;
+    }
+  
+    .ranking-card-top {
+      flex-direction: column;
+    }
+  
+    .ranking-score-box {
+      width: 100%;
+    }
+  
+    .ranking-stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .app {
+      padding: 18px 12px 34px;
+    }
+  
+    h1 {
+      font-size: 34px;
+    }
+  
+    .hero-panel,
+    .stock-card {
+      padding: 18px;
+      border-radius: 22px;
+    }
+  
+    .assassin-hero-panel {
+      padding: 0;
+    }
+  
+    .stock-card p {
+      font-size: 16px;
+    }
+  
+    input,
+    textarea {
+      font-size: 16px;
+    }
+  
+    button {
+      width: 100%;
+      margin: 8px 0;
+    }
+  
+    .mode-button {
+      width: auto;
+    }
+  
+    .main-card > button {
+      width: 100%;
+    }
+  
+    .score-orb,
+    .result-banner,
+    .scan-status {
+      width: 100%;
+    }
+  
+    .result-banner {
+      align-items: flex-start;
+    }
+  
+    .result-banner-icon {
+      width: 48px;
+      height: 48px;
+      flex-basis: 48px;
+      font-size: 24px;
+    }
+  
+    .result-banner-text strong {
+      font-size: 20px;
+    }
+  
+    .simple-upload {
+      min-height: 190px;
+      padding: 22px;
+    }
+  
+    .simple-upload span {
+      font-size: 20px;
+    }
+  
+    .preview-card img {
+      height: 220px;
+    }
+  
+    .ranking-leader {
+      text-align: center;
+    }
+  
+    .ranking-card {
+      padding: 16px;
+    }
+  }
+  
+  @media (max-width: 420px) {
+    .mode-switch {
+      flex-direction: column;
+    }
+  
+    .mode-button {
+      width: 100%;
+    }
+  
+    .assassin-hero-panel {
+      min-height: 390px;
+    }
+  
+    .assassin-hero-content {
+      padding: 28px 20px;
+    }
+  
+    .assassin-hero-content h1 {
+      font-size: 42px;
+    }
+  
+    .assassin-hero-subtitle {
+      font-size: 20px !important;
+      padding: 8px 12px;
+    }
+  
+    .assassin-hero-text {
+      font-size: 18px !important;
+      padding: 7px 12px;
+    }
+  
+    .stock-card {
+      padding: 16px;
+    }
+  
+    .ranking-header h2 {
+      font-size: 26px;
+    }
+  }
