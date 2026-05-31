@@ -5,7 +5,6 @@ import "./App.css";
 import { getChipData } from "./services/chipApi";
 import {
   analyzeV2ShortStock,
-  getV2Result,
   type V2ShortAnalysis,
 } from "./engine/v2ShortEngine";
 import {
@@ -28,6 +27,30 @@ type ScreenshotItem = {
   base64: string;
 };
 
+function getBattleResult(score: number) {
+  if (score >= 80) {
+    return {
+      label: "刺客出擊",
+      icon: "🗡",
+      className: "result-assassin",
+    };
+  }
+
+  if (score >= 60) {
+    return {
+      label: "斥侯觀察",
+      icon: "🏹",
+      className: "result-scout",
+    };
+  }
+
+  return {
+    label: "騎士撤守",
+    icon: "🛡",
+    className: "result-knight",
+  };
+}
+
 function App() {
   const [stockCode, setStockCode] = useState("");
   const [stockData, setStockData] = useState<StockApiItem | null>(null);
@@ -35,7 +58,7 @@ function App() {
   const [analysis, setAnalysis] = useState<V2ShortAnalysis | null>(null);
   const [scoreItems, setScoreItems] = useState<ScoreItem[]>([]);
   const [watchList, setWatchList] = useState<WatchStock[]>([]);
-  const [message, setMessage] = useState("輸入股票代號，啟動戰情掃描。");
+  const [message, setMessage] = useState("輸入股票代號，派出斥侯探路。");
   const [loading, setLoading] = useState(false);
 
   const [screenshots, setScreenshots] = useState<ScreenshotItem[]>([]);
@@ -43,11 +66,12 @@ function App() {
 
   const [aiResult, setAiResult] = useState<AiScreenshotResult | null>(null);
   const [hybridScores, setHybridScores] = useState<V2HybridScores | null>(null);
-  const [aiMessage, setAiMessage] = useState("尚未進行 AI 截圖辨識。");
+  const [aiMessage, setAiMessage] = useState("尚未解析情報卷軸。");
   const [aiLoading, setAiLoading] = useState(false);
   const [isAiApplied, setIsAiApplied] = useState(false);
 
   const totalScore = analysis?.finalScore ?? 0;
+  const battleResult = getBattleResult(totalScore);
 
   const goV2 = () => {
     window.location.href = "/";
@@ -86,7 +110,7 @@ function App() {
     }
 
     try {
-      setAiMessage("正在整理截圖資料...");
+      setAiMessage("正在整理情報卷軸...");
 
       const payload: ScreenshotPayloadItem[] = await buildScreenshotPayload(
         imageFiles
@@ -111,7 +135,7 @@ function App() {
         .filter((item): item is ScreenshotItem => item !== null);
 
       if (!nextImages.length) {
-        setAiMessage("截圖讀取失敗，請重新上傳。");
+        setAiMessage("卷軸讀取失敗，請重新上傳。");
         event.target.value = "";
         return;
       }
@@ -120,9 +144,9 @@ function App() {
       setAiResult(null);
       setHybridScores(null);
       setIsAiApplied(false);
-      setAiMessage("已上傳截圖，尚未進行 AI 截圖辨識。");
+      setAiMessage("情報卷軸已送達，尚未解析。");
     } catch (error: any) {
-      setAiMessage(`截圖讀取失敗：${error.message}`);
+      setAiMessage(`卷軸讀取失敗：${error.message}`);
     }
 
     event.target.value = "";
@@ -142,7 +166,7 @@ function App() {
     setAiResult(null);
     setHybridScores(null);
     setIsAiApplied(false);
-    setAiMessage("截圖已變更，請重新進行 AI 截圖辨識。");
+    setAiMessage("卷軸已變更，請重新解析情報。");
   };
 
   const clearScreenshots = () => {
@@ -155,7 +179,7 @@ function App() {
     setAiResult(null);
     setHybridScores(null);
     setIsAiApplied(false);
-    setAiMessage("尚未進行 AI 截圖辨識。");
+    setAiMessage("尚未解析情報卷軸。");
   };
 
   const scanStock = async () => {
@@ -164,7 +188,7 @@ function App() {
       console.log("籌碼資料:", chipData);
 
       setLoading(true);
-      setMessage("掃描中...");
+      setMessage("斥侯探路中...");
       setStockData(null);
       setHistoryDataCache(null);
       setAnalysis(null);
@@ -172,12 +196,12 @@ function App() {
       setAiResult(null);
       setHybridScores(null);
       setIsAiApplied(false);
-      setAiMessage("尚未進行 AI 截圖辨識。");
+      setAiMessage("尚未解析情報卷軸。");
 
       const code = stockCode.trim();
 
       if (!code) {
-        setMessage("請輸入股票代號");
+        setMessage("請先輸入股票代號。");
         setLoading(false);
         return;
       }
@@ -186,7 +210,7 @@ function App() {
       const allStocks = await stockResponse.json();
 
       if (!Array.isArray(allStocks)) {
-        setMessage("stock API 格式錯誤");
+        setMessage("stock API 格式錯誤。");
         setLoading(false);
         return;
       }
@@ -194,7 +218,7 @@ function App() {
       const stock = allStocks.find((item: StockApiItem) => item.Code === code);
 
       if (!stock) {
-        setMessage("查無股票，可能是上櫃股或資料尚未更新");
+        setMessage("查無股票，可能是上櫃股或資料尚未更新。");
         setLoading(false);
         return;
       }
@@ -207,23 +231,24 @@ function App() {
         !Array.isArray(historyData.data) ||
         historyData.data.length < 5
       ) {
-        setMessage("歷史資料不足，無法計算均線");
+        setMessage("歷史資料不足，斥侯無法判讀均線。");
         setLoading(false);
         return;
       }
 
       const nextAnalysis = analyzeV2ShortStock(stock, historyData);
+      const nextBattleResult = getBattleResult(nextAnalysis.finalScore);
 
       setStockData(stock);
       setHistoryDataCache(historyData);
       setAnalysis(nextAnalysis);
       setScoreItems(nextAnalysis.items);
       setMessage(
-        `查詢成功，總分 ${nextAnalysis.finalScore}，${nextAnalysis.result}`
+        `探路完成，戰力 ${nextAnalysis.finalScore}，${nextBattleResult.label}`
       );
       setLoading(false);
     } catch (error: any) {
-      setMessage(`API錯誤：${error.message}`);
+      setMessage(`探路失敗：${error.message}`);
       setLoading(false);
     }
   };
@@ -232,18 +257,18 @@ function App() {
     const code = stockCode.trim();
 
     if (!code) {
-      setAiMessage("請先輸入股票代號，再進行 AI 截圖辨識。");
+      setAiMessage("請先輸入股票代號，再解析情報卷軸。");
       return;
     }
 
     if (screenshots.length === 0) {
-      setAiMessage("請先上傳至少一張截圖。");
+      setAiMessage("請先上傳至少一張情報卷軸。");
       return;
     }
 
     try {
       setAiLoading(true);
-      setAiMessage("正在呼叫後端 AI 截圖辨識 API...");
+      setAiMessage("卷軸解析中，正在交叉判讀截圖資訊...");
 
       const response = await fetch("/api/analyze-screenshot", {
         method: "POST",
@@ -266,7 +291,7 @@ function App() {
 
       if (!response.ok) {
         setAiMessage(
-          `AI 截圖辨識 API 錯誤：${data?.message || data?.error || "未知錯誤"}`
+          `卷軸解析失敗：${data?.message || data?.error || "未知錯誤"}`
         );
         setAiLoading(false);
         return;
@@ -281,28 +306,28 @@ function App() {
       setIsAiApplied(false);
 
       if (applyStatus === "CAN_APPLY") {
-        setAiMessage("AI 截圖辨識成功，可套用到 V2 評分。");
+        setAiMessage("卷軸解析成功，可套用至戰力評分。");
       } else if (applyStatus === "NEEDS_CONFIRMATION") {
-        setAiMessage("AI 截圖辨識完成，但需要使用者確認後再套用。");
+        setAiMessage("卷軸解析完成，但需要確認後再套用。");
       } else {
-        setAiMessage("AI 截圖辨識結果不可套用，請檢查截圖股號。");
+        setAiMessage("卷軸結果不可套用，請檢查截圖股號。");
       }
 
       setAiLoading(false);
     } catch (error: any) {
-      setAiMessage(`AI 截圖辨識失敗：${error.message}`);
+      setAiMessage(`卷軸解析失敗：${error.message}`);
       setAiLoading(false);
     }
   };
 
   const applyAiScoresToV2 = () => {
     if (!stockData || !historyDataCache || !hybridScores) {
-      setAiMessage("缺少股票資料或 AI 辨識資料，無法套用。");
+      setAiMessage("缺少股票資料或卷軸解析資料，無法套用。");
       return;
     }
 
     if (!hybridScores.canApply) {
-      setAiMessage("目前 AI 辨識結果不可直接套用。");
+      setAiMessage("目前卷軸解析結果不可直接套用。");
       return;
     }
 
@@ -311,14 +336,15 @@ function App() {
       historyDataCache,
       hybridScores
     );
+    const nextBattleResult = getBattleResult(nextAnalysis.finalScore);
 
     setAnalysis(nextAnalysis);
     setScoreItems(nextAnalysis.items);
     setIsAiApplied(true);
     setMessage(
-      `已套用 AI 截圖籌碼分數，總分 ${nextAnalysis.finalScore}，${nextAnalysis.result}`
+      `已套用卷軸籌碼分數，戰力 ${nextAnalysis.finalScore}，${nextBattleResult.label}`
     );
-    setAiMessage("已套用 AI 截圖辨識結果到 V2 評分。");
+    setAiMessage("卷軸解析結果已套用至 V2 戰力評分。");
   };
 
   const addToWatchList = () => {
@@ -329,7 +355,7 @@ function App() {
       name: stockData.Name,
       close: stockData.ClosingPrice,
       totalScore: analysis.finalScore,
-      result: getV2Result(analysis.finalScore),
+      result: getBattleResult(analysis.finalScore).label,
       items: scoreItems,
       ma5: analysis.ma5,
       maMonth: analysis.maMonth,
@@ -361,11 +387,11 @@ function App() {
     <div className="app">
       <div className="mode-switch">
         <button className="mode-button active" onClick={goV2}>
-          🔥 V2 短線爆發
+          🏹 V2 斥侯短擊
         </button>
 
         <button className="mode-button" onClick={goV3}>
-          🚀 V3 中長期波段
+          🛡 V3 波段遠征
         </button>
       </div>
 
@@ -373,23 +399,21 @@ function App() {
         <img
           className="assassin-hero-image"
           src="/assassin-hero.png"
-          alt="暗黑刺客情報斥侯"
+          alt="情報斥侯主視覺"
         />
 
         <div className="assassin-hero-shade" />
 
         <div className="assassin-hero-content">
           <h1>情報斥侯</h1>
-
           <p className="assassin-hero-subtitle">彭姊的福音</p>
-
           <p className="assassin-hero-text">不用很會也可以</p>
         </div>
       </section>
 
       <div className="dashboard-grid">
         <div className="stock-card main-card">
-          <h2>🔥 短線掃描器</h2>
+          <h2>🗡 短線斥侯掃描器</h2>
 
           <input
             value={stockCode}
@@ -398,24 +422,33 @@ function App() {
           />
 
           <button onClick={scanStock} disabled={loading}>
-            {loading ? "掃描中..." : "查詢並自動評分"}
+            {loading ? "斥侯探路中..." : "送出斥侯掃描"}
           </button>
 
-          <h2
-            className={
-              totalScore >= 80
-                ? "score-high result-glow"
-                : totalScore >= 60
-                ? "score-medium result-glow"
-                : "score-low result-glow"
-            }
-          >
-            目前分數：{totalScore}
-          </h2>
+          <div className="score-orb">
+            <span className="score-orb-label">戰力評分</span>
+            <strong
+              className={
+                totalScore >= 80
+                  ? "score-high"
+                  : totalScore >= 60
+                  ? "score-medium"
+                  : "score-low"
+              }
+            >
+              {totalScore}
+            </strong>
+          </div>
 
-          <h2 className="result-glow">目前結果：{getV2Result(totalScore)}</h2>
+          <div className={`result-banner ${battleResult.className}`}>
+            <span className="result-banner-icon">{battleResult.icon}</span>
+            <div className="result-banner-text">
+              <small>目前結果</small>
+              <strong>{battleResult.label}</strong>
+            </div>
+          </div>
 
-          <p>{message}</p>
+          <p className="scan-status">{message}</p>
 
           {stockData && analysis && (
             <div className="info-panel">
@@ -434,28 +467,28 @@ function App() {
               <p>賣壓警示分：{analysis.pressureScore}/100</p>
 
               <div className="info-panel">
-                <h3>📌 資料來源狀態</h3>
+                <h3>📜 資料來源狀態</h3>
                 <p>價格 / K線 / 量能：盤後 API</p>
                 <p>均線 / Trigger / 熔斷：V2 短線引擎自動計算</p>
 
                 {isAiApplied ? (
                   <>
-                    <p>主力籌碼：AI 截圖辨識已套用</p>
-                    <p>法人動向：AI 截圖辨識已套用</p>
-                    <p>大戶持股：AI 截圖辨識已套用</p>
-                    <p>籌碼乾淨度：AI 截圖辨識已套用</p>
+                    <p>主力籌碼：情報卷軸已套用</p>
+                    <p>法人動向：情報卷軸已套用</p>
+                    <p>大戶持股：情報卷軸已套用</p>
+                    <p>籌碼乾淨度：情報卷軸已套用</p>
                   </>
                 ) : (
                   <>
-                    <p>主力籌碼：未提供 AI 截圖，使用中性分</p>
-                    <p>法人動向：未提供 AI 截圖，使用中性分</p>
-                    <p>大戶持股：未提供 AI 截圖，使用中性分</p>
-                    <p>籌碼乾淨度：未提供 AI 截圖，使用中性分</p>
+                    <p>主力籌碼：未提供情報卷軸，使用中性分</p>
+                    <p>法人動向：未提供情報卷軸，使用中性分</p>
+                    <p>大戶持股：未提供情報卷軸，使用中性分</p>
+                    <p>籌碼乾淨度：未提供情報卷軸，使用中性分</p>
                   </>
                 )}
               </div>
 
-              <button onClick={addToWatchList}>加入主攻排行榜</button>
+              <button onClick={addToWatchList}>加入主攻戰情榜</button>
             </div>
           )}
         </div>
@@ -463,14 +496,14 @@ function App() {
         <div className="stock-card screenshot-card">
           <div className="screenshot-header">
             <div>
-              <h2>📷 AI 截圖輔助區</h2>
+              <h2>🧙 情報卷軸輔助區</h2>
               <p className="helper-text">
                 不用分類，直接把籌碼、K線、主力、法人或任何股票截圖丟進來。
               </p>
             </div>
 
             <button className="danger-button" onClick={clearScreenshots}>
-              清空截圖
+              清空卷軸
             </button>
           </div>
 
@@ -481,7 +514,7 @@ function App() {
               multiple
               onChange={uploadScreenshots}
             />
-            <span>點我上傳截圖</span>
+            <span>點我上傳情報卷軸</span>
             <small>支援多張圖片，適合新手直接使用</small>
           </label>
 
@@ -493,22 +526,22 @@ function App() {
           />
 
           <div className="info-panel">
-            <h3>AI 截圖辨識狀態</h3>
+            <h3>卷軸解析狀態</h3>
             <p>{aiMessage}</p>
 
             <button onClick={analyzeScreenshotByApi} disabled={aiLoading}>
-              {aiLoading ? "辨識中..." : "AI 辨識截圖"}
+              {aiLoading ? "解析中..." : "解析情報卷軸"}
             </button>
 
             <button
               onClick={applyAiScoresToV2}
               disabled={!hybridScores?.canApply}
             >
-              套用到 V2 評分
+              套用至戰力評分
             </button>
 
             {aiResult && hybridScores && (
-              <div>
+              <div className="ai-result-scroll">
                 <p>偵測股號：{aiResult.meta.detectedCodes.join("、")}</p>
                 <p>輸入股號：{aiResult.meta.inputCode}</p>
                 <p>股號一致：{aiResult.meta.isCodeMatched ? "是" : "否"}</p>
@@ -575,7 +608,7 @@ function App() {
       </div>
 
       <div className="stock-card wide-card">
-        <h2>📊 評分明細</h2>
+        <h2>📜 評分明細</h2>
 
         {scoreItems.length === 0 ? (
           <p>尚未評分</p>
