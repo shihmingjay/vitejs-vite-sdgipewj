@@ -373,47 +373,26 @@ function App() {
         className="hero-panel"
         style={{
           display: "grid",
-          gridTemplateColumns: "minmax(0, 1.35fr) minmax(260px, 0.65fr)",
+          gridTemplateColumns: "minmax(0, 1.25fr) minmax(260px, 0.75fr)",
           gap: "24px",
           alignItems: "center",
           textAlign: "left",
         }}
       >
         <div>
-          <p className="eyebrow">Stock War Room</p>
-          <h1>股票戰情中心 V2</h1>
-          <p className="hero-text" style={{ margin: 0 }}>
-            黑夜作戰模式啟動。短線爆發掃描、賣壓判斷、攻擊結構與 AI 截圖輔助區。
-          </p>
+          <h1>蒐情斥侯部隊</h1>
 
-          <div
+          <p
+            className="hero-text"
             style={{
-              display: "flex",
-              gap: "10px",
-              flexWrap: "wrap",
-              marginTop: "18px",
+              margin: 0,
+              fontSize: "22px",
+              color: "#c4b5fd",
+              fontWeight: 800,
             }}
           >
-            {["V2 SHORT", "PRESSURE RADAR", "AI SCREENSHOT", "DARK OPS"].map(
-              (item) => (
-                <span
-                  key={item}
-                  style={{
-                    padding: "8px 12px",
-                    borderRadius: "999px",
-                    background: "rgba(2,6,23,0.62)",
-                    border: "1px solid rgba(34,211,238,0.24)",
-                    color: "#67e8f9",
-                    fontSize: "12px",
-                    fontWeight: 900,
-                    letterSpacing: "1.2px",
-                  }}
-                >
-                  {item}
-                </span>
-              )
-            )}
-          </div>
+            彭姊的福音，不用很會也可以
+          </p>
         </div>
 
         <div
@@ -422,7 +401,7 @@ function App() {
             minHeight: "230px",
             borderRadius: "28px",
             background:
-              "radial-gradient(circle at 50% 45%, rgba(34,211,238,0.22), transparent 36%), rgba(2,6,23,0.38)",
+              "radial-gradient(circle at 50% 45%, rgba(34,211,238,0.2), transparent 38%), linear-gradient(145deg, rgba(2,6,23,0.82), rgba(15,23,42,0.72))",
             border: "1px solid rgba(125,211,252,0.18)",
             overflow: "hidden",
             boxShadow:
@@ -432,35 +411,11 @@ function App() {
           <div
             style={{
               position: "absolute",
-              inset: "28px",
-              borderRadius: "50%",
-              border: "1px solid rgba(34,211,238,0.2)",
-              boxShadow:
-                "0 0 24px rgba(34,211,238,0.12), inset 0 0 24px rgba(124,58,237,0.12)",
-            }}
-          />
-
-          <div
-            style={{
-              position: "absolute",
-              inset: "58px",
-              borderRadius: "50%",
-              border: "1px solid rgba(124,58,237,0.22)",
-            }}
-          />
-
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              width: "2px",
-              height: "92px",
+              inset: "24px",
+              borderRadius: "24px",
+              border: "1px solid rgba(34,211,238,0.18)",
               background:
-                "linear-gradient(to bottom, rgba(34,211,238,0.95), transparent)",
-              transformOrigin: "top center",
-              transform: "rotate(42deg)",
-              boxShadow: "0 0 18px rgba(34,211,238,0.8)",
+                "linear-gradient(135deg, rgba(34,211,238,0.08), transparent 40%, rgba(124,58,237,0.12))",
             }}
           />
 
@@ -469,57 +424,58 @@ function App() {
               position: "absolute",
               left: "50%",
               top: "50%",
-              width: "12px",
-              height: "12px",
-              borderRadius: "50%",
-              background: "#22d3ee",
+              width: "86px",
+              height: "160px",
               transform: "translate(-50%, -50%)",
+              borderRadius: "44px 44px 20px 20px",
+              background:
+                "linear-gradient(180deg, rgba(15,23,42,0.1), rgba(2,6,23,0.95))",
+              border: "1px solid rgba(226,232,240,0.18)",
               boxShadow:
-                "0 0 18px rgba(34,211,238,0.95), 0 0 34px rgba(124,58,237,0.4)",
+                "0 0 28px rgba(34,211,238,0.16), inset 0 0 24px rgba(124,58,237,0.16)",
             }}
           />
 
           <div
             style={{
               position: "absolute",
-              left: "20px",
-              bottom: "20px",
-              right: "20px",
-              display: "grid",
-              gap: "8px",
+              left: "50%",
+              top: "47%",
+              width: "120px",
+              height: "2px",
+              transform: "translate(-50%, -50%) rotate(-18deg)",
+              background:
+                "linear-gradient(90deg, transparent, #22d3ee, transparent)",
+              boxShadow: "0 0 18px rgba(34,211,238,0.85)",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "54%",
+              width: "120px",
+              height: "2px",
+              transform: "translate(-50%, -50%) rotate(18deg)",
+              background:
+                "linear-gradient(90deg, transparent, #7c3aed, transparent)",
+              boxShadow: "0 0 18px rgba(124,58,237,0.85)",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              right: "18px",
+              bottom: "16px",
+              color: "rgba(226,232,240,0.38)",
+              fontSize: "12px",
+              fontWeight: 900,
+              letterSpacing: "2px",
             }}
           >
-            <div
-              style={{
-                height: "8px",
-                width: "72%",
-                borderRadius: "999px",
-                background:
-                  "linear-gradient(90deg,#22d3ee,rgba(34,211,238,0.08))",
-              }}
-            />
-
-            <div
-              style={{
-                height: "8px",
-                width: "52%",
-                borderRadius: "999px",
-                background:
-                  "linear-gradient(90deg,#7c3aed,rgba(124,58,237,0.08))",
-              }}
-            />
-
-            <p
-              style={{
-                margin: "6px 0 0",
-                color: "#94a3b8",
-                fontSize: "13px",
-                fontWeight: 900,
-                letterSpacing: "2px",
-              }}
-            >
-              TARGET SCAN ONLINE
-            </p>
+            刺客美圖預留區
           </div>
         </div>
       </section>
