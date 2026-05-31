@@ -8,6 +8,13 @@ import {
   getV2Result,
   type V2ShortAnalysis,
 } from "./engine/v2ShortEngine";
+import {
+  checkApplicability,
+  convertAiResultToScores,
+  createMockAiScreenshotResult,
+  type AiScreenshotResult,
+  type V2HybridScores,
+} from "./engine/v2AiScreenshotSchema";
 
 type ScreenshotItem = {
   id: string;
@@ -18,6 +25,7 @@ type ScreenshotItem = {
 function App() {
   const [stockCode, setStockCode] = useState("");
   const [stockData, setStockData] = useState<StockApiItem | null>(null);
+  const [historyDataCache, setHistoryDataCache] = useState<any | null>(null);
   const [analysis, setAnalysis] = useState<V2ShortAnalysis | null>(null);
   const [scoreItems, setScoreItems] = useState<ScoreItem[]>([]);
   const [watchList, setWatchList] = useState<WatchStock[]>([]);
@@ -26,6 +34,10 @@ function App() {
 
   const [screenshots, setScreenshots] = useState<ScreenshotItem[]>([]);
   const [screenshotNote, setScreenshotNote] = useState("");
+
+  const [aiResult, setAiResult] = useState<AiScreenshotResult | null>(null);
+  const [hybridScores, setHybridScores] = useState<V2HybridScores | null>(null);
+  const [aiMessage, setAiMessage] = useState("尚未進行 AI 截圖辨識。");
 
   const totalScore = analysis?.finalScore ?? 0;
 
@@ -70,6 +82,10 @@ function App() {
     }));
 
     setScreenshots((prev) => [...prev, ...nextImages]);
+    setAiResult(null);
+    setHybridScores(null);
+    setAiMessage("已上傳截圖，尚未進行 AI 截圖辨識。");
+
     event.target.value = "";
   };
 
@@ -83,6 +99,10 @@ function App() {
 
       return prev.filter((item) => item.id !== id);
     });
+
+    setAiResult(null);
+    setHybridScores(null);
+    setAiMessage("截圖已變更，請重新進行 AI 截圖辨識。");
   };
 
   const clearScreenshots = () => {
@@ -92,6 +112,9 @@ function App() {
 
     setScreenshots([]);
     setScreenshotNote("");
+    setAiResult(null);
+    setHybridScores(null);
+    setAiMessage("尚未進行 AI 截圖辨識。");
   };
 
   const scanStock = async () => {
@@ -102,8 +125,12 @@ function App() {
       setLoading(true);
       setMessage("掃描中...");
       setStockData(null);
+      setHistoryDataCache(null);
       setAnalysis(null);
       setScoreItems([]);
+      setAiResult(null);
+      setHybridScores(null);
+      setAiMessage("尚未進行 AI 截圖辨識。");
 
       const code = stockCode.trim();
 
@@ -146,6 +173,7 @@ function App() {
       const nextAnalysis = analyzeV2ShortStock(stock, historyData);
 
       setStockData(stock);
+      setHistoryDataCache(historyData);
       setAnalysis(nextAnalysis);
       setScoreItems(nextAnalysis.items);
       setMessage(
@@ -156,6 +184,60 @@ function App() {
       setMessage(`API錯誤：${error.message}`);
       setLoading(false);
     }
+  };
+
+  const mockAnalyzeScreenshot = () => {
+    const code = stockCode.trim();
+
+    if (!code) {
+      setAiMessage("請先輸入股票代號，再進行 AI 截圖辨識。");
+      return;
+    }
+
+    if (screenshots.length === 0) {
+      setAiMessage("請先上傳至少一張截圖。");
+      return;
+    }
+
+    const mockResult = createMockAiScreenshotResult(code);
+    const applyStatus = checkApplicability(mockResult);
+    const nextHybridScores = convertAiResultToScores(mockResult);
+
+    setAiResult(mockResult);
+    setHybridScores(nextHybridScores);
+
+    if (applyStatus === "CAN_APPLY") {
+      setAiMessage("Mock AI 辨識成功，可套用到 V2 評分。");
+    } else if (applyStatus === "NEEDS_CONFIRMATION") {
+      setAiMessage("Mock AI 辨識完成，但需要使用者確認後再套用。");
+    } else {
+      setAiMessage("Mock AI 辨識結果不可套用，請檢查截圖股號。");
+    }
+  };
+
+  const applyAiScoresToV2 = () => {
+    if (!stockData || !historyDataCache || !hybridScores) {
+      setAiMessage("缺少股票資料或 AI 辨識資料，無法套用。");
+      return;
+    }
+
+    if (!hybridScores.canApply) {
+      setAiMessage("目前 AI 辨識結果不可直接套用。");
+      return;
+    }
+
+    const nextAnalysis = analyzeV2ShortStock(
+      stockData,
+      historyDataCache,
+      hybridScores
+    );
+
+    setAnalysis(nextAnalysis);
+    setScoreItems(nextAnalysis.items);
+    setMessage(
+      `已套用 AI 截圖籌碼分數，總分 ${nextAnalysis.finalScore}，${nextAnalysis.result}`
+    );
+    setAiMessage("已套用 AI 截圖辨識結果到 V2 評分。");
   };
 
   const addToWatchList = () => {
@@ -210,7 +292,7 @@ function App() {
         <p className="eyebrow">Stock War Room</p>
         <h1>📡 股票戰情中心 V2</h1>
         <p className="hero-text">
-          短線爆發掃描、賣壓判斷、攻擊結構與一般截圖輔助區。
+          短線爆發掃描、賣壓判斷、攻擊結構與 AI 截圖輔助區。
         </p>
       </section>
 
@@ -270,7 +352,7 @@ function App() {
         <div className="stock-card screenshot-card">
           <div className="screenshot-header">
             <div>
-              <h2>📷 截圖輔助區</h2>
+              <h2>📷 AI 截圖輔助區</h2>
               <p className="helper-text">
                 不用分類，直接把籌碼、K線、主力、法人或任何股票截圖丟進來。
               </p>
@@ -299,6 +381,71 @@ function App() {
             placeholder="可輸入臨時觀察，例如：主力連買、散戶下降、今天回5MA、上影線偏長..."
           />
 
+          <div className="info-panel">
+            <h3>AI 截圖辨識狀態</h3>
+            <p>{aiMessage}</p>
+
+            <button onClick={mockAnalyzeScreenshot}>
+              模擬 AI 辨識截圖
+            </button>
+
+            <button
+              onClick={applyAiScoresToV2}
+              disabled={!hybridScores?.canApply}
+            >
+              套用到 V2 評分
+            </button>
+
+            {aiResult && hybridScores && (
+              <div>
+                <p>偵測股號：{aiResult.meta.detectedCodes.join("、")}</p>
+                <p>輸入股號：{aiResult.meta.inputCode}</p>
+                <p>
+                  股號一致：
+                  {aiResult.meta.isCodeMatched ? "是" : "否"}
+                </p>
+                <p>整體信心度：{aiResult.meta.overallConfidence}%</p>
+                <p>套用狀態：{hybridScores.applyStatus}</p>
+                <p>資料來源：{hybridScores.sourceLabel}</p>
+
+                <p>
+                  主力籌碼：
+                  {aiResult.chipsData.mainForce.value}｜
+                  {aiResult.chipsData.mainForce.rawText}｜
+                  信心度 {aiResult.chipsData.mainForce.confidence}%
+                </p>
+
+                <p>
+                  大戶持股：
+                  {aiResult.chipsData.bigHolder.value}｜
+                  {aiResult.chipsData.bigHolder.rawText}｜
+                  信心度 {aiResult.chipsData.bigHolder.confidence}%
+                </p>
+
+                <p>
+                  散戶持股：
+                  {aiResult.chipsData.retail.value}｜
+                  {aiResult.chipsData.retail.rawText}｜
+                  信心度 {aiResult.chipsData.retail.confidence}%
+                </p>
+
+                <p>
+                  法人動向：
+                  {aiResult.chipsData.institution.value}｜
+                  {aiResult.chipsData.institution.rawText}｜
+                  信心度 {aiResult.chipsData.institution.confidence}%
+                </p>
+
+                <p>
+                  籌碼乾淨度：
+                  {aiResult.chipsData.chipCleanliness.value}｜
+                  {aiResult.chipsData.chipCleanliness.rawText}｜
+                  信心度 {aiResult.chipsData.chipCleanliness.confidence}%
+                </p>
+              </div>
+            )}
+          </div>
+
           {screenshots.length > 0 && (
             <div className="preview-grid">
               {screenshots.map((item) => (
@@ -320,7 +467,7 @@ function App() {
       </div>
 
       <div className="stock-card wide-card">
-        <h2>📊 10項評分明細</h2>
+        <h2>📊 評分明細</h2>
 
         {scoreItems.length === 0 ? (
           <p>尚未評分</p>
