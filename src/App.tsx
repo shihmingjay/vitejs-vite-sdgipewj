@@ -39,6 +39,7 @@ function App() {
   const [hybridScores, setHybridScores] = useState<V2HybridScores | null>(null);
   const [aiMessage, setAiMessage] = useState("尚未進行 AI 截圖辨識。");
   const [aiLoading, setAiLoading] = useState(false);
+  const [isAiApplied, setIsAiApplied] = useState(false);
 
   const totalScore = analysis?.finalScore ?? 0;
 
@@ -85,6 +86,7 @@ function App() {
     setScreenshots((prev) => [...prev, ...nextImages]);
     setAiResult(null);
     setHybridScores(null);
+    setIsAiApplied(false);
     setAiMessage("已上傳截圖，尚未進行 AI 截圖辨識。");
 
     event.target.value = "";
@@ -103,6 +105,7 @@ function App() {
 
     setAiResult(null);
     setHybridScores(null);
+    setIsAiApplied(false);
     setAiMessage("截圖已變更，請重新進行 AI 截圖辨識。");
   };
 
@@ -115,6 +118,7 @@ function App() {
     setScreenshotNote("");
     setAiResult(null);
     setHybridScores(null);
+    setIsAiApplied(false);
     setAiMessage("尚未進行 AI 截圖辨識。");
   };
 
@@ -131,6 +135,7 @@ function App() {
       setScoreItems([]);
       setAiResult(null);
       setHybridScores(null);
+      setIsAiApplied(false);
       setAiMessage("尚未進行 AI 截圖辨識。");
 
       const code = stockCode.trim();
@@ -232,6 +237,7 @@ function App() {
 
       setAiResult(normalizedResult);
       setHybridScores(nextHybridScores);
+      setIsAiApplied(false);
 
       if (applyStatus === "CAN_APPLY") {
         setAiMessage("AI 截圖辨識成功，可套用到 V2 評分。");
@@ -267,6 +273,7 @@ function App() {
 
     setAnalysis(nextAnalysis);
     setScoreItems(nextAnalysis.items);
+    setIsAiApplied(true);
     setMessage(
       `已套用 AI 截圖籌碼分數，總分 ${nextAnalysis.finalScore}，${nextAnalysis.result}`
     );
@@ -376,6 +383,28 @@ function App() {
               <p>平均線觀察：{analysis.trendStatus}</p>
               <p>近10日賣壓：{analysis.pressureStatus}</p>
               <p>賣壓警示分：{analysis.pressureScore}/100</p>
+
+              <div className="info-panel">
+                <h3>📌 資料來源狀態</h3>
+                <p>價格 / K線 / 量能：盤後 API</p>
+                <p>均線 / Trigger / 熔斷：V2 短線引擎自動計算</p>
+
+                {isAiApplied ? (
+                  <>
+                    <p>主力籌碼：AI 截圖辨識已套用</p>
+                    <p>法人動向：AI 截圖辨識已套用</p>
+                    <p>大戶持股：AI 截圖辨識已套用</p>
+                    <p>籌碼乾淨度：AI 截圖辨識已套用</p>
+                  </>
+                ) : (
+                  <>
+                    <p>主力籌碼：未提供 AI 截圖，使用中性分</p>
+                    <p>法人動向：未提供 AI 截圖，使用中性分</p>
+                    <p>大戶持股：未提供 AI 截圖，使用中性分</p>
+                    <p>籌碼乾淨度：未提供 AI 截圖，使用中性分</p>
+                  </>
+                )}
+              </div>
 
               <button onClick={addToWatchList}>加入主攻排行榜</button>
             </div>
