@@ -13,10 +13,10 @@ function getScoreClass(score: number) {
 }
 
 function getRankBadge(index: number) {
-  if (index === 0) return "👑 主攻一號";
-  if (index === 1) return "🥈 第二觀察";
-  if (index === 2) return "🥉 第三觀察";
-  return `#${index + 1} 追蹤觀察`;
+  if (index === 0) return "👑 PRIME TARGET";
+  if (index === 1) return "🥈 SECOND WATCH";
+  if (index === 2) return "🥉 THIRD WATCH";
+  return `#${index + 1} WATCHLIST`;
 }
 
 function getScoreLabel(score: number) {
@@ -27,9 +27,9 @@ function getScoreLabel(score: number) {
 }
 
 function getPressureColor(value: number) {
-  if (value >= 80) return "#dc2626";
+  if (value >= 80) return "#ef4444";
   if (value >= 50) return "#f59e0b";
-  return "#16a34a";
+  return "#22c55e";
 }
 
 function getPressureLabel(value: number) {
@@ -58,10 +58,10 @@ function RankingBoard({ watchList, removeStock, clearAll }: Props) {
         }}
       >
         <div>
-          <p className="eyebrow">V2 Attack Ranking</p>
+          <p className="eyebrow">V2 DARK RANKING</p>
           <h2>🏆 主攻排行榜</h2>
           <p className="helper-text">
-            依照 V2 短線爆發評分排序，重點觀察分數、賣壓、攻擊結構、5MA 與量能狀態。
+            黑夜作戰看板：分數、賣壓、攻擊結構、5MA 與量能狀態集中觀察。
           </p>
         </div>
 
@@ -82,16 +82,19 @@ function RankingBoard({ watchList, removeStock, clearAll }: Props) {
         <div
           style={{
             marginTop: "18px",
-            padding: "24px",
-            borderRadius: "20px",
-            background: "linear-gradient(135deg,#f8fafc,#eef2ff)",
-            border: "1px solid #cbd5e1",
+            padding: "28px",
+            borderRadius: "24px",
+            background:
+              "radial-gradient(circle at 50% 15%, rgba(34,211,238,0.14), transparent 40%), rgba(2,6,23,0.72)",
+            border: "1px solid rgba(34,211,238,0.22)",
             textAlign: "center",
+            boxShadow:
+              "inset 0 1px 0 rgba(255,255,255,0.06), 0 18px 34px rgba(0,0,0,0.28)",
           }}
         >
-          <h3>目前沒有主攻標的</h3>
+          <h3 style={{ marginTop: 0 }}>目前沒有主攻標的</h3>
           <p className="helper-text">
-            先輸入股票代號完成評分，再按「加入主攻排行榜」。排行榜會變成你的短線作戰看板。
+            先輸入股票代號完成評分，再按「加入主攻排行榜」。這裡會變成你的夜間作戰清單。
           </p>
         </div>
       )}
@@ -101,18 +104,24 @@ function RankingBoard({ watchList, removeStock, clearAll }: Props) {
           style={{
             marginTop: "20px",
             padding: "18px",
-            borderRadius: "22px",
+            borderRadius: "24px",
             background:
-              "linear-gradient(135deg, rgba(15,23,42,0.95), rgba(30,64,175,0.9))",
+              "linear-gradient(135deg, rgba(2,6,23,0.96), rgba(30,41,59,0.86)), radial-gradient(circle at 80% 20%, rgba(34,211,238,0.18), transparent 34%)",
             color: "white",
-            boxShadow: "0 14px 32px rgba(15,23,42,0.25)",
+            border: "1px solid rgba(250,204,21,0.38)",
+            boxShadow:
+              "0 18px 36px rgba(0,0,0,0.36), 0 0 28px rgba(250,204,21,0.12)",
           }}
         >
-          <p style={{ margin: 0, opacity: 0.8 }}>目前排行榜龍頭</p>
-          <h3 style={{ margin: "8px 0 6px" }}>
+          <p style={{ margin: 0, color: "#94a3b8", fontWeight: 800 }}>
+            PRIME TARGET
+          </p>
+
+          <h3 style={{ margin: "8px 0 6px", color: "#f8fafc" }}>
             👑 {topStock.name} ({topStock.code})
           </h3>
-          <p style={{ margin: 0 }}>
+
+          <p style={{ margin: 0, color: "#cbd5e1" }}>
             分數 {topStock.totalScore}｜{getScoreLabel(topStock.totalScore)}｜
             {safeText(topStock.attackStatus, "攻擊結構尚無資料")}
           </p>
@@ -137,236 +146,240 @@ function RankingBoard({ watchList, removeStock, clearAll }: Props) {
             <div
               key={stock.code}
               style={{
-                background: "#f8fafc",
-                borderRadius: "22px",
+                background:
+                  "linear-gradient(145deg, rgba(15,23,42,0.94), rgba(2,6,23,0.86))",
+                borderRadius: "24px",
                 padding: "18px",
                 border:
                   index === 0
-                    ? "2px solid #facc15"
-                    : "1px solid #cbd5e1",
+                    ? "1px solid rgba(250,204,21,0.44)"
+                    : "1px solid rgba(125,211,252,0.2)",
                 boxShadow:
                   index === 0
-                    ? "0 14px 30px rgba(250,204,21,0.22)"
-                    : "0 8px 20px rgba(0,0,0,0.08)",
+                    ? "0 18px 38px rgba(0,0,0,0.36), 0 0 24px rgba(250,204,21,0.12)"
+                    : "0 14px 30px rgba(0,0,0,0.3)",
+                position: "relative",
+                overflow: "hidden",
               }}
             >
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: "12px",
-                  alignItems: "flex-start",
+                  position: "absolute",
+                  right: "-60px",
+                  top: "-60px",
+                  width: "160px",
+                  height: "160px",
+                  borderRadius: "50%",
+                  border: "1px solid rgba(34,211,238,0.16)",
+                  boxShadow: "inset 0 0 28px rgba(34,211,238,0.08)",
                 }}
-              >
-                <div>
-                  <p
-                    style={{
-                      margin: "0 0 8px",
-                      fontSize: "13px",
-                      color: "#475569",
-                      fontWeight: 700,
-                    }}
-                  >
-                    {getRankBadge(index)}
-                  </p>
+              />
 
-                  <h3 style={{ margin: 0 }}>
-                    {stock.name} ({stock.code})
-                  </h3>
-
-                  <p style={{ margin: "8px 0 0", color: "#475569" }}>
-                    收盤價：{safeText(stock.close)}
-                  </p>
-                </div>
-
-                <div
-                  style={{
-                    minWidth: "78px",
-                    padding: "10px 12px",
-                    borderRadius: "18px",
-                    background: "white",
-                    textAlign: "center",
-                    boxShadow: "0 6px 16px rgba(15,23,42,0.08)",
-                  }}
-                >
-                  <div
-                    className={getScoreClass(stock.totalScore)}
-                    style={{
-                      fontSize: "28px",
-                      fontWeight: 900,
-                      lineHeight: 1,
-                    }}
-                  >
-                    {stock.totalScore}
-                  </div>
-                  <small>{getScoreLabel(stock.totalScore)}</small>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  marginTop: "16px",
-                  padding: "12px",
-                  borderRadius: "18px",
-                  background: "white",
-                  border: "1px solid #e2e8f0",
-                }}
-              >
-                <strong>判斷結果</strong>
-                <p style={{ margin: "8px 0 0" }}>
-                  {safeText(stock.result, "尚無結論")}
-                </p>
-              </div>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "10px",
-                  marginTop: "12px",
-                }}
-              >
-                <div
-                  style={{
-                    padding: "12px",
-                    borderRadius: "16px",
-                    background: "#eef2ff",
-                  }}
-                >
-                  <small>量能</small>
-                  <p style={{ margin: "6px 0 0", fontWeight: 700 }}>
-                    {safeText(stock.volumeStatus)}
-                  </p>
-                </div>
-
-                <div
-                  style={{
-                    padding: "12px",
-                    borderRadius: "16px",
-                    background: "#ecfeff",
-                  }}
-                >
-                  <small>5MA</small>
-                  <p style={{ margin: "6px 0 0", fontWeight: 700 }}>
-                    {safeText(stock.maSupport)}
-                  </p>
-                </div>
-
-                <div
-                  style={{
-                    padding: "12px",
-                    borderRadius: "16px",
-                    background: "#f0fdf4",
-                  }}
-                >
-                  <small>均線結構</small>
-                  <p style={{ margin: "6px 0 0", fontWeight: 700 }}>
-                    {safeText(stock.trendStatus)}
-                  </p>
-                </div>
-
-                <div
-                  style={{
-                    padding: "12px",
-                    borderRadius: "16px",
-                    background: "#fff7ed",
-                  }}
-                >
-                  <small>攻擊結構</small>
-                  <p style={{ margin: "6px 0 0", fontWeight: 700 }}>
-                    {safeText(stock.attackStatus)}
-                  </p>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  marginTop: "14px",
-                  padding: "14px",
-                  borderRadius: "18px",
-                  background: "white",
-                  border: "1px solid #e2e8f0",
-                }}
-              >
+              <div style={{ position: "relative", zIndex: 1 }}>
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
                     gap: "12px",
-                    alignItems: "center",
+                    alignItems: "flex-start",
                   }}
                 >
-                  <strong>賣壓雷達</strong>
-                  <span
+                  <div>
+                    <p
+                      style={{
+                        margin: "0 0 8px",
+                        fontSize: "13px",
+                        color: index === 0 ? "#fde68a" : "#67e8f9",
+                        fontWeight: 900,
+                        letterSpacing: "1.5px",
+                      }}
+                    >
+                      {getRankBadge(index)}
+                    </p>
+
+                    <h3 style={{ margin: 0, color: "#f8fafc" }}>
+                      {stock.name} ({stock.code})
+                    </h3>
+
+                    <p style={{ margin: "8px 0 0", color: "#94a3b8" }}>
+                      收盤價：{safeText(stock.close)}
+                    </p>
+                  </div>
+
+                  <div
                     style={{
-                      fontSize: "13px",
-                      fontWeight: 800,
-                      color: getPressureColor(pressureValue),
+                      minWidth: "82px",
+                      padding: "10px 12px",
+                      borderRadius: "18px",
+                      background: "rgba(2,6,23,0.78)",
+                      border: "1px solid rgba(148,163,184,0.18)",
+                      textAlign: "center",
+                      boxShadow:
+                        "inset 0 1px 0 rgba(255,255,255,0.06), 0 10px 20px rgba(0,0,0,0.24)",
                     }}
                   >
-                    {getPressureLabel(pressureValue)}
-                  </span>
+                    <div
+                      className={getScoreClass(stock.totalScore)}
+                      style={{
+                        fontSize: "30px",
+                        fontWeight: 950,
+                        lineHeight: 1,
+                      }}
+                    >
+                      {stock.totalScore}
+                    </div>
+                    <small>{getScoreLabel(stock.totalScore)}</small>
+                  </div>
                 </div>
-
-                <p style={{ margin: "8px 0", color: "#475569" }}>
-                  {safeText(stock.pressureStatus)}
-                </p>
 
                 <div
                   style={{
-                    width: "100%",
-                    height: "14px",
-                    background: "#e2e8f0",
-                    borderRadius: "999px",
-                    overflow: "hidden",
+                    marginTop: "16px",
+                    padding: "12px",
+                    borderRadius: "18px",
+                    background: "rgba(15,23,42,0.72)",
+                    border: "1px solid rgba(148,163,184,0.16)",
+                  }}
+                >
+                  <strong style={{ color: "#e0f2fe" }}>判斷結果</strong>
+                  <p style={{ margin: "8px 0 0", color: "#cbd5e1" }}>
+                    {safeText(stock.result, "尚無結論")}
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "10px",
+                    marginTop: "12px",
+                  }}
+                >
+                  {[
+                    ["量能", safeText(stock.volumeStatus)],
+                    ["5MA", safeText(stock.maSupport)],
+                    ["均線結構", safeText(stock.trendStatus)],
+                    ["攻擊結構", safeText(stock.attackStatus)],
+                  ].map(([label, value]) => (
+                    <div
+                      key={label}
+                      style={{
+                        padding: "12px",
+                        borderRadius: "16px",
+                        background: "rgba(2,6,23,0.58)",
+                        border: "1px solid rgba(125,211,252,0.14)",
+                      }}
+                    >
+                      <small style={{ color: "#67e8f9", fontWeight: 800 }}>
+                        {label}
+                      </small>
+                      <p
+                        style={{
+                          margin: "6px 0 0",
+                          fontWeight: 800,
+                          color: "#cbd5e1",
+                          fontSize: "15px",
+                        }}
+                      >
+                        {value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div
+                  style={{
+                    marginTop: "14px",
+                    padding: "14px",
+                    borderRadius: "18px",
+                    background: "rgba(15,23,42,0.72)",
+                    border: "1px solid rgba(148,163,184,0.16)",
                   }}
                 >
                   <div
                     style={{
-                      width: `${pressureValue}%`,
-                      height: "100%",
-                      background: getPressureColor(pressureValue),
-                      transition: "0.3s",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      alignItems: "center",
                     }}
-                  />
+                  >
+                    <strong style={{ color: "#e0f2fe" }}>賣壓雷達</strong>
+                    <span
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: 900,
+                        color: getPressureColor(pressureValue),
+                      }}
+                    >
+                      {getPressureLabel(pressureValue)}
+                    </span>
+                  </div>
+
+                  <p style={{ margin: "8px 0", color: "#94a3b8" }}>
+                    {safeText(stock.pressureStatus)}
+                  </p>
+
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "14px",
+                      background: "rgba(15,23,42,0.95)",
+                      borderRadius: "999px",
+                      overflow: "hidden",
+                      border: "1px solid rgba(148,163,184,0.12)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: `${pressureValue}%`,
+                        height: "100%",
+                        background: getPressureColor(pressureValue),
+                        boxShadow: `0 0 16px ${getPressureColor(
+                          pressureValue
+                        )}`,
+                        transition: "0.3s",
+                      }}
+                    />
+                  </div>
+
+                  <p style={{ margin: "8px 0 0", fontWeight: 800 }}>
+                    賣壓分：{safeText(stock.pressureScore, "0")}/100
+                  </p>
                 </div>
 
-                <p style={{ margin: "8px 0 0", fontWeight: 700 }}>
-                  賣壓分：{safeText(stock.pressureScore, "0")}/100
-                </p>
-              </div>
+                <div
+                  style={{
+                    marginTop: "14px",
+                    padding: "12px",
+                    borderRadius: "18px",
+                    background: "rgba(2,6,23,0.62)",
+                    border: "1px dashed rgba(125,211,252,0.28)",
+                  }}
+                >
+                  <strong style={{ color: "#e0f2fe" }}>資料來源</strong>
+                  <p style={{ margin: "8px 0 0", fontSize: "14px" }}>
+                    價格 / K線 / 量能：盤後 API
+                  </p>
+                  <p style={{ margin: "4px 0 0", fontSize: "14px" }}>
+                    均線 / Trigger / 熔斷：V2 短線引擎
+                  </p>
+                  <p style={{ margin: "4px 0 0", fontSize: "14px" }}>
+                    主力 / 法人 / 大戶：未套截圖時為中性估算
+                  </p>
+                </div>
 
-              <div
-                style={{
-                  marginTop: "14px",
-                  padding: "12px",
-                  borderRadius: "18px",
-                  background: "#f1f5f9",
-                  border: "1px dashed #94a3b8",
-                }}
-              >
-                <strong>資料來源</strong>
-                <p style={{ margin: "8px 0 0", fontSize: "14px" }}>
-                  價格 / K線 / 量能：盤後 API
-                </p>
-                <p style={{ margin: "4px 0 0", fontSize: "14px" }}>
-                  均線 / Trigger / 熔斷：V2 短線引擎
-                </p>
-                <p style={{ margin: "4px 0 0", fontSize: "14px" }}>
-                  主力 / 法人 / 大戶：未套截圖時為中性估算
-                </p>
+                <button
+                  onClick={() => removeStock(stock.code)}
+                  style={{
+                    marginTop: "14px",
+                    width: "100%",
+                    background: "linear-gradient(135deg,#dc2626,#f97316)",
+                  }}
+                >
+                  刪除此股票
+                </button>
               </div>
-
-              <button
-                onClick={() => removeStock(stock.code)}
-                style={{
-                  marginTop: "14px",
-                  width: "100%",
-                  background: "linear-gradient(135deg,#ef4444,#f97316)",
-                }}
-              >
-                刪除此股票
-              </button>
             </div>
           );
         })}
