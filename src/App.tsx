@@ -369,12 +369,159 @@ function App() {
         </button>
       </div>
 
-      <section className="hero-panel">
-        <p className="eyebrow">Stock War Room</p>
-        <h1>📡 股票戰情中心 V2</h1>
-        <p className="hero-text">
-          短線爆發掃描、賣壓判斷、攻擊結構與 AI 截圖輔助區。
-        </p>
+      <section
+        className="hero-panel"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 1.35fr) minmax(260px, 0.65fr)",
+          gap: "24px",
+          alignItems: "center",
+          textAlign: "left",
+        }}
+      >
+        <div>
+          <p className="eyebrow">Stock War Room</p>
+          <h1>股票戰情中心 V2</h1>
+          <p className="hero-text" style={{ margin: 0 }}>
+            黑夜作戰模式啟動。短線爆發掃描、賣壓判斷、攻擊結構與 AI 截圖輔助區。
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
+              flexWrap: "wrap",
+              marginTop: "18px",
+            }}
+          >
+            {["V2 SHORT", "PRESSURE RADAR", "AI SCREENSHOT", "DARK OPS"].map(
+              (item) => (
+                <span
+                  key={item}
+                  style={{
+                    padding: "8px 12px",
+                    borderRadius: "999px",
+                    background: "rgba(2,6,23,0.62)",
+                    border: "1px solid rgba(34,211,238,0.24)",
+                    color: "#67e8f9",
+                    fontSize: "12px",
+                    fontWeight: 900,
+                    letterSpacing: "1.2px",
+                  }}
+                >
+                  {item}
+                </span>
+              )
+            )}
+          </div>
+        </div>
+
+        <div
+          style={{
+            position: "relative",
+            minHeight: "230px",
+            borderRadius: "28px",
+            background:
+              "radial-gradient(circle at 50% 45%, rgba(34,211,238,0.22), transparent 36%), rgba(2,6,23,0.38)",
+            border: "1px solid rgba(125,211,252,0.18)",
+            overflow: "hidden",
+            boxShadow:
+              "inset 0 1px 0 rgba(255,255,255,0.06), 0 18px 36px rgba(0,0,0,0.28)",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              inset: "28px",
+              borderRadius: "50%",
+              border: "1px solid rgba(34,211,238,0.2)",
+              boxShadow:
+                "0 0 24px rgba(34,211,238,0.12), inset 0 0 24px rgba(124,58,237,0.12)",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              inset: "58px",
+              borderRadius: "50%",
+              border: "1px solid rgba(124,58,237,0.22)",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              width: "2px",
+              height: "92px",
+              background:
+                "linear-gradient(to bottom, rgba(34,211,238,0.95), transparent)",
+              transformOrigin: "top center",
+              transform: "rotate(42deg)",
+              boxShadow: "0 0 18px rgba(34,211,238,0.8)",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              width: "12px",
+              height: "12px",
+              borderRadius: "50%",
+              background: "#22d3ee",
+              transform: "translate(-50%, -50%)",
+              boxShadow:
+                "0 0 18px rgba(34,211,238,0.95), 0 0 34px rgba(124,58,237,0.4)",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              left: "20px",
+              bottom: "20px",
+              right: "20px",
+              display: "grid",
+              gap: "8px",
+            }}
+          >
+            <div
+              style={{
+                height: "8px",
+                width: "72%",
+                borderRadius: "999px",
+                background:
+                  "linear-gradient(90deg,#22d3ee,rgba(34,211,238,0.08))",
+              }}
+            />
+
+            <div
+              style={{
+                height: "8px",
+                width: "52%",
+                borderRadius: "999px",
+                background:
+                  "linear-gradient(90deg,#7c3aed,rgba(124,58,237,0.08))",
+              }}
+            />
+
+            <p
+              style={{
+                margin: "6px 0 0",
+                color: "#94a3b8",
+                fontSize: "13px",
+                fontWeight: 900,
+                letterSpacing: "2px",
+              }}
+            >
+              TARGET SCAN ONLINE
+            </p>
+          </div>
+        </div>
       </section>
 
       <div className="dashboard-grid">
@@ -403,9 +550,7 @@ function App() {
             目前分數：{totalScore}
           </h2>
 
-          <h2 className="result-glow">
-            目前結果：{getV2Result(totalScore)}
-          </h2>
+          <h2 className="result-glow">目前結果：{getV2Result(totalScore)}</h2>
 
           <p>{message}</p>
 
@@ -503,10 +648,7 @@ function App() {
               <div>
                 <p>偵測股號：{aiResult.meta.detectedCodes.join("、")}</p>
                 <p>輸入股號：{aiResult.meta.inputCode}</p>
-                <p>
-                  股號一致：
-                  {aiResult.meta.isCodeMatched ? "是" : "否"}
-                </p>
+                <p>股號一致：{aiResult.meta.isCodeMatched ? "是" : "否"}</p>
                 <p>整體信心度：{aiResult.meta.overallConfidence}%</p>
                 <p>套用狀態：{hybridScores.applyStatus}</p>
                 <p>資料來源：{hybridScores.sourceLabel}</p>
@@ -514,36 +656,36 @@ function App() {
                 <p>
                   主力籌碼：
                   {aiResult.chipsData.mainForce.value}｜
-                  {aiResult.chipsData.mainForce.rawText}｜
-                  信心度 {aiResult.chipsData.mainForce.confidence}%
+                  {aiResult.chipsData.mainForce.rawText}｜ 信心度{" "}
+                  {aiResult.chipsData.mainForce.confidence}%
                 </p>
 
                 <p>
                   大戶持股：
                   {aiResult.chipsData.bigHolder.value}｜
-                  {aiResult.chipsData.bigHolder.rawText}｜
-                  信心度 {aiResult.chipsData.bigHolder.confidence}%
+                  {aiResult.chipsData.bigHolder.rawText}｜ 信心度{" "}
+                  {aiResult.chipsData.bigHolder.confidence}%
                 </p>
 
                 <p>
                   散戶持股：
                   {aiResult.chipsData.retail.value}｜
-                  {aiResult.chipsData.retail.rawText}｜
-                  信心度 {aiResult.chipsData.retail.confidence}%
+                  {aiResult.chipsData.retail.rawText}｜ 信心度{" "}
+                  {aiResult.chipsData.retail.confidence}%
                 </p>
 
                 <p>
                   法人動向：
                   {aiResult.chipsData.institution.value}｜
-                  {aiResult.chipsData.institution.rawText}｜
-                  信心度 {aiResult.chipsData.institution.confidence}%
+                  {aiResult.chipsData.institution.rawText}｜ 信心度{" "}
+                  {aiResult.chipsData.institution.confidence}%
                 </p>
 
                 <p>
                   籌碼乾淨度：
                   {aiResult.chipsData.chipCleanliness.value}｜
-                  {aiResult.chipsData.chipCleanliness.rawText}｜
-                  信心度 {aiResult.chipsData.chipCleanliness.confidence}%
+                  {aiResult.chipsData.chipCleanliness.rawText}｜ 信心度{" "}
+                  {aiResult.chipsData.chipCleanliness.confidence}%
                 </p>
               </div>
             )}
