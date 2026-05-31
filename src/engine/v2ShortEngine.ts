@@ -1,4 +1,5 @@
 import type { ScoreItem, StockApiItem } from "../types";
+import type { V2HybridScores } from "./v2AiScreenshotSchema";
 
 export type V2ShortAnalysis = {
   finalScore: number;
@@ -27,6 +28,22 @@ type BreakerResult = {
   warnings: string[];
 };
 
+type SafeHybridScores = {
+  mainForceScore: number;
+  institutionScore: number;
+  bigHolderScore: number;
+  chipCleanlinessScore: number;
+  sourceLabel: string;
+};
+
+const DEFAULT_HYBRID_SCORES: SafeHybridScores = {
+  mainForceScore: 5,
+  institutionScore: 5,
+  bigHolderScore: 5,
+  chipCleanlinessScore: 5,
+  sourceLabel: "未提供截圖AI辨識，維持中性分",
+};
+
 export function getV2Result(score: number) {
   if (score >= 90) return "🔥 S級主攻";
   if (score >= 80) return "🚀 A級觀察";
@@ -52,6 +69,34 @@ function average(arr: number[]) {
 function percentChange(current: number, previous: number) {
   if (!previous) return 0;
   return (current - previous) / previous;
+}
+
+function clampScore(score: number) {
+  if (Number.isNaN(score)) return 5;
+
+  return Math.max(
+    0,
+    Math.min(
+      10,
+      Math.round(score)
+    )
+  );
+}
+
+function normalizeHybridScores(
+  hybridScores?: V2HybridScores | null
+): SafeHybridScores {
+  if (!hybridScores) {
+    return DEFAULT_HYBRID_SCORES;
+  }
+
+  return {
+    mainForceScore: clampScore(hybridScores.mainForceScore),
+    institutionScore: clampScore(hybridScores.institutionScore),
+    bigHolderScore: clampScore(hybridScores.bigHolderScore),
+    chipCleanlinessScore: clampScore(hybridScores.chipCleanlinessScore),
+    sourceLabel: hybridScores.sourceLabel || "截圖AI辨識",
+  };
 }
 
 function calcClosePosition(high: number, low: number, close: number) {
@@ -459,8 +504,11 @@ function analyzeSellingPressure(
 
 export function analyzeV2ShortStock(
   stock: StockApiItem,
-  historyData: any
+  historyData: any,
+  hybridScores?: V2HybridScores | null
 ): V2ShortAnalysis {
+  const chipScores = normalizeHybridScores(hybridScores);
+
   const closes = historyData.data.map((row: any[]) => toNumber(row[6]));
   const volumes = historyData.data.map((row: any[]) => toNumber(row[1]));
 
@@ -601,8 +649,18 @@ export function analyzeV2ShortStock(
 
   const items: ScoreItem[] = [
     { name: "成交量", score: volume.score, reason: volume.text, auto: true },
-    { name: "主力籌碼", score: 5, reason: "尚未接籌碼 API，暫給中性分", auto: false },
-    { name: "法人動向", score: 5, reason: "尚未接法人 API，暫給中性分", auto: false },
+    {
+      name: "主力籌碼",
+      score: chipScores.mainForceScore,
+      reason: chipScores.sourceLabel,
+      auto: Boolean(hybridScores),
+    },
+    {
+      name: "法人動向",
+      score: chipScores.institutionScore,
+      reason: chipScores.sourceLabel,
+      auto: Boolean(hybridScores),
+    },
     { name: "位階", score: positionScore, reason: close >= currentMa5 ? "站上短均" : "短線偏弱", auto: true },
     { name: "技術面", score: maTrend.score, reason: maTrend.text, auto: true },
     { name: "K線品質", score: candleScore, reason: candleReason, auto: true },
@@ -638,8 +696,18 @@ export function analyzeV2ShortStock(
       reason: breaker.warnings.length ? breaker.warnings.join("、") : "無熔斷警示",
       auto: true,
     },
-    { name: "籌碼乾淨度", score: 5, reason: "尚未接融資/散戶 API，暫給中性分", auto: false },
-    { name: "大戶持股", score: 5, reason: "尚未接大戶 API，暫給中性分", auto: false },
+    {
+      name: "籌碼乾淨度",
+      score: chipScores.chipCleanlinessScore,
+      reason: chipScores.sourceLabel,
+      auto: Boolean(hybridScores),
+    },
+    {
+      name: "大戶持股",
+      score: chipScores.bigHolderScore,
+      reason: chipScores.sourceLabel,
+      auto: Boolean(hybridScores),
+    },
     { name: "平均線觀察", score: maTrend.score, reason: maTrend.text, auto: true },
   ];
 
