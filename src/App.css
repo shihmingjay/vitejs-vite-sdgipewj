@@ -1079,3 +1079,23 @@ button:disabled {
 .stock-card.wide-card:last-child [style*="PRIME TARGET"] {
   letter-spacing: 2px;
 }
+.ai-result-scroll {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, rgba(2, 6, 23, 0.7), rgba(15, 23, 42, 0.68));
+  border: 1px solid rgba(201, 168, 106, 0.14);
+}
+
+.ai-result-scroll p {
+  margin: 6px 0 !important;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+  color: #cbd5e1 !important;
+  font-size: 15px !important;
+}
+
+.ai-result-scroll p:last-child {
+  border-bottom: none;
+}
