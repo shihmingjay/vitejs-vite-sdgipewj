@@ -1099,3 +1099,43 @@ button:disabled {
 .ai-result-scroll p:last-child {
   border-bottom: none;
 }
+/* ===== Hero 最終覆蓋：刪除暗夜情報組 + 修正標語色 ===== */
+
+.assassin-hero-content::before {
+  content: none !important;
+  display: none !important;
+}
+
+.assassin-hero-text {
+  width: fit-content !important;
+  margin-top: 14px !important;
+  padding: 8px 16px !important;
+  border-left: 3px solid rgba(201, 168, 106, 0.72) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(201, 168, 106, 0.16),
+    rgba(2, 6, 23, 0)
+  ) !important;
+  color: #d6c59a !important;
+  font-size: clamp(18px, 2vw, 28px) !important;
+  font-weight: 900 !important;
+  letter-spacing: 1.4px !important;
+  text-shadow:
+    0 0 10px rgba(201, 168, 106, 0.18),
+    0 8px 24px rgba(0, 0, 0, 0.72) !important;
+}
+
+.assassin-hero-subtitle {
+  color: #ddd6fe !important;
+  background: linear-gradient(
+    135deg,
+    rgba(111, 77, 189, 0.22),
+    rgba(201, 168, 106, 0.1)
+  ) !important;
+  border-color: rgba(201, 168, 106, 0.18) !important;
+}
+
+.assassin-hero-subtitle::before {
+  color: #d6c59a !important;
+  text-shadow: none !important;
+}
