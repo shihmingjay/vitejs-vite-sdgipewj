@@ -995,3 +995,87 @@ button:disabled {
   color: #94a3b8;
   font-weight: 800;
 }
+.stock-card.wide-card:last-child {
+  position: relative;
+  overflow: hidden;
+}
+
+.stock-card.wide-card:last-child::after {
+  content: "";
+  position: absolute;
+  left: -120px;
+  bottom: -120px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1px solid rgba(124, 58, 237, 0.16);
+  background:
+    radial-gradient(circle, rgba(124, 58, 237, 0.12), transparent 54%),
+    radial-gradient(circle, transparent 44%, rgba(34, 211, 238, 0.08) 45%, transparent 48%);
+  box-shadow:
+    0 0 40px rgba(124, 58, 237, 0.12),
+    inset 0 0 34px rgba(34, 211, 238, 0.08);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stock-card.wide-card:last-child > * {
+  position: relative;
+  z-index: 1;
+}
+
+.stock-card.wide-card:last-child .eyebrow {
+  width: fit-content;
+  margin-bottom: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.58);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: #67e8f9;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.stock-card.wide-card:last-child > div:first-child {
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.stock-card.wide-card:last-child > div:first-child h2 {
+  margin-bottom: 8px;
+  font-size: clamp(26px, 3vw, 36px);
+  color: #f8fafc;
+  text-shadow:
+    0 0 18px rgba(34, 211, 238, 0.22),
+    0 0 30px rgba(124, 58, 237, 0.16);
+}
+
+.stock-card.wide-card:last-child > div:first-child .helper-text {
+  max-width: 680px;
+}
+
+.stock-card.wide-card:last-child button {
+  border-color: rgba(196, 181, 253, 0.22);
+}
+
+.stock-card.wide-card:last-child button:hover {
+  box-shadow:
+    0 0 24px rgba(124, 58, 237, 0.22),
+    0 18px 34px rgba(0, 0, 0, 0.26);
+}
+
+.stock-card.wide-card:last-child h3 {
+  letter-spacing: 0.3px;
+}
+
+.stock-card.wide-card:last-child strong {
+  letter-spacing: 0.5px;
+}
+
+.stock-card.wide-card:last-child small {
+  font-weight: 850;
+}
+
+.stock-card.wide-card:last-child [style*="PRIME TARGET"] {
+  letter-spacing: 2px;
+}
