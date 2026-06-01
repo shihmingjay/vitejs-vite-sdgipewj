@@ -27,10 +27,10 @@
       "rankScore": 86.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 72.04,
-      "initialStop": 72.04,
+      "activeStop": 69.75,
+      "initialStop": 69.54,
       "breakevenStop": 0,
-      "trailingStop": 71.61
+      "trailingStop": 69.75
     },
     {
       "id": "6534",
@@ -77,10 +77,10 @@
       "rankScore": 82.9,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 85.58,
-      "initialStop": 84.83,
+      "activeStop": 81.4,
+      "initialStop": 79.62,
       "breakevenStop": 0,
-      "trailingStop": 85.58
+      "trailingStop": 81.4
     },
     {
       "id": "4562",
@@ -152,10 +152,10 @@
       "rankScore": 79.28,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 102.19,
-      "initialStop": 96.66,
+      "activeStop": 94.06,
+      "initialStop": 94.06,
       "breakevenStop": 0,
-      "trailingStop": 102.19
+      "trailingStop": 92.27
     },
     {
       "id": "8473",
@@ -227,10 +227,10 @@
       "rankScore": 77.8,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 64.16,
-      "initialStop": 64.16,
+      "activeStop": 63.64,
+      "initialStop": 63.64,
       "breakevenStop": 0,
-      "trailingStop": 63.79
+      "trailingStop": 63.58
     },
     {
       "id": "4906",
@@ -377,10 +377,10 @@
       "rankScore": 74.27,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 104.87,
-      "initialStop": 100.14,
+      "activeStop": 106.11,
+      "initialStop": 101.09,
       "breakevenStop": 0,
-      "trailingStop": 104.87
+      "trailingStop": 106.11
     },
     {
       "id": "3708",
@@ -402,10 +402,10 @@
       "rankScore": 74.12,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 113.17,
-      "initialStop": 109.14,
+      "activeStop": 114.93,
+      "initialStop": 114.86,
       "breakevenStop": 0,
-      "trailingStop": 113.17
+      "trailingStop": 114.93
     },
     {
       "id": "3714",
@@ -427,10 +427,10 @@
       "rankScore": 74.12,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 65.76,
-      "initialStop": 64.56,
+      "activeStop": 65.65,
+      "initialStop": 65.34,
       "breakevenStop": 0,
-      "trailingStop": 65.76
+      "trailingStop": 65.65
     },
     {
       "id": "3312",
@@ -452,10 +452,10 @@
       "rankScore": 74.12,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 50.7,
-      "initialStop": 50.7,
+      "activeStop": 46.3,
+      "initialStop": 44.8,
       "breakevenStop": 0,
-      "trailingStop": 49.83
+      "trailingStop": 46.3
     },
     {
       "id": "3059",
@@ -477,10 +477,10 @@
       "rankScore": 74.12,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 43.51,
-      "initialStop": 43.51,
+      "activeStop": 41.68,
+      "initialStop": 39.21,
       "breakevenStop": 0,
-      "trailingStop": 42.97
+      "trailingStop": 41.68
     },
     {
       "id": "1726",
@@ -502,10 +502,10 @@
       "rankScore": 73.97,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 76.94,
-      "initialStop": 76.42,
+      "activeStop": 75.91,
+      "initialStop": 75.91,
       "breakevenStop": 0,
-      "trailingStop": 76.94
+      "trailingStop": 75.89
     },
     {
       "id": "1419",
@@ -602,10 +602,10 @@
       "rankScore": 73.28,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 65.19,
-      "initialStop": 63.79,
+      "activeStop": 61.8,
+      "initialStop": 61.1,
       "breakevenStop": 0,
-      "trailingStop": 65.19
+      "trailingStop": 61.8
     },
     {
       "id": "2489",
@@ -677,10 +677,10 @@
       "rankScore": 72.78,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 56.52,
-      "initialStop": 56.52,
+      "activeStop": 52.86,
+      "initialStop": 52.27,
       "breakevenStop": 0,
-      "trailingStop": 56.04
+      "trailingStop": 52.86
     },
     {
       "id": "9944",
@@ -752,10 +752,10 @@
       "rankScore": 71.9,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 59.6,
-      "initialStop": 59.18,
+      "activeStop": 57.29,
+      "initialStop": 57.29,
       "breakevenStop": 0,
-      "trailingStop": 59.6
+      "trailingStop": 56.99
     },
     {
       "id": "2347",
@@ -802,10 +802,10 @@
       "rankScore": 71.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 56.99,
-      "initialStop": 56.99,
+      "activeStop": 56.25,
+      "initialStop": 55.95,
       "breakevenStop": 0,
-      "trailingStop": 56.71
+      "trailingStop": 56.25
     },
     {
       "id": "3679",
@@ -827,10 +827,10 @@
       "rankScore": 71.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 121.56,
-      "initialStop": 121.56,
+      "activeStop": 117.88,
+      "initialStop": 117.88,
       "breakevenStop": 0,
-      "trailingStop": 121.47
+      "trailingStop": 117.85
     },
     {
       "id": "2105",
@@ -852,10 +852,10 @@
       "rankScore": 71.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 31.92,
-      "initialStop": 31.92,
+      "activeStop": 31.04,
+      "initialStop": 30.85,
       "breakevenStop": 0,
-      "trailingStop": 31.75
+      "trailingStop": 31.04
     },
     {
       "id": "9933",
@@ -927,10 +927,10 @@
       "rankScore": 71.5,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 119.25,
-      "initialStop": 117.54,
+      "activeStop": 118.4,
+      "initialStop": 112.34,
       "breakevenStop": 0,
-      "trailingStop": 119.25
+      "trailingStop": 118.4
     },
     {
       "id": "3051",
@@ -952,10 +952,10 @@
       "rankScore": 71.5,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 26.54,
-      "initialStop": 26.54,
+      "activeStop": 25.67,
+      "initialStop": 24.91,
       "breakevenStop": 0,
-      "trailingStop": 26.23
+      "trailingStop": 25.67
     },
     {
       "id": "3669",
@@ -977,10 +977,10 @@
       "rankScore": 71.5,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 39.27,
-      "initialStop": 39.27,
+      "activeStop": 37.18,
+      "initialStop": 35.98,
       "breakevenStop": 0,
-      "trailingStop": 39.16
+      "trailingStop": 37.18
     },
     {
       "id": "6189",
@@ -1027,10 +1027,10 @@
       "rankScore": 71.5,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 56.83,
-      "initialStop": 56.83,
+      "activeStop": 51.21,
+      "initialStop": 49.17,
       "breakevenStop": 0,
-      "trailingStop": 56.0
+      "trailingStop": 51.21
     },
     {
       "id": "6226",
@@ -1127,10 +1127,10 @@
       "rankScore": 71.5,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 130.09,
-      "initialStop": 130.09,
+      "activeStop": 133.72,
+      "initialStop": 129.44,
       "breakevenStop": 0,
-      "trailingStop": 129.9
+      "trailingStop": 133.72
     },
     {
       "id": "6168",
@@ -1177,10 +1177,10 @@
       "rankScore": 71.12,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 35.66,
-      "initialStop": 35.03,
+      "activeStop": 34.9,
+      "initialStop": 33.44,
       "breakevenStop": 0,
-      "trailingStop": 35.66
+      "trailingStop": 34.9
     },
     {
       "id": "1802",
@@ -1202,10 +1202,10 @@
       "rankScore": 71.12,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 69.57,
-      "initialStop": 67.69,
+      "activeStop": 68.01,
+      "initialStop": 63.74,
       "breakevenStop": 0,
-      "trailingStop": 69.57
+      "trailingStop": 68.01
     },
     {
       "id": "1303",
@@ -1227,10 +1227,10 @@
       "rankScore": 71.12,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 99.61,
-      "initialStop": 99.61,
+      "activeStop": 87.81,
+      "initialStop": 83.67,
       "breakevenStop": 0,
-      "trailingStop": 98.03
+      "trailingStop": 87.81
     },
     {
       "id": "3057",
@@ -1251,11 +1251,11 @@
       "triggerWarnings": "無",
       "rankScore": 71.12,
       "group": "main_watch",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 20.85,
-      "initialStop": 20.85,
+      "positionAction": "續抱觀察",
+      "activeStop": 18.8,
+      "initialStop": 18.51,
       "breakevenStop": 0,
-      "trailingStop": 20.6
+      "trailingStop": 18.8
     },
     {
       "id": "3494",
@@ -1277,10 +1277,10 @@
       "rankScore": 70.97,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 7.71,
-      "initialStop": 7.68,
+      "activeStop": 7.66,
+      "initialStop": 7.66,
       "breakevenStop": 0,
-      "trailingStop": 7.71
+      "trailingStop": 7.59
     },
     {
       "id": "2426",
@@ -1302,10 +1302,10 @@
       "rankScore": 70.78,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 71.28,
-      "initialStop": 68.15,
+      "activeStop": 75.35,
+      "initialStop": 72.44,
       "breakevenStop": 0,
-      "trailingStop": 71.28
+      "trailingStop": 75.35
     },
     {
       "id": "1907",
@@ -1402,10 +1402,10 @@
       "rankScore": 70.28,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 35.52,
-      "initialStop": 33.98,
+      "activeStop": 31.77,
+      "initialStop": 31.77,
       "breakevenStop": 0,
-      "trailingStop": 35.52
+      "trailingStop": 31.23
     },
     {
       "id": "6116",
@@ -1427,10 +1427,10 @@
       "rankScore": 70.28,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 17.11,
-      "initialStop": 17.11,
+      "activeStop": 14.1,
+      "initialStop": 14.01,
       "breakevenStop": 0,
-      "trailingStop": 16.77
+      "trailingStop": 14.1
     },
     {
       "id": "4938",
@@ -1451,11 +1451,11 @@
       "triggerWarnings": "無",
       "rankScore": 69.78,
       "group": "hidden",
-      "positionAction": "全數出場",
-      "activeStop": 87.4,
-      "initialStop": 87.28,
+      "positionAction": "續抱觀察",
+      "activeStop": 84.83,
+      "initialStop": 84.69,
       "breakevenStop": 0,
-      "trailingStop": 87.4
+      "trailingStop": 84.83
     },
     {
       "id": "6558",
@@ -1477,10 +1477,10 @@
       "rankScore": 69.4,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 31.58,
-      "initialStop": 31.58,
+      "activeStop": 30.55,
+      "initialStop": 29.51,
       "breakevenStop": 0,
-      "trailingStop": 31.17
+      "trailingStop": 30.55
     },
     {
       "id": "8070",
@@ -1552,10 +1552,10 @@
       "rankScore": 69.25,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 17.16,
-      "initialStop": 17.15,
+      "activeStop": 17.12,
+      "initialStop": 16.92,
       "breakevenStop": 0,
-      "trailingStop": 17.16
+      "trailingStop": 17.12
     },
     {
       "id": "1537",
@@ -1601,11 +1601,11 @@
       "triggerWarnings": "無",
       "rankScore": 69.25,
       "group": "follow_watch",
-      "positionAction": "全數出場",
-      "activeStop": 81.13,
-      "initialStop": 79.54,
+      "positionAction": "續抱觀察",
+      "activeStop": 79.99,
+      "initialStop": 79.81,
       "breakevenStop": 0,
-      "trailingStop": 81.13
+      "trailingStop": 79.99
     },
     {
       "id": "5515",
@@ -1727,10 +1727,10 @@
       "rankScore": 68.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 21.61,
-      "initialStop": 21.14,
+      "activeStop": 20.3,
+      "initialStop": 18.62,
       "breakevenStop": 0,
-      "trailingStop": 21.61
+      "trailingStop": 20.3
     },
     {
       "id": "2027",
@@ -1802,10 +1802,10 @@
       "rankScore": 68.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 23.67,
-      "initialStop": 23.67,
+      "activeStop": 23.85,
+      "initialStop": 23.36,
       "breakevenStop": 0,
-      "trailingStop": 23.67
+      "trailingStop": 23.85
     },
     {
       "id": "3545",
@@ -1827,10 +1827,10 @@
       "rankScore": 68.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 56.03,
-      "initialStop": 54.88,
+      "activeStop": 54.56,
+      "initialStop": 53.42,
       "breakevenStop": 0,
-      "trailingStop": 56.03
+      "trailingStop": 54.56
     },
     {
       "id": "3504",
@@ -1852,10 +1852,10 @@
       "rankScore": 68.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 71.55,
-      "initialStop": 70.69,
+      "activeStop": 71.31,
+      "initialStop": 69.36,
       "breakevenStop": 0,
-      "trailingStop": 71.55
+      "trailingStop": 71.31
     },
     {
       "id": "6416",
@@ -1952,10 +1952,10 @@
       "rankScore": 68.5,
       "group": "main_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 113.75,
-      "initialStop": 110.96,
+      "activeStop": 113.82,
+      "initialStop": 111.02,
       "breakevenStop": 0,
-      "trailingStop": 113.75
+      "trailingStop": 113.82
     },
     {
       "id": "3022",
@@ -2077,10 +2077,10 @@
       "rankScore": 67.65,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 52.79,
-      "initialStop": 52.79,
+      "activeStop": 55.89,
+      "initialStop": 55.89,
       "breakevenStop": 0,
-      "trailingStop": 52.07
+      "trailingStop": 55.09
     },
     {
       "id": "6695",
@@ -2202,10 +2202,10 @@
       "rankScore": 67.28,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 140.75,
-      "initialStop": 137.79,
+      "activeStop": 156.27,
+      "initialStop": 148.65,
       "breakevenStop": 0,
-      "trailingStop": 140.75
+      "trailingStop": 156.27
     },
     {
       "id": "6799",
@@ -2227,10 +2227,10 @@
       "rankScore": 67.28,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 103.55,
-      "initialStop": 97.96,
+      "activeStop": 107.61,
+      "initialStop": 102.84,
       "breakevenStop": 0,
-      "trailingStop": 103.55
+      "trailingStop": 107.61
     },
     {
       "id": "1533",
@@ -2327,10 +2327,10 @@
       "rankScore": 67.22,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 21.65,
-      "initialStop": 21.07,
+      "activeStop": 22.11,
+      "initialStop": 20.55,
       "breakevenStop": 0,
-      "trailingStop": 21.65
+      "trailingStop": 22.11
     },
     {
       "id": "6585",
@@ -2377,10 +2377,10 @@
       "rankScore": 67.15,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 18.09,
-      "initialStop": 18.09,
+      "activeStop": 18.33,
+      "initialStop": 18.33,
       "breakevenStop": 0,
-      "trailingStop": 18.08
+      "trailingStop": 18.27
     },
     {
       "id": "6464",
@@ -2527,10 +2527,10 @@
       "rankScore": 66.4,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 36.79,
-      "initialStop": 36.41,
+      "activeStop": 35.64,
+      "initialStop": 34.09,
       "breakevenStop": 0,
-      "trailingStop": 36.79
+      "trailingStop": 35.64
     },
     {
       "id": "4952",
@@ -2552,10 +2552,10 @@
       "rankScore": 66.25,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 48.31,
-      "initialStop": 47.74,
+      "activeStop": 49.38,
+      "initialStop": 48.61,
       "breakevenStop": 0,
-      "trailingStop": 48.31
+      "trailingStop": 49.38
     },
     {
       "id": "3706",
@@ -2826,11 +2826,11 @@
       "triggerWarnings": "無",
       "rankScore": 65.88,
       "group": "follow_watch",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 30.15,
-      "initialStop": 30.15,
+      "positionAction": "續抱觀察",
+      "activeStop": 24.24,
+      "initialStop": 23.46,
       "breakevenStop": 0,
-      "trailingStop": 29.7
+      "trailingStop": 24.24
     },
     {
       "id": "2385",
@@ -2852,10 +2852,10 @@
       "rankScore": 65.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 129.12,
-      "initialStop": 129.12,
+      "activeStop": 129.98,
+      "initialStop": 125.73,
       "breakevenStop": 0,
-      "trailingStop": 128.35
+      "trailingStop": 129.98
     },
     {
       "id": "8213",
@@ -2877,10 +2877,10 @@
       "rankScore": 65.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 36.62,
-      "initialStop": 36.45,
+      "activeStop": 37.74,
+      "initialStop": 36.02,
       "breakevenStop": 0,
-      "trailingStop": 36.62
+      "trailingStop": 37.74
     },
     {
       "id": "3055",
@@ -2927,10 +2927,10 @@
       "rankScore": 65.75,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 80.87,
-      "initialStop": 80.87,
+      "activeStop": 79.75,
+      "initialStop": 79.75,
       "breakevenStop": 0,
-      "trailingStop": 80.86
+      "trailingStop": 79.65
     },
     {
       "id": "1568",
@@ -3052,10 +3052,10 @@
       "rankScore": 65.38,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 138.27,
-      "initialStop": 138.27,
+      "activeStop": 126.72,
+      "initialStop": 126.19,
       "breakevenStop": 0,
-      "trailingStop": 137.12
+      "trailingStop": 126.72
     },
     {
       "id": "3607",
@@ -3152,10 +3152,10 @@
       "rankScore": 65.0,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 58.37,
-      "initialStop": 58.37,
+      "activeStop": 57.82,
+      "initialStop": 54.8,
       "breakevenStop": 0,
-      "trailingStop": 56.98
+      "trailingStop": 57.82
     },
     {
       "id": "2405",
@@ -3276,11 +3276,11 @@
       "triggerWarnings": "過熱量",
       "rankScore": 64.88,
       "group": "follow_watch",
-      "positionAction": "續抱觀察",
-      "activeStop": 39.47,
-      "initialStop": 38.56,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 38.28,
+      "initialStop": 38.28,
       "breakevenStop": 0,
-      "trailingStop": 39.47
+      "trailingStop": 37.75
     },
     {
       "id": "8112",
@@ -3502,10 +3502,10 @@
       "rankScore": 64.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 21.18,
-      "initialStop": 21.18,
+      "activeStop": 21.06,
+      "initialStop": 21.06,
       "breakevenStop": 0,
-      "trailingStop": 21.15
+      "trailingStop": 20.98
     },
     {
       "id": "6281",
@@ -3552,10 +3552,10 @@
       "rankScore": 64.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 26.47,
-      "initialStop": 26.47,
+      "activeStop": 26.38,
+      "initialStop": 26.38,
       "breakevenStop": 0,
-      "trailingStop": 26.43
+      "trailingStop": 26.33
     },
     {
       "id": "2610",
@@ -3602,10 +3602,10 @@
       "rankScore": 64.0,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 32.67,
-      "initialStop": 32.65,
+      "activeStop": 32.45,
+      "initialStop": 32.0,
       "breakevenStop": 0,
-      "trailingStop": 32.67
+      "trailingStop": 32.45
     },
     {
       "id": "6120",
@@ -3627,10 +3627,10 @@
       "rankScore": 64.0,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 14.08,
-      "initialStop": 13.71,
+      "activeStop": 13.3,
+      "initialStop": 12.67,
       "breakevenStop": 0,
-      "trailingStop": 14.08
+      "trailingStop": 13.3
     },
     {
       "id": "2025",
@@ -3652,10 +3652,10 @@
       "rankScore": 64.0,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 11.02,
-      "initialStop": 11.02,
+      "activeStop": 11.15,
+      "initialStop": 11.09,
       "breakevenStop": 0,
-      "trailingStop": 10.89
+      "trailingStop": 11.15
     },
     {
       "id": "1540",
@@ -3752,10 +3752,10 @@
       "rankScore": 63.62,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 57.04,
-      "initialStop": 56.98,
+      "activeStop": 56.48,
+      "initialStop": 56.48,
       "breakevenStop": 0,
-      "trailingStop": 57.04
+      "trailingStop": 56.24
     },
     {
       "id": "2425",
@@ -3777,10 +3777,10 @@
       "rankScore": 63.62,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 34.39,
-      "initialStop": 34.39,
+      "activeStop": 33.29,
+      "initialStop": 33.26,
       "breakevenStop": 0,
-      "trailingStop": 34.23
+      "trailingStop": 33.29
     },
     {
       "id": "2832",
@@ -3802,10 +3802,10 @@
       "rankScore": 63.62,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 52.35,
-      "initialStop": 52.31,
+      "activeStop": 51.88,
+      "initialStop": 51.65,
       "breakevenStop": 0,
-      "trailingStop": 52.35
+      "trailingStop": 51.88
     },
     {
       "id": "2739",
@@ -3952,10 +3952,10 @@
       "rankScore": 63.62,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 59.36,
-      "initialStop": 58.75,
+      "activeStop": 60.76,
+      "initialStop": 57.97,
       "breakevenStop": 0,
-      "trailingStop": 59.36
+      "trailingStop": 60.76
     },
     {
       "id": "3028",
@@ -4027,10 +4027,10 @@
       "rankScore": 63.25,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 57.73,
-      "initialStop": 56.7,
+      "activeStop": 57.15,
+      "initialStop": 56.71,
       "breakevenStop": 0,
-      "trailingStop": 57.73
+      "trailingStop": 57.15
     },
     {
       "id": "3094",
@@ -4126,11 +4126,11 @@
       "triggerWarnings": "無",
       "rankScore": 62.5,
       "group": "hidden",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 91.0,
-      "initialStop": 91.0,
+      "positionAction": "續抱觀察",
+      "activeStop": 83.19,
+      "initialStop": 83.19,
       "breakevenStop": 0,
-      "trailingStop": 90.19
+      "trailingStop": 82.52
     },
     {
       "id": "2540",
@@ -4202,10 +4202,10 @@
       "rankScore": 62.38,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 48.41,
-      "initialStop": 48.41,
+      "activeStop": 45.6,
+      "initialStop": 42.35,
       "breakevenStop": 0,
-      "trailingStop": 47.37
+      "trailingStop": 45.6
     },
     {
       "id": "2488",
@@ -4252,10 +4252,10 @@
       "rankScore": 62.38,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 27.07,
-      "initialStop": 27.04,
+      "activeStop": 28.5,
+      "initialStop": 27.43,
       "breakevenStop": 0,
-      "trailingStop": 27.07
+      "trailingStop": 28.5
     },
     {
       "id": "6277",
@@ -4277,10 +4277,10 @@
       "rankScore": 62.38,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 77.73,
-      "initialStop": 77.19,
+      "activeStop": 74.8,
+      "initialStop": 74.58,
       "breakevenStop": 0,
-      "trailingStop": 77.73
+      "trailingStop": 74.8
     },
     {
       "id": "6412",
@@ -4327,10 +4327,10 @@
       "rankScore": 62.38,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 77.38,
-      "initialStop": 76.98,
+      "activeStop": 75.38,
+      "initialStop": 73.19,
       "breakevenStop": 0,
-      "trailingStop": 77.38
+      "trailingStop": 75.38
     },
     {
       "id": "3702",
@@ -4427,10 +4427,10 @@
       "rankScore": 62.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 25.34,
-      "initialStop": 25.33,
+      "activeStop": 25.0,
+      "initialStop": 24.85,
       "breakevenStop": 0,
-      "trailingStop": 25.34
+      "trailingStop": 25.0
     },
     {
       "id": "1713",
@@ -4551,11 +4551,11 @@
       "triggerWarnings": "強烈過熱量",
       "rankScore": 61.88,
       "group": "follow_watch",
-      "positionAction": "觸發停損/停利",
-      "activeStop": 58.05,
-      "initialStop": 53.17,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 55.3,
+      "initialStop": 55.3,
       "breakevenStop": 0,
-      "trailingStop": 58.05
+      "trailingStop": 55.01
     },
     {
       "id": "2438",
@@ -4601,11 +4601,11 @@
       "triggerWarnings": "無",
       "rankScore": 61.88,
       "group": "follow_watch",
-      "positionAction": "續抱觀察",
-      "activeStop": 37.4,
-      "initialStop": 36.5,
+      "positionAction": "全數出場",
+      "activeStop": 34.01,
+      "initialStop": 33.46,
       "breakevenStop": 0,
-      "trailingStop": 37.4
+      "trailingStop": 34.01
     },
     {
       "id": "4155",
@@ -4627,10 +4627,10 @@
       "rankScore": 61.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 13.95,
-      "initialStop": 13.86,
+      "activeStop": 14.1,
+      "initialStop": 14.05,
       "breakevenStop": 0,
-      "trailingStop": 13.95
+      "trailingStop": 14.1
     },
     {
       "id": "1530",
@@ -4702,10 +4702,10 @@
       "rankScore": 61.5,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 99.4,
-      "initialStop": 96.92,
+      "activeStop": 97.33,
+      "initialStop": 94.36,
       "breakevenStop": 0,
-      "trailingStop": 99.4
+      "trailingStop": 97.33
     },
     {
       "id": "3013",
@@ -4727,10 +4727,10 @@
       "rankScore": 61.5,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 117.17,
-      "initialStop": 115.31,
+      "activeStop": 111.42,
+      "initialStop": 109.1,
       "breakevenStop": 0,
-      "trailingStop": 117.17
+      "trailingStop": 111.42
     },
     {
       "id": "5607",
@@ -4777,10 +4777,10 @@
       "rankScore": 61.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 23.18,
-      "initialStop": 22.87,
+      "activeStop": 22.66,
+      "initialStop": 22.48,
       "breakevenStop": 0,
-      "trailingStop": 23.18
+      "trailingStop": 22.66
     },
     {
       "id": "6605",
@@ -4801,11 +4801,11 @@
       "triggerWarnings": "過熱量",
       "rankScore": 61.38,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 136.7,
-      "initialStop": 134.59,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 135.15,
+      "initialStop": 135.15,
       "breakevenStop": 0,
-      "trailingStop": 136.7
+      "trailingStop": 134.07
     },
     {
       "id": "2002",
@@ -4827,10 +4827,10 @@
       "rankScore": 61.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 18.32,
+      "activeStop": 18.46,
       "initialStop": 18.32,
       "breakevenStop": 0,
-      "trailingStop": 18.31
+      "trailingStop": 18.46
     },
     {
       "id": "8201",
@@ -4901,11 +4901,11 @@
       "triggerWarnings": "無",
       "rankScore": 61.12,
       "group": "follow_watch",
-      "positionAction": "續抱觀察",
-      "activeStop": 31.82,
-      "initialStop": 30.71,
+      "positionAction": "觸發停損/停利",
+      "activeStop": 34.12,
+      "initialStop": 31.33,
       "breakevenStop": 0,
-      "trailingStop": 31.82
+      "trailingStop": 34.12
     },
     {
       "id": "1339",
@@ -4926,11 +4926,11 @@
       "triggerWarnings": "強烈過熱量",
       "rankScore": 61.0,
       "group": "follow_watch",
-      "positionAction": "續抱觀察",
-      "activeStop": 43.72,
-      "initialStop": 42.54,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 43.23,
+      "initialStop": 43.23,
       "breakevenStop": 0,
-      "trailingStop": 43.72
+      "trailingStop": 42.91
     },
     {
       "id": "9934",
@@ -4976,11 +4976,11 @@
       "triggerWarnings": "無",
       "rankScore": 61.0,
       "group": "follow_watch",
-      "positionAction": "續抱觀察",
-      "activeStop": 33.15,
-      "initialStop": 33.15,
+      "positionAction": "全數出場",
+      "activeStop": 32.51,
+      "initialStop": 31.83,
       "breakevenStop": 0,
-      "trailingStop": 33.02
+      "trailingStop": 32.51
     },
     {
       "id": "2498",
@@ -5002,10 +5002,10 @@
       "rankScore": 61.0,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 42.37,
-      "initialStop": 42.37,
+      "activeStop": 41.63,
+      "initialStop": 40.67,
       "breakevenStop": 0,
-      "trailingStop": 42.19
+      "trailingStop": 41.63
     },
     {
       "id": "4976",
@@ -5027,10 +5027,10 @@
       "rankScore": 61.0,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 30.03,
-      "initialStop": 30.03,
+      "activeStop": 29.7,
+      "initialStop": 28.55,
       "breakevenStop": 0,
-      "trailingStop": 29.73
+      "trailingStop": 29.7
     },
     {
       "id": "7732",
@@ -5077,10 +5077,10 @@
       "rankScore": 61.0,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 22.14,
-      "initialStop": 22.12,
+      "activeStop": 22.08,
+      "initialStop": 21.55,
       "breakevenStop": 0,
-      "trailingStop": 22.14
+      "trailingStop": 22.08
     },
     {
       "id": "1504",
@@ -5127,10 +5127,10 @@
       "rankScore": 60.62,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 93.44,
-      "initialStop": 93.44,
+      "activeStop": 95.69,
+      "initialStop": 90.41,
       "breakevenStop": 0,
-      "trailingStop": 91.82
+      "trailingStop": 95.69
     },
     {
       "id": "2465",
@@ -5152,10 +5152,10 @@
       "rankScore": 60.62,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 82.02,
-      "initialStop": 81.18,
+      "activeStop": 77.84,
+      "initialStop": 74.69,
       "breakevenStop": 0,
-      "trailingStop": 82.02
+      "trailingStop": 77.84
     },
     {
       "id": "3518",
@@ -5176,11 +5176,11 @@
       "triggerWarnings": "無",
       "rankScore": 60.62,
       "group": "follow_watch",
-      "positionAction": "全數出場",
-      "activeStop": 29.82,
-      "initialStop": 28.38,
+      "positionAction": "續抱觀察",
+      "activeStop": 32.58,
+      "initialStop": 30.78,
       "breakevenStop": 0,
-      "trailingStop": 29.82
+      "trailingStop": 32.58
     },
     {
       "id": "3024",
@@ -5277,10 +5277,10 @@
       "rankScore": 60.38,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 48.27,
-      "initialStop": 47.43,
+      "activeStop": 50.98,
+      "initialStop": 49.52,
       "breakevenStop": 0,
-      "trailingStop": 48.27
+      "trailingStop": 50.98
     },
     {
       "id": "8249",
@@ -5352,10 +5352,10 @@
       "rankScore": 59.77,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 13.04,
-      "initialStop": 12.81,
+      "activeStop": 12.77,
+      "initialStop": 12.77,
       "breakevenStop": 0,
-      "trailingStop": 13.04
+      "trailingStop": 12.62
     },
     {
       "id": "1809",
@@ -5402,10 +5402,10 @@
       "rankScore": 59.75,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 49.81,
-      "initialStop": 49.76,
+      "activeStop": 49.43,
+      "initialStop": 49.07,
       "breakevenStop": 0,
-      "trailingStop": 49.81
+      "trailingStop": 49.43
     },
     {
       "id": "2324",
@@ -5427,10 +5427,10 @@
       "rankScore": 59.75,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 37.12,
-      "initialStop": 37.12,
+      "activeStop": 32.0,
+      "initialStop": 30.66,
       "breakevenStop": 0,
-      "trailingStop": 36.48
+      "trailingStop": 32.0
     },
     {
       "id": "6272",
@@ -5576,11 +5576,11 @@
       "triggerWarnings": "過熱量、爆量長上影疑似出貨",
       "rankScore": 59.38,
       "group": "follow_watch",
-      "positionAction": "觸發停損/停利",
-      "activeStop": 34.6,
-      "initialStop": 30.21,
+      "positionAction": "續抱觀察",
+      "activeStop": 30.61,
+      "initialStop": 30.4,
       "breakevenStop": 0,
-      "trailingStop": 34.6
+      "trailingStop": 30.61
     },
     {
       "id": "1516",
@@ -5627,10 +5627,10 @@
       "rankScore": 59.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 10.59,
-      "initialStop": 10.57,
+      "activeStop": 10.46,
+      "initialStop": 10.04,
       "breakevenStop": 0,
-      "trailingStop": 10.59
+      "trailingStop": 10.46
     },
     {
       "id": "6606",
@@ -5651,11 +5651,11 @@
       "triggerWarnings": "無",
       "rankScore": 59.25,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 25.44,
-      "initialStop": 25.44,
+      "positionAction": "全數出場",
+      "activeStop": 24.95,
+      "initialStop": 24.95,
       "breakevenStop": 0,
-      "trailingStop": 25.25
+      "trailingStop": 24.95
     },
     {
       "id": "4545",
@@ -5676,11 +5676,11 @@
       "triggerWarnings": "過熱量、爆量長上影疑似出貨",
       "rankScore": 58.88,
       "group": "follow_watch",
-      "positionAction": "續抱觀察",
-      "activeStop": 39.05,
-      "initialStop": 39.05,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 36.93,
+      "initialStop": 36.01,
       "breakevenStop": 0,
-      "trailingStop": 38.75
+      "trailingStop": 36.93
     },
     {
       "id": "2478",
@@ -5726,11 +5726,11 @@
       "triggerWarnings": "過熱量",
       "rankScore": 58.88,
       "group": "follow_watch",
-      "positionAction": "續抱觀察",
-      "activeStop": 23.76,
-      "initialStop": 23.76,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 19.8,
+      "initialStop": 19.8,
       "breakevenStop": 0,
-      "trailingStop": 23.5
+      "trailingStop": 19.62
     },
     {
       "id": "3481",
@@ -5752,10 +5752,10 @@
       "rankScore": 58.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 44.69,
-      "initialStop": 44.69,
+      "activeStop": 49.58,
+      "initialStop": 49.58,
       "breakevenStop": 0,
-      "trailingStop": 43.42
+      "trailingStop": 48.27
     },
     {
       "id": "6906",
@@ -5777,10 +5777,10 @@
       "rankScore": 58.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 101.2,
-      "initialStop": 96.42,
+      "activeStop": 105.28,
+      "initialStop": 101.32,
       "breakevenStop": 0,
-      "trailingStop": 101.2
+      "trailingStop": 105.28
     },
     {
       "id": "6834",
@@ -5802,10 +5802,10 @@
       "rankScore": 58.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 70.57,
-      "initialStop": 66.89,
+      "activeStop": 68.47,
+      "initialStop": 60.81,
       "breakevenStop": 0,
-      "trailingStop": 70.57
+      "trailingStop": 68.47
     },
     {
       "id": "3321",
@@ -5827,10 +5827,10 @@
       "rankScore": 58.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 18.62,
-      "initialStop": 18.48,
+      "activeStop": 18.68,
+      "initialStop": 17.93,
       "breakevenStop": 0,
-      "trailingStop": 18.62
+      "trailingStop": 18.68
     },
     {
       "id": "4916",
@@ -5877,10 +5877,10 @@
       "rankScore": 58.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 69.1,
-      "initialStop": 67.63,
+      "activeStop": 72.61,
+      "initialStop": 70.5,
       "breakevenStop": 0,
-      "trailingStop": 69.1
+      "trailingStop": 72.61
     },
     {
       "id": "2495",
@@ -6002,10 +6002,10 @@
       "rankScore": 58.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 136.4,
-      "initialStop": 130.09,
+      "activeStop": 133.34,
+      "initialStop": 127.28,
       "breakevenStop": 0,
-      "trailingStop": 136.4
+      "trailingStop": 133.34
     },
     {
       "id": "2305",
@@ -6177,10 +6177,10 @@
       "rankScore": 58.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 61.03,
-      "initialStop": 61.03,
+      "activeStop": 57.44,
+      "initialStop": 57.44,
       "breakevenStop": 0,
-      "trailingStop": 59.44
+      "trailingStop": 56.02
     },
     {
       "id": "6166",
@@ -6277,10 +6277,10 @@
       "rankScore": 58.88,
       "group": "follow_watch",
       "positionAction": "過熱減碼30%",
-      "activeStop": 37.83,
-      "initialStop": 37.83,
+      "activeStop": 34.87,
+      "initialStop": 34.87,
       "breakevenStop": 0,
-      "trailingStop": 37.75
+      "trailingStop": 34.54
     },
     {
       "id": "4555",
@@ -6302,10 +6302,10 @@
       "rankScore": 58.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 53.99,
-      "initialStop": 51.92,
+      "activeStop": 53.38,
+      "initialStop": 53.12,
       "breakevenStop": 0,
-      "trailingStop": 53.99
+      "trailingStop": 53.38
     },
     {
       "id": "1817",
@@ -6327,10 +6327,10 @@
       "rankScore": 58.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 38.46,
-      "initialStop": 38.3,
+      "activeStop": 37.98,
+      "initialStop": 37.86,
       "breakevenStop": 0,
-      "trailingStop": 38.46
+      "trailingStop": 37.98
     },
     {
       "id": "1558",
@@ -6552,10 +6552,10 @@
       "rankScore": 58.0,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 53.95,
-      "initialStop": 53.39,
+      "activeStop": 54.44,
+      "initialStop": 53.9,
       "breakevenStop": 0,
-      "trailingStop": 53.95
+      "trailingStop": 54.44
     },
     {
       "id": "6192",
@@ -6602,10 +6602,10 @@
       "rankScore": 58.0,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 14.34,
-      "initialStop": 13.88,
+      "activeStop": 16.02,
+      "initialStop": 15.01,
       "breakevenStop": 0,
-      "trailingStop": 14.34
+      "trailingStop": 16.02
     },
     {
       "id": "1312",
@@ -6777,10 +6777,10 @@
       "rankScore": 57.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 65.95,
-      "initialStop": 65.95,
+      "activeStop": 65.72,
+      "initialStop": 65.38,
       "breakevenStop": 0,
-      "trailingStop": 65.88
+      "trailingStop": 65.72
     },
     {
       "id": "6835",
@@ -6801,11 +6801,11 @@
       "triggerWarnings": "無",
       "rankScore": 57.38,
       "group": "hidden",
-      "positionAction": "全數出場",
-      "activeStop": 37.4,
-      "initialStop": 36.54,
+      "positionAction": "續抱觀察",
+      "activeStop": 37.38,
+      "initialStop": 37.38,
       "breakevenStop": 0,
-      "trailingStop": 37.4
+      "trailingStop": 37.13
     },
     {
       "id": "1314",
@@ -6827,10 +6827,10 @@
       "rankScore": 57.15,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 6.84,
-      "initialStop": 6.8,
+      "activeStop": 6.88,
+      "initialStop": 6.83,
       "breakevenStop": 0,
-      "trailingStop": 6.84
+      "trailingStop": 6.88
     },
     {
       "id": "8105",
@@ -6927,10 +6927,10 @@
       "rankScore": 57.1,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 19.98,
-      "initialStop": 19.98,
+      "activeStop": 19.81,
+      "initialStop": 19.81,
       "breakevenStop": 0,
-      "trailingStop": 19.97
+      "trailingStop": 19.8
     },
     {
       "id": "3150",
@@ -6977,10 +6977,10 @@
       "rankScore": 56.75,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 48.96,
-      "initialStop": 48.96,
+      "activeStop": 47.67,
+      "initialStop": 47.09,
       "breakevenStop": 0,
-      "trailingStop": 48.81
+      "trailingStop": 47.67
     },
     {
       "id": "3003",
@@ -7002,10 +7002,10 @@
       "rankScore": 56.75,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 58.34,
-      "initialStop": 57.89,
+      "activeStop": 58.41,
+      "initialStop": 58.29,
       "breakevenStop": 0,
-      "trailingStop": 58.34
+      "trailingStop": 58.41
     },
     {
       "id": "4956",
@@ -7177,10 +7177,10 @@
       "rankScore": 55.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 81.45,
-      "initialStop": 81.45,
+      "activeStop": 84.23,
+      "initialStop": 81.95,
       "breakevenStop": 0,
-      "trailingStop": 80.46
+      "trailingStop": 84.23
     },
     {
       "id": "3149",
@@ -7227,10 +7227,10 @@
       "rankScore": 55.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 43.68,
-      "initialStop": 43.68,
+      "activeStop": 43.32,
+      "initialStop": 42.16,
       "breakevenStop": 0,
-      "trailingStop": 43.46
+      "trailingStop": 43.32
     },
     {
       "id": "6902",
@@ -7252,10 +7252,10 @@
       "rankScore": 55.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 132.62,
-      "initialStop": 132.62,
+      "activeStop": 128.74,
+      "initialStop": 128.74,
       "breakevenStop": 0,
-      "trailingStop": 131.74
+      "trailingStop": 125.88
     },
     {
       "id": "3025",
@@ -7277,10 +7277,10 @@
       "rankScore": 55.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 67.28,
-      "initialStop": 66.48,
+      "activeStop": 72.35,
+      "initialStop": 69.71,
       "breakevenStop": 0,
-      "trailingStop": 67.28
+      "trailingStop": 72.35
     },
     {
       "id": "2356",
@@ -7302,10 +7302,10 @@
       "rankScore": 55.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 70.47,
-      "initialStop": 70.47,
+      "activeStop": 60.53,
+      "initialStop": 58.26,
       "breakevenStop": 0,
-      "trailingStop": 69.12
+      "trailingStop": 60.53
     },
     {
       "id": "2441",
@@ -7327,10 +7327,10 @@
       "rankScore": 55.88,
       "group": "follow_watch",
       "positionAction": "續抱觀察",
-      "activeStop": 129.34,
-      "initialStop": 126.11,
+      "activeStop": 135.15,
+      "initialStop": 130.29,
       "breakevenStop": 0,
-      "trailingStop": 129.34
+      "trailingStop": 135.15
     },
     {
       "id": "1563",
@@ -7451,11 +7451,11 @@
       "triggerWarnings": "無",
       "rankScore": 55.75,
       "group": "hidden",
-      "positionAction": "全數出場",
-      "activeStop": 93.3,
-      "initialStop": 92.73,
+      "positionAction": "續抱觀察",
+      "activeStop": 90.7,
+      "initialStop": 90.47,
       "breakevenStop": 0,
-      "trailingStop": 93.3
+      "trailingStop": 90.7
     },
     {
       "id": "2606",
@@ -7502,10 +7502,10 @@
       "rankScore": 55.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 84.26,
-      "initialStop": 84.26,
+      "activeStop": 86.48,
+      "initialStop": 83.36,
       "breakevenStop": 0,
-      "trailingStop": 83.77
+      "trailingStop": 86.48
     },
     {
       "id": "2417",
@@ -7526,11 +7526,11 @@
       "triggerWarnings": "無",
       "rankScore": 55.38,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 45.22,
-      "initialStop": 45.22,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 49.97,
+      "initialStop": 49.97,
       "breakevenStop": 0,
-      "trailingStop": 45.21
+      "trailingStop": 49.18
     },
     {
       "id": "2365",
@@ -7577,10 +7577,10 @@
       "rankScore": 55.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 60.84,
-      "initialStop": 60.84,
+      "activeStop": 58.21,
+      "initialStop": 58.21,
       "breakevenStop": 0,
-      "trailingStop": 60.83
+      "trailingStop": 57.65
     },
     {
       "id": "2388",
@@ -7702,10 +7702,10 @@
       "rankScore": 55.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 25.31,
-      "initialStop": 25.11,
+      "activeStop": 23.91,
+      "initialStop": 23.41,
       "breakevenStop": 0,
-      "trailingStop": 25.31
+      "trailingStop": 23.91
     },
     {
       "id": "6283",
@@ -7777,10 +7777,10 @@
       "rankScore": 54.9,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 21.55,
-      "initialStop": 21.45,
+      "activeStop": 20.45,
+      "initialStop": 20.45,
       "breakevenStop": 0,
-      "trailingStop": 21.55
+      "trailingStop": 20.43
     },
     {
       "id": "6115",
@@ -7852,10 +7852,10 @@
       "rankScore": 54.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 13.49,
-      "initialStop": 13.29,
+      "activeStop": 13.11,
+      "initialStop": 12.62,
       "breakevenStop": 0,
-      "trailingStop": 13.49
+      "trailingStop": 13.11
     },
     {
       "id": "2377",
@@ -7926,11 +7926,11 @@
       "triggerWarnings": "無",
       "rankScore": 54.38,
       "group": "hidden",
-      "positionAction": "全數出場",
-      "activeStop": 17.47,
-      "initialStop": 17.29,
+      "positionAction": "續抱觀察",
+      "activeStop": 17.23,
+      "initialStop": 17.23,
       "breakevenStop": 0,
-      "trailingStop": 17.47
+      "trailingStop": 17.21
     },
     {
       "id": "3049",
@@ -7952,10 +7952,10 @@
       "rankScore": 54.15,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 12.42,
-      "initialStop": 12.2,
+      "activeStop": 12.08,
+      "initialStop": 11.47,
       "breakevenStop": 0,
-      "trailingStop": 12.42
+      "trailingStop": 12.08
     },
     {
       "id": "2108",
@@ -7977,10 +7977,10 @@
       "rankScore": 54.0,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 26.17,
-      "initialStop": 26.02,
+      "activeStop": 25.6,
+      "initialStop": 25.45,
       "breakevenStop": 0,
-      "trailingStop": 26.17
+      "trailingStop": 25.6
     },
     {
       "id": "2546",
@@ -8076,11 +8076,11 @@
       "triggerWarnings": "無",
       "rankScore": 53.62,
       "group": "hidden",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 13.53,
-      "initialStop": 13.53,
+      "positionAction": "續抱觀察",
+      "activeStop": 12.67,
+      "initialStop": 12.25,
       "breakevenStop": 0,
-      "trailingStop": 13.33
+      "trailingStop": 12.67
     },
     {
       "id": "5533",
@@ -8102,10 +8102,10 @@
       "rankScore": 53.47,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 13.73,
-      "initialStop": 13.72,
+      "activeStop": 13.63,
+      "initialStop": 13.63,
       "breakevenStop": 0,
-      "trailingStop": 13.73
+      "trailingStop": 13.62
     },
     {
       "id": "2471",
@@ -8227,10 +8227,10 @@
       "rankScore": 53.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 18.94,
-      "initialStop": 18.84,
+      "activeStop": 18.98,
+      "initialStop": 18.36,
       "breakevenStop": 0,
-      "trailingStop": 18.94
+      "trailingStop": 18.98
     },
     {
       "id": "3032",
@@ -8277,10 +8277,10 @@
       "rankScore": 53.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 18.93,
-      "initialStop": 18.93,
+      "activeStop": 18.52,
+      "initialStop": 18.46,
       "breakevenStop": 0,
-      "trailingStop": 18.84
+      "trailingStop": 18.52
     },
     {
       "id": "3005",
@@ -8302,10 +8302,10 @@
       "rankScore": 53.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 101.66,
-      "initialStop": 101.66,
+      "activeStop": 98.45,
+      "initialStop": 97.96,
       "breakevenStop": 0,
-      "trailingStop": 101.59
+      "trailingStop": 98.45
     },
     {
       "id": "5306",
@@ -8502,10 +8502,10 @@
       "rankScore": 52.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 74.64,
-      "initialStop": 74.64,
+      "activeStop": 67.78,
+      "initialStop": 67.78,
       "breakevenStop": 0,
-      "trailingStop": 73.43
+      "trailingStop": 67.15
     },
     {
       "id": "6153",
@@ -8577,10 +8577,10 @@
       "rankScore": 52.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 113.11,
-      "initialStop": 113.11,
+      "activeStop": 111.48,
+      "initialStop": 107.98,
       "breakevenStop": 0,
-      "trailingStop": 112.53
+      "trailingStop": 111.48
     },
     {
       "id": "3047",
@@ -8627,10 +8627,10 @@
       "rankScore": 51.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 14.81,
-      "initialStop": 14.81,
+      "activeStop": 14.72,
+      "initialStop": 14.72,
       "breakevenStop": 0,
-      "trailingStop": 14.75
+      "trailingStop": 14.62
     },
     {
       "id": "1470",
@@ -8652,10 +8652,10 @@
       "rankScore": 51.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 21.85,
-      "initialStop": 21.85,
+      "activeStop": 21.28,
+      "initialStop": 21.28,
       "breakevenStop": 0,
-      "trailingStop": 21.7
+      "trailingStop": 21.21
     },
     {
       "id": "6994",
@@ -8752,10 +8752,10 @@
       "rankScore": 51.0,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 23.16,
-      "initialStop": 23.16,
+      "activeStop": 23.77,
+      "initialStop": 23.39,
       "breakevenStop": 0,
-      "trailingStop": 23.07
+      "trailingStop": 23.77
     },
     {
       "id": "3605",
@@ -8852,10 +8852,10 @@
       "rankScore": 50.85,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 8.29,
-      "initialStop": 8.28,
+      "activeStop": 8.64,
+      "initialStop": 8.64,
       "breakevenStop": 0,
-      "trailingStop": 8.29
+      "trailingStop": 8.62
     },
     {
       "id": "4440",
@@ -8926,11 +8926,11 @@
       "triggerWarnings": "過熱量",
       "rankScore": 50.62,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 49.82,
-      "initialStop": 49.2,
+      "positionAction": "全數出場",
+      "activeStop": 52.84,
+      "initialStop": 51.13,
       "breakevenStop": 0,
-      "trailingStop": 49.82
+      "trailingStop": 52.84
     },
     {
       "id": "2015",
@@ -8977,10 +8977,10 @@
       "rankScore": 50.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 12.04,
-      "initialStop": 12.04,
+      "activeStop": 11.75,
+      "initialStop": 11.57,
       "breakevenStop": 0,
-      "trailingStop": 11.96
+      "trailingStop": 11.75
     },
     {
       "id": "3060",
@@ -9002,10 +9002,10 @@
       "rankScore": 49.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 28.61,
-      "initialStop": 27.74,
+      "activeStop": 27.92,
+      "initialStop": 26.88,
       "breakevenStop": 0,
-      "trailingStop": 28.61
+      "trailingStop": 27.92
     },
     {
       "id": "6869",
@@ -9102,10 +9102,10 @@
       "rankScore": 49.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 99.36,
-      "initialStop": 99.36,
+      "activeStop": 96.72,
+      "initialStop": 96.72,
       "breakevenStop": 0,
-      "trailingStop": 98.73
+      "trailingStop": 95.56
     },
     {
       "id": "2885",
@@ -9202,10 +9202,10 @@
       "rankScore": 49.65,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 6.8,
-      "initialStop": 6.8,
+      "activeStop": 6.74,
+      "initialStop": 6.73,
       "breakevenStop": 0,
-      "trailingStop": 6.8
+      "trailingStop": 6.74
     },
     {
       "id": "1468",
@@ -9227,8 +9227,8 @@
       "rankScore": 49.27,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 11.53,
-      "initialStop": 11.53,
+      "activeStop": 11.57,
+      "initialStop": 11.57,
       "breakevenStop": 0,
       "trailingStop": 11.47
     },
@@ -9376,11 +9376,11 @@
       "triggerWarnings": "無",
       "rankScore": 49.12,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 60.58,
-      "initialStop": 60.41,
+      "positionAction": "觸發停損/停利",
+      "activeStop": 61.61,
+      "initialStop": 60.45,
       "breakevenStop": 0,
-      "trailingStop": 60.58
+      "trailingStop": 61.61
     },
     {
       "id": "2228",
@@ -9427,10 +9427,10 @@
       "rankScore": 48.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 5.47,
-      "initialStop": 5.47,
+      "activeStop": 4.83,
+      "initialStop": 4.83,
       "breakevenStop": 0,
-      "trailingStop": 5.42
+      "trailingStop": 4.79
     },
     {
       "id": "1903",
@@ -9652,10 +9652,10 @@
       "rankScore": 48.0,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 151.97,
-      "initialStop": 150.06,
+      "activeStop": 140.91,
+      "initialStop": 140.91,
       "breakevenStop": 0,
-      "trailingStop": 151.97
+      "trailingStop": 137.5
     },
     {
       "id": "6117",
@@ -9702,10 +9702,10 @@
       "rankScore": 48.0,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 22.14,
-      "initialStop": 22.14,
+      "activeStop": 20.2,
+      "initialStop": 20.2,
       "breakevenStop": 0,
-      "trailingStop": 21.86
+      "trailingStop": 19.96
     },
     {
       "id": "1216",
@@ -9727,10 +9727,10 @@
       "rankScore": 47.88,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 71.35,
-      "initialStop": 71.24,
+      "activeStop": 70.26,
+      "initialStop": 69.43,
       "breakevenStop": 0,
-      "trailingStop": 71.35
+      "trailingStop": 70.26
     },
     {
       "id": "1722",
@@ -9827,10 +9827,10 @@
       "rankScore": 47.85,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 13.49,
-      "initialStop": 13.48,
+      "activeStop": 13.17,
+      "initialStop": 13.17,
       "breakevenStop": 0,
-      "trailingStop": 13.49
+      "trailingStop": 13.17
     },
     {
       "id": "6128",
@@ -9902,10 +9902,10 @@
       "rankScore": 47.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 23.52,
-      "initialStop": 23.52,
+      "activeStop": 22.94,
+      "initialStop": 22.48,
       "breakevenStop": 0,
-      "trailingStop": 23.36
+      "trailingStop": 22.94
     },
     {
       "id": "1443",
@@ -10077,10 +10077,10 @@
       "rankScore": 47.47,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 8.57,
-      "initialStop": 8.57,
+      "activeStop": 8.47,
+      "initialStop": 8.47,
       "breakevenStop": 0,
-      "trailingStop": 8.55
+      "trailingStop": 8.45
     },
     {
       "id": "2461",
@@ -10202,10 +10202,10 @@
       "rankScore": 47.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 28.21,
-      "initialStop": 28.21,
+      "activeStop": 27.63,
+      "initialStop": 27.31,
       "breakevenStop": 0,
-      "trailingStop": 27.98
+      "trailingStop": 27.63
     },
     {
       "id": "1313",
@@ -10252,10 +10252,10 @@
       "rankScore": 46.65,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 19.15,
-      "initialStop": 19.11,
+      "activeStop": 18.61,
+      "initialStop": 18.61,
       "breakevenStop": 0,
-      "trailingStop": 19.15
+      "trailingStop": 18.6
     },
     {
       "id": "2834",
@@ -10476,11 +10476,11 @@
       "triggerWarnings": "過熱量、爆量長上影疑似出貨",
       "rankScore": 45.88,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 18.61,
-      "initialStop": 18.61,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 18.98,
+      "initialStop": 18.11,
       "breakevenStop": 0,
-      "trailingStop": 18.58
+      "trailingStop": 18.98
     },
     {
       "id": "2915",
@@ -10502,10 +10502,10 @@
       "rankScore": 45.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 43.55,
-      "initialStop": 43.55,
+      "activeStop": 42.6,
+      "initialStop": 42.45,
       "breakevenStop": 0,
-      "trailingStop": 43.32
+      "trailingStop": 42.6
     },
     {
       "id": "2007",
@@ -10527,10 +10527,10 @@
       "rankScore": 45.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 7.29,
-      "initialStop": 7.29,
+      "activeStop": 7.17,
+      "initialStop": 7.16,
       "breakevenStop": 0,
-      "trailingStop": 7.26
+      "trailingStop": 7.17
     },
     {
       "id": "2440",
@@ -10577,10 +10577,10 @@
       "rankScore": 45.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 39.64,
-      "initialStop": 39.63,
+      "activeStop": 39.34,
+      "initialStop": 38.88,
       "breakevenStop": 0,
-      "trailingStop": 39.64
+      "trailingStop": 39.34
     },
     {
       "id": "2419",
@@ -10727,10 +10727,10 @@
       "rankScore": 44.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 61.82,
-      "initialStop": 61.78,
+      "activeStop": 61.66,
+      "initialStop": 61.12,
       "breakevenStop": 0,
-      "trailingStop": 61.82
+      "trailingStop": 61.66
     },
     {
       "id": "1444",
@@ -10751,11 +10751,11 @@
       "triggerWarnings": "無",
       "rankScore": 44.1,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 6.47,
-      "initialStop": 6.47,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 6.44,
+      "initialStop": 6.44,
       "breakevenStop": 0,
-      "trailingStop": 6.46
+      "trailingStop": 6.42
     },
     {
       "id": "6201",
@@ -10826,11 +10826,11 @@
       "triggerWarnings": "無",
       "rankScore": 43.65,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 20.65,
-      "initialStop": 20.41,
+      "positionAction": "觸發停損/停利",
+      "activeStop": 21.19,
+      "initialStop": 20.59,
       "breakevenStop": 0,
-      "trailingStop": 20.65
+      "trailingStop": 21.19
     },
     {
       "id": "1905",
@@ -10877,10 +10877,10 @@
       "rankScore": 43.65,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 12.1,
-      "initialStop": 12.1,
+      "activeStop": 11.87,
+      "initialStop": 11.87,
       "breakevenStop": 0,
-      "trailingStop": 12.05
+      "trailingStop": 11.77
     },
     {
       "id": "9955",
@@ -10952,10 +10952,10 @@
       "rankScore": 43.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 110.25,
-      "initialStop": 109.71,
+      "activeStop": 113.93,
+      "initialStop": 107.94,
       "breakevenStop": 0,
-      "trailingStop": 110.25
+      "trailingStop": 113.93
     },
     {
       "id": "1217",
@@ -10977,10 +10977,10 @@
       "rankScore": 43.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 9.61,
-      "initialStop": 9.61,
+      "activeStop": 9.51,
+      "initialStop": 9.51,
       "breakevenStop": 0,
-      "trailingStop": 9.61
+      "trailingStop": 9.49
     },
     {
       "id": "9929",
@@ -11027,10 +11027,10 @@
       "rankScore": 43.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 81.89,
-      "initialStop": 81.89,
+      "activeStop": 83.21,
+      "initialStop": 79.59,
       "breakevenStop": 0,
-      "trailingStop": 81.27
+      "trailingStop": 83.21
     },
     {
       "id": "2905",
@@ -11102,10 +11102,10 @@
       "rankScore": 42.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 29.92,
-      "initialStop": 29.92,
+      "activeStop": 29.62,
+      "initialStop": 29.08,
       "breakevenStop": 0,
-      "trailingStop": 29.73
+      "trailingStop": 29.62
     },
     {
       "id": "1506",
@@ -11126,11 +11126,11 @@
       "triggerWarnings": "無",
       "rankScore": 42.75,
       "group": "hidden",
-      "positionAction": "全數出場",
-      "activeStop": 9.48,
-      "initialStop": 9.48,
+      "positionAction": "續抱觀察",
+      "activeStop": 9.98,
+      "initialStop": 9.7,
       "breakevenStop": 0,
-      "trailingStop": 9.46
+      "trailingStop": 9.98
     },
     {
       "id": "8481",
@@ -11177,10 +11177,10 @@
       "rankScore": 42.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 52.3,
-      "initialStop": 52.1,
+      "activeStop": 51.81,
+      "initialStop": 51.49,
       "breakevenStop": 0,
-      "trailingStop": 52.3
+      "trailingStop": 51.81
     },
     {
       "id": "9921",
@@ -11302,10 +11302,10 @@
       "rankScore": 41.85,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 16.97,
-      "initialStop": 16.97,
+      "activeStop": 16.99,
+      "initialStop": 16.99,
       "breakevenStop": 0,
-      "trailingStop": 16.97
+      "trailingStop": 16.99
     },
     {
       "id": "2104",
@@ -11402,10 +11402,10 @@
       "rankScore": 41.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 21.02,
-      "initialStop": 21.02,
+      "activeStop": 20.92,
+      "initialStop": 20.68,
       "breakevenStop": 0,
-      "trailingStop": 20.9
+      "trailingStop": 20.92
     },
     {
       "id": "2009",
@@ -11452,10 +11452,10 @@
       "rankScore": 41.38,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 38.77,
-      "initialStop": 38.77,
+      "activeStop": 38.44,
+      "initialStop": 37.6,
       "breakevenStop": 0,
-      "trailingStop": 38.76
+      "trailingStop": 38.44
     },
     {
       "id": "1614",
@@ -11477,10 +11477,10 @@
       "rankScore": 40.88,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 31.92,
-      "initialStop": 31.41,
+      "activeStop": 31.83,
+      "initialStop": 31.34,
       "breakevenStop": 0,
-      "trailingStop": 31.92
+      "trailingStop": 31.83
     },
     {
       "id": "9927",
@@ -11527,10 +11527,10 @@
       "rankScore": 40.88,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 21.75,
-      "initialStop": 21.2,
+      "activeStop": 20.8,
+      "initialStop": 20.8,
       "breakevenStop": 0,
-      "trailingStop": 21.75
+      "trailingStop": 20.7
     },
     {
       "id": "2945",
@@ -11627,10 +11627,10 @@
       "rankScore": 40.65,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 8.25,
-      "initialStop": 8.07,
+      "activeStop": 7.89,
+      "initialStop": 7.73,
       "breakevenStop": 0,
-      "trailingStop": 8.25
+      "trailingStop": 7.89
     },
     {
       "id": "4930",
@@ -11652,10 +11652,10 @@
       "rankScore": 40.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 17.18,
-      "initialStop": 17.18,
+      "activeStop": 16.96,
+      "initialStop": 16.79,
       "breakevenStop": 0,
-      "trailingStop": 17.14
+      "trailingStop": 16.96
     },
     {
       "id": "1235",
@@ -11677,10 +11677,10 @@
       "rankScore": 40.5,
       "group": "hidden",
       "positionAction": "過熱減碼30%",
-      "activeStop": 38.57,
-      "initialStop": 38.49,
+      "activeStop": 38.55,
+      "initialStop": 38.55,
       "breakevenStop": 0,
-      "trailingStop": 38.57
+      "trailingStop": 38.04
     },
     {
       "id": "1472",
@@ -11727,10 +11727,10 @@
       "rankScore": 40.15,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 94.04,
-      "initialStop": 94.04,
+      "activeStop": 91.46,
+      "initialStop": 90.73,
       "breakevenStop": 0,
-      "trailingStop": 93.93
+      "trailingStop": 91.46
     },
     {
       "id": "3040",
@@ -11926,11 +11926,11 @@
       "triggerWarnings": "無",
       "rankScore": 38.25,
       "group": "hidden",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 112.62,
-      "initialStop": 111.02,
+      "positionAction": "全數出場",
+      "activeStop": 104.88,
+      "initialStop": 104.73,
       "breakevenStop": 0,
-      "trailingStop": 112.62
+      "trailingStop": 104.88
     },
     {
       "id": "2450",
@@ -12001,11 +12001,11 @@
       "triggerWarnings": "無",
       "rankScore": 38.25,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 12.13,
-      "initialStop": 12.13,
+      "positionAction": "全數出場",
+      "activeStop": 11.91,
+      "initialStop": 11.85,
       "breakevenStop": 0,
-      "trailingStop": 12.1
+      "trailingStop": 11.91
     },
     {
       "id": "2887",
@@ -12176,11 +12176,11 @@
       "triggerWarnings": "無",
       "rankScore": 38.25,
       "group": "hidden",
-      "positionAction": "全數出場",
-      "activeStop": 16.46,
-      "initialStop": 16.07,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 15.26,
+      "initialStop": 15.26,
       "breakevenStop": 0,
-      "trailingStop": 16.46
+      "trailingStop": 15.17
     },
     {
       "id": "4736",
@@ -12202,10 +12202,10 @@
       "rankScore": 38.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 121.31,
-      "initialStop": 121.31,
+      "activeStop": 119.78,
+      "initialStop": 119.31,
       "breakevenStop": 0,
-      "trailingStop": 120.78
+      "trailingStop": 119.78
     },
     {
       "id": "8072",
@@ -12277,10 +12277,10 @@
       "rankScore": 37.88,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 52.45,
-      "initialStop": 52.44,
+      "activeStop": 51.17,
+      "initialStop": 51.17,
       "breakevenStop": 0,
-      "trailingStop": 52.45
+      "trailingStop": 51.08
     },
     {
       "id": "2889",
@@ -12327,10 +12327,10 @@
       "rankScore": 37.88,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 41.78,
-      "initialStop": 41.78,
+      "activeStop": 41.9,
+      "initialStop": 41.65,
       "breakevenStop": 0,
-      "trailingStop": 41.78
+      "trailingStop": 41.9
     },
     {
       "id": "1734",
@@ -12477,10 +12477,10 @@
       "rankScore": 37.88,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 13.09,
-      "initialStop": 13.0,
+      "activeStop": 12.93,
+      "initialStop": 12.93,
       "breakevenStop": 0,
-      "trailingStop": 13.09
+      "trailingStop": 12.93
     },
     {
       "id": "2607",
@@ -12552,10 +12552,10 @@
       "rankScore": 37.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 33.45,
-      "initialStop": 33.45,
+      "activeStop": 32.06,
+      "initialStop": 31.98,
       "breakevenStop": 0,
-      "trailingStop": 33.22
+      "trailingStop": 32.06
     },
     {
       "id": "6269",
@@ -12652,10 +12652,10 @@
       "rankScore": 37.15,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 22.16,
-      "initialStop": 22.16,
+      "activeStop": 21.65,
+      "initialStop": 21.55,
       "breakevenStop": 0,
-      "trailingStop": 22.09
+      "trailingStop": 21.65
     },
     {
       "id": "1310",
@@ -12677,10 +12677,10 @@
       "rankScore": 37.15,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 7.97,
-      "initialStop": 7.97,
+      "activeStop": 7.82,
+      "initialStop": 7.77,
       "breakevenStop": 0,
-      "trailingStop": 7.95
+      "trailingStop": 7.82
     },
     {
       "id": "1309",
@@ -12827,10 +12827,10 @@
       "rankScore": 36.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 73.58,
-      "initialStop": 73.58,
+      "activeStop": 71.98,
+      "initialStop": 68.9,
       "breakevenStop": 0,
-      "trailingStop": 72.36
+      "trailingStop": 71.98
     },
     {
       "id": "1210",
@@ -12976,11 +12976,11 @@
       "triggerWarnings": "無",
       "rankScore": 35.77,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 12.3,
-      "initialStop": 12.3,
+      "positionAction": "全數出場",
+      "activeStop": 13.39,
+      "initialStop": 12.87,
       "breakevenStop": 0,
-      "trailingStop": 12.23
+      "trailingStop": 13.39
     },
     {
       "id": "9925",
@@ -13052,10 +13052,10 @@
       "rankScore": 35.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 19.58,
-      "initialStop": 19.55,
+      "activeStop": 19.42,
+      "initialStop": 19.37,
       "breakevenStop": 0,
-      "trailingStop": 19.58
+      "trailingStop": 19.42
     },
     {
       "id": "2901",
@@ -13102,10 +13102,10 @@
       "rankScore": 35.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 9.78,
-      "initialStop": 9.78,
+      "activeStop": 9.82,
+      "initialStop": 9.74,
       "breakevenStop": 0,
-      "trailingStop": 9.78
+      "trailingStop": 9.82
     },
     {
       "id": "2028",
@@ -13152,10 +13152,10 @@
       "rankScore": 35.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 16.57,
-      "initialStop": 16.55,
+      "activeStop": 16.48,
+      "initialStop": 16.47,
       "breakevenStop": 0,
-      "trailingStop": 16.57
+      "trailingStop": 16.48
     },
     {
       "id": "2515",
@@ -13177,10 +13177,10 @@
       "rankScore": 35.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 12.22,
-      "initialStop": 12.07,
+      "activeStop": 12.28,
+      "initialStop": 12.28,
       "breakevenStop": 0,
-      "trailingStop": 12.22
+      "trailingStop": 12.14
     },
     {
       "id": "2511",
@@ -13252,10 +13252,10 @@
       "rankScore": 35.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 52.01,
-      "initialStop": 52.01,
+      "activeStop": 51.93,
+      "initialStop": 51.84,
       "breakevenStop": 0,
-      "trailingStop": 51.91
+      "trailingStop": 51.93
     },
     {
       "id": "1714",
@@ -13302,10 +13302,10 @@
       "rankScore": 35.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 10.41,
-      "initialStop": 10.41,
+      "activeStop": 10.21,
+      "initialStop": 10.21,
       "breakevenStop": 0,
-      "trailingStop": 10.41
+      "trailingStop": 10.21
     },
     {
       "id": "6918",
@@ -13352,10 +13352,10 @@
       "rankScore": 35.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 47.07,
-      "initialStop": 46.13,
+      "activeStop": 46.11,
+      "initialStop": 45.05,
       "breakevenStop": 0,
-      "trailingStop": 47.07
+      "trailingStop": 46.11
     },
     {
       "id": "1439",
@@ -13551,11 +13551,11 @@
       "triggerWarnings": "無",
       "rankScore": 34.88,
       "group": "hidden",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 6.96,
-      "initialStop": 6.96,
+      "positionAction": "續抱觀察",
+      "activeStop": 6.33,
+      "initialStop": 6.33,
       "breakevenStop": 0,
-      "trailingStop": 6.9
+      "trailingStop": 6.29
     },
     {
       "id": "1603",
@@ -13577,10 +13577,10 @@
       "rankScore": 34.88,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 30.82,
-      "initialStop": 30.77,
+      "activeStop": 30.87,
+      "initialStop": 30.87,
       "breakevenStop": 0,
-      "trailingStop": 30.82
+      "trailingStop": 30.77
     },
     {
       "id": "2323",
@@ -13602,10 +13602,10 @@
       "rankScore": 34.88,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 10.03,
-      "initialStop": 9.95,
+      "activeStop": 9.78,
+      "initialStop": 9.55,
       "breakevenStop": 0,
-      "trailingStop": 10.03
+      "trailingStop": 9.78
     },
     {
       "id": "2038",
@@ -13627,10 +13627,10 @@
       "rankScore": 34.88,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 13.3,
-      "initialStop": 13.2,
+      "activeStop": 13.25,
+      "initialStop": 12.9,
       "breakevenStop": 0,
-      "trailingStop": 13.3
+      "trailingStop": 13.25
     },
     {
       "id": "9919",
@@ -13676,11 +13676,11 @@
       "triggerWarnings": "無",
       "rankScore": 34.88,
       "group": "hidden",
-      "positionAction": "觸發停損/停利",
-      "activeStop": 31.89,
-      "initialStop": 30.61,
+      "positionAction": "續抱觀察",
+      "activeStop": 29.99,
+      "initialStop": 29.99,
       "breakevenStop": 0,
-      "trailingStop": 31.89
+      "trailingStop": 29.91
     },
     {
       "id": "2504",
@@ -13727,10 +13727,10 @@
       "rankScore": 34.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 11.87,
-      "initialStop": 11.74,
+      "activeStop": 12.05,
+      "initialStop": 12.05,
       "breakevenStop": 0,
-      "trailingStop": 11.87
+      "trailingStop": 12.04
     },
     {
       "id": "1512",
@@ -13927,10 +13927,10 @@
       "rankScore": 32.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 124.11,
-      "initialStop": 124.11,
+      "activeStop": 112.96,
+      "initialStop": 112.96,
       "breakevenStop": 0,
-      "trailingStop": 122.03
+      "trailingStop": 112.55
     },
     {
       "id": "2516",
@@ -13951,11 +13951,11 @@
       "triggerWarnings": "無",
       "rankScore": 32.25,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 11.97,
-      "initialStop": 11.91,
+      "positionAction": "觸發停損/停利",
+      "activeStop": 12.78,
+      "initialStop": 12.01,
       "breakevenStop": 0,
-      "trailingStop": 11.97
+      "trailingStop": 12.78
     },
     {
       "id": "2524",
@@ -13977,10 +13977,10 @@
       "rankScore": 32.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 32.82,
-      "initialStop": 32.82,
+      "activeStop": 32.41,
+      "initialStop": 32.41,
       "breakevenStop": 0,
-      "trailingStop": 32.64
+      "trailingStop": 32.39
     },
     {
       "id": "2617",
@@ -14027,10 +14027,10 @@
       "rankScore": 32.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 10.55,
-      "initialStop": 10.36,
+      "activeStop": 10.02,
+      "initialStop": 9.72,
       "breakevenStop": 0,
-      "trailingStop": 10.55
+      "trailingStop": 10.02
     },
     {
       "id": "2646",
@@ -14102,10 +14102,10 @@
       "rankScore": 32.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 27.84,
-      "initialStop": 27.84,
+      "activeStop": 27.3,
+      "initialStop": 27.02,
       "breakevenStop": 0,
-      "trailingStop": 27.79
+      "trailingStop": 27.3
     },
     {
       "id": "1909",
@@ -14402,10 +14402,10 @@
       "rankScore": 31.87,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 13.72,
-      "initialStop": 13.72,
+      "activeStop": 13.75,
+      "initialStop": 13.65,
       "breakevenStop": 0,
-      "trailingStop": 13.56
+      "trailingStop": 13.75
     },
     {
       "id": "4915",
@@ -14427,10 +14427,10 @@
       "rankScore": 31.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 73.55,
-      "initialStop": 73.54,
+      "activeStop": 70.28,
+      "initialStop": 68.77,
       "breakevenStop": 0,
-      "trailingStop": 73.55
+      "trailingStop": 70.28
     },
     {
       "id": "5519",
@@ -14451,11 +14451,11 @@
       "triggerWarnings": "無",
       "rankScore": 31.75,
       "group": "hidden",
-      "positionAction": "全數出場",
-      "activeStop": 31.47,
+      "positionAction": "續抱觀察",
+      "activeStop": 31.57,
       "initialStop": 31.43,
       "breakevenStop": 0,
-      "trailingStop": 31.47
+      "trailingStop": 31.57
     },
     {
       "id": "6184",
@@ -14502,10 +14502,10 @@
       "rankScore": 31.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 21.48,
-      "initialStop": 21.48,
+      "activeStop": 21.51,
+      "initialStop": 21.39,
       "breakevenStop": 0,
-      "trailingStop": 21.45
+      "trailingStop": 21.51
     },
     {
       "id": "9905",
@@ -14527,10 +14527,10 @@
       "rankScore": 31.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 20.54,
-      "initialStop": 20.54,
+      "activeStop": 20.37,
+      "initialStop": 20.29,
       "breakevenStop": 0,
-      "trailingStop": 20.52
+      "trailingStop": 20.37
     },
     {
       "id": "1451",
@@ -14552,10 +14552,10 @@
       "rankScore": 31.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 16.45,
-      "initialStop": 16.27,
+      "activeStop": 16.07,
+      "initialStop": 16.07,
       "breakevenStop": 0,
-      "trailingStop": 16.45
+      "trailingStop": 16.05
     },
     {
       "id": "1459",
@@ -14777,10 +14777,10 @@
       "rankScore": 29.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 16.71,
-      "initialStop": 16.71,
+      "activeStop": 16.32,
+      "initialStop": 16.11,
       "breakevenStop": 0,
-      "trailingStop": 16.51
+      "trailingStop": 16.32
     },
     {
       "id": "2371",
@@ -14826,11 +14826,11 @@
       "triggerWarnings": "無",
       "rankScore": 29.25,
       "group": "hidden",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 34.74,
-      "initialStop": 34.74,
+      "positionAction": "續抱觀察",
+      "activeStop": 32.48,
+      "initialStop": 31.44,
       "breakevenStop": 0,
-      "trailingStop": 34.39
+      "trailingStop": 32.48
     },
     {
       "id": "3447",
@@ -14852,10 +14852,10 @@
       "rankScore": 29.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 36.58,
-      "initialStop": 36.58,
+      "activeStop": 36.47,
+      "initialStop": 36.47,
       "breakevenStop": 0,
-      "trailingStop": 36.57
+      "trailingStop": 36.44
     },
     {
       "id": "8422",
@@ -14902,10 +14902,10 @@
       "rankScore": 29.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 13.29,
-      "initialStop": 13.29,
+      "activeStop": 13.47,
+      "initialStop": 13.17,
       "breakevenStop": 0,
-      "trailingStop": 13.29
+      "trailingStop": 13.47
     },
     {
       "id": "2103",
@@ -14927,10 +14927,10 @@
       "rankScore": 29.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 18.38,
-      "initialStop": 18.38,
+      "activeStop": 18.41,
+      "initialStop": 18.41,
       "breakevenStop": 0,
-      "trailingStop": 18.27
+      "trailingStop": 18.31
     },
     {
       "id": "1213",
@@ -14977,10 +14977,10 @@
       "rankScore": 29.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 74.18,
-      "initialStop": 74.18,
+      "activeStop": 74.39,
+      "initialStop": 74.39,
       "breakevenStop": 0,
-      "trailingStop": 73.96
+      "trailingStop": 74.35
     },
     {
       "id": "1736",
@@ -15077,10 +15077,10 @@
       "rankScore": 28.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 21.67,
-      "initialStop": 21.5,
+      "activeStop": 21.74,
+      "initialStop": 21.51,
       "breakevenStop": 0,
-      "trailingStop": 21.67
+      "trailingStop": 21.74
     },
     {
       "id": "6183",
@@ -15102,10 +15102,10 @@
       "rankScore": 28.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 90.18,
-      "initialStop": 90.18,
+      "activeStop": 90.06,
+      "initialStop": 90.06,
       "breakevenStop": 0,
-      "trailingStop": 90.12
+      "trailingStop": 89.97
     },
     {
       "id": "1467",
@@ -15202,10 +15202,10 @@
       "rankScore": 28.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 27.95,
-      "initialStop": 27.75,
+      "activeStop": 28.22,
+      "initialStop": 28.16,
       "breakevenStop": 0,
-      "trailingStop": 27.95
+      "trailingStop": 28.22
     },
     {
       "id": "9908",
@@ -15452,10 +15452,10 @@
       "rankScore": 28.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 11.8,
-      "initialStop": 11.69,
+      "activeStop": 11.73,
+      "initialStop": 11.68,
       "breakevenStop": 0,
-      "trailingStop": 11.8
+      "trailingStop": 11.73
     },
     {
       "id": "6754",
@@ -15476,11 +15476,11 @@
       "triggerWarnings": "無",
       "rankScore": 28.25,
       "group": "hidden",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 45.91,
-      "initialStop": 44.97,
+      "positionAction": "續抱觀察",
+      "activeStop": 42.61,
+      "initialStop": 42.34,
       "breakevenStop": 0,
-      "trailingStop": 45.91
+      "trailingStop": 42.61
     },
     {
       "id": "2514",
@@ -15501,11 +15501,11 @@
       "triggerWarnings": "無",
       "rankScore": 28.25,
       "group": "hidden",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 13.49,
-      "initialStop": 13.3,
+      "positionAction": "續抱觀察",
+      "activeStop": 12.59,
+      "initialStop": 12.54,
       "breakevenStop": 0,
-      "trailingStop": 13.49
+      "trailingStop": 12.59
     },
     {
       "id": "1457",
@@ -15527,10 +15527,10 @@
       "rankScore": 28.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 13.76,
-      "initialStop": 13.76,
+      "activeStop": 13.71,
+      "initialStop": 13.71,
       "breakevenStop": 0,
-      "trailingStop": 13.76
+      "trailingStop": 13.66
     },
     {
       "id": "2107",
@@ -15552,10 +15552,10 @@
       "rankScore": 27.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 25.12,
-      "initialStop": 25.12,
+      "activeStop": 24.34,
+      "initialStop": 24.34,
       "breakevenStop": 0,
-      "trailingStop": 25.02
+      "trailingStop": 24.29
     },
     {
       "id": "4588",
@@ -15577,10 +15577,10 @@
       "rankScore": 26.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 56.16,
-      "initialStop": 54.88,
+      "activeStop": 54.94,
+      "initialStop": 53.52,
       "breakevenStop": 0,
-      "trailingStop": 56.16
+      "trailingStop": 54.94
     },
     {
       "id": "3092",
@@ -15602,10 +15602,10 @@
       "rankScore": 26.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 29.74,
-      "initialStop": 29.74,
+      "activeStop": 28.11,
+      "initialStop": 26.9,
       "breakevenStop": 0,
-      "trailingStop": 29.4
+      "trailingStop": 28.11
     },
     {
       "id": "2022",
@@ -15652,10 +15652,10 @@
       "rankScore": 26.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 124.35,
-      "initialStop": 123.62,
+      "activeStop": 124.22,
+      "initialStop": 122.02,
       "breakevenStop": 0,
-      "trailingStop": 124.35
+      "trailingStop": 124.22
     },
     {
       "id": "5244",
@@ -15702,10 +15702,10 @@
       "rankScore": 26.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 21.91,
-      "initialStop": 21.91,
+      "activeStop": 20.83,
+      "initialStop": 20.54,
       "breakevenStop": 0,
-      "trailingStop": 21.89
+      "trailingStop": 20.83
     },
     {
       "id": "1541",
@@ -15752,10 +15752,10 @@
       "rankScore": 26.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 25.51,
-      "initialStop": 24.74,
+      "activeStop": 24.95,
+      "initialStop": 24.95,
       "breakevenStop": 0,
-      "trailingStop": 25.51
+      "trailingStop": 24.91
     },
     {
       "id": "1438",
@@ -15826,11 +15826,11 @@
       "triggerWarnings": "無",
       "rankScore": 26.12,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 51.39,
-      "initialStop": 51.2,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 47.63,
+      "initialStop": 47.63,
       "breakevenStop": 0,
-      "trailingStop": 51.39
+      "trailingStop": 47.18
     },
     {
       "id": "9940",
@@ -16002,10 +16002,10 @@
       "rankScore": 25.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 20.55,
-      "initialStop": 20.55,
+      "activeStop": 19.56,
+      "initialStop": 19.56,
       "breakevenStop": 0,
-      "trailingStop": 20.43
+      "trailingStop": 19.55
     },
     {
       "id": "2106",
@@ -16027,10 +16027,10 @@
       "rankScore": 25.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 16.63,
-      "initialStop": 16.63,
+      "activeStop": 16.31,
+      "initialStop": 16.24,
       "breakevenStop": 0,
-      "trailingStop": 16.55
+      "trailingStop": 16.31
     },
     {
       "id": "2427",
@@ -16077,10 +16077,10 @@
       "rankScore": 25.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 23.05,
-      "initialStop": 23.05,
+      "activeStop": 22.22,
+      "initialStop": 22.16,
       "breakevenStop": 0,
-      "trailingStop": 22.95
+      "trailingStop": 22.22
     },
     {
       "id": "6589",
@@ -16127,10 +16127,10 @@
       "rankScore": 25.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 9.68,
-      "initialStop": 9.68,
+      "activeStop": 9.21,
+      "initialStop": 9.14,
       "breakevenStop": 0,
-      "trailingStop": 9.65
+      "trailingStop": 9.21
     },
     {
       "id": "1101",
@@ -16202,10 +16202,10 @@
       "rankScore": 25.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 72.92,
-      "initialStop": 72.92,
+      "activeStop": 73.18,
+      "initialStop": 72.66,
       "breakevenStop": 0,
-      "trailingStop": 72.66
+      "trailingStop": 73.18
     },
     {
       "id": "9937",
@@ -16327,10 +16327,10 @@
       "rankScore": 25.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 31.64,
-      "initialStop": 31.64,
+      "activeStop": 30.12,
+      "initialStop": 30.02,
       "breakevenStop": 0,
-      "trailingStop": 31.52
+      "trailingStop": 30.12
     },
     {
       "id": "2845",
@@ -16427,10 +16427,10 @@
       "rankScore": 24.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 41.36,
-      "initialStop": 41.36,
+      "activeStop": 41.1,
+      "initialStop": 40.95,
       "breakevenStop": 0,
-      "trailingStop": 41.29
+      "trailingStop": 41.1
     },
     {
       "id": "8443",
@@ -16527,10 +16527,10 @@
       "rankScore": 24.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 38.65,
-      "initialStop": 38.65,
+      "activeStop": 38.09,
+      "initialStop": 38.03,
       "breakevenStop": 0,
-      "trailingStop": 38.5
+      "trailingStop": 38.09
     },
     {
       "id": "1233",
@@ -16676,11 +16676,11 @@
       "triggerWarnings": "無",
       "rankScore": 22.75,
       "group": "hidden",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 7.5,
-      "initialStop": 7.46,
+      "positionAction": "續抱觀察",
+      "activeStop": 7.61,
+      "initialStop": 7.57,
       "breakevenStop": 0,
-      "trailingStop": 7.5
+      "trailingStop": 7.61
     },
     {
       "id": "8940",
@@ -16802,10 +16802,10 @@
       "rankScore": 22.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 50.79,
-      "initialStop": 50.79,
+      "activeStop": 48.36,
+      "initialStop": 47.93,
       "breakevenStop": 0,
-      "trailingStop": 50.79
+      "trailingStop": 48.36
     },
     {
       "id": "4590",
@@ -16852,10 +16852,10 @@
       "rankScore": 22.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 14.09,
-      "initialStop": 14.09,
+      "activeStop": 13.47,
+      "initialStop": 13.47,
       "breakevenStop": 0,
-      "trailingStop": 14.09
+      "trailingStop": 13.42
     },
     {
       "id": "7780",
@@ -16877,10 +16877,10 @@
       "rankScore": 22.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 17.23,
-      "initialStop": 17.05,
+      "activeStop": 17.01,
+      "initialStop": 16.99,
       "breakevenStop": 0,
-      "trailingStop": 17.23
+      "trailingStop": 17.01
     },
     {
       "id": "1442",
@@ -16927,10 +16927,10 @@
       "rankScore": 22.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 11.28,
-      "initialStop": 11.14,
+      "activeStop": 11.44,
+      "initialStop": 11.44,
       "breakevenStop": 0,
-      "trailingStop": 11.28
+      "trailingStop": 11.44
     },
     {
       "id": "2712",
@@ -16977,10 +16977,10 @@
       "rankScore": 22.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 20.73,
-      "initialStop": 20.73,
+      "activeStop": 20.75,
+      "initialStop": 20.51,
       "breakevenStop": 0,
-      "trailingStop": 20.62
+      "trailingStop": 20.75
     },
     {
       "id": "2547",
@@ -17002,10 +17002,10 @@
       "rankScore": 22.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 9.73,
-      "initialStop": 9.66,
+      "activeStop": 9.72,
+      "initialStop": 9.7,
       "breakevenStop": 0,
-      "trailingStop": 9.73
+      "trailingStop": 9.72
     },
     {
       "id": "1104",
@@ -17052,10 +17052,10 @@
       "rankScore": 22.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 42.85,
-      "initialStop": 42.85,
+      "activeStop": 42.27,
+      "initialStop": 42.27,
       "breakevenStop": 0,
-      "trailingStop": 42.64
+      "trailingStop": 42.25
     },
     {
       "id": "1413",
@@ -17076,11 +17076,11 @@
       "triggerWarnings": "過熱量、爆量長上影疑似出貨",
       "rankScore": 22.25,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 9.21,
-      "initialStop": 9.21,
+      "positionAction": "全數出場",
+      "activeStop": 9.35,
+      "initialStop": 9.03,
       "breakevenStop": 0,
-      "trailingStop": 9.18
+      "trailingStop": 9.35
     },
     {
       "id": "1760",
@@ -17152,10 +17152,10 @@
       "rankScore": 22.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 12.4,
-      "initialStop": 12.4,
+      "activeStop": 12.2,
+      "initialStop": 12.2,
       "breakevenStop": 0,
-      "trailingStop": 12.39
+      "trailingStop": 12.14
     },
     {
       "id": "6936",
@@ -17177,10 +17177,10 @@
       "rankScore": 22.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 32.73,
-      "initialStop": 32.73,
+      "activeStop": 32.23,
+      "initialStop": 32.05,
       "breakevenStop": 0,
-      "trailingStop": 32.59
+      "trailingStop": 32.23
     },
     {
       "id": "1466",
@@ -17401,11 +17401,11 @@
       "triggerWarnings": "無",
       "rankScore": 20.12,
       "group": "hidden",
-      "positionAction": "過熱減碼30%",
-      "activeStop": 11.46,
-      "initialStop": 11.46,
+      "positionAction": "續抱觀察",
+      "activeStop": 9.79,
+      "initialStop": 9.52,
       "breakevenStop": 0,
-      "trailingStop": 11.3
+      "trailingStop": 9.79
     },
     {
       "id": "8011",
@@ -17477,10 +17477,10 @@
       "rankScore": 19.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 35.96,
-      "initialStop": 35.96,
+      "activeStop": 36.76,
+      "initialStop": 36.47,
       "breakevenStop": 0,
-      "trailingStop": 35.91
+      "trailingStop": 36.76
     },
     {
       "id": "6657",
@@ -17527,10 +17527,10 @@
       "rankScore": 19.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 51.33,
-      "initialStop": 51.24,
+      "activeStop": 48.25,
+      "initialStop": 48.02,
       "breakevenStop": 0,
-      "trailingStop": 51.33
+      "trailingStop": 48.25
     },
     {
       "id": "5222",
@@ -17552,10 +17552,10 @@
       "rankScore": 19.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 121.77,
-      "initialStop": 121.31,
+      "activeStop": 120.64,
+      "initialStop": 120.64,
       "breakevenStop": 0,
-      "trailingStop": 121.77
+      "trailingStop": 120.07
     },
     {
       "id": "3419",
@@ -17677,10 +17677,10 @@
       "rankScore": 19.62,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 38.44,
-      "initialStop": 38.24,
+      "activeStop": 37.97,
+      "initialStop": 37.97,
       "breakevenStop": 0,
-      "trailingStop": 38.44
+      "trailingStop": 37.8
     },
     {
       "id": "6722",
@@ -17726,11 +17726,11 @@
       "triggerWarnings": "無",
       "rankScore": 19.5,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 32.91,
-      "initialStop": 32.77,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 32.98,
+      "initialStop": 32.98,
       "breakevenStop": 0,
-      "trailingStop": 32.91
+      "trailingStop": 32.78
     },
     {
       "id": "6614",
@@ -17752,10 +17752,10 @@
       "rankScore": 19.25,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 39.34,
-      "initialStop": 38.78,
+      "activeStop": 38.79,
+      "initialStop": 37.99,
       "breakevenStop": 0,
-      "trailingStop": 39.34
+      "trailingStop": 38.79
     },
     {
       "id": "1220",
@@ -17802,10 +17802,10 @@
       "rankScore": 19.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 14.08,
-      "initialStop": 14.08,
+      "activeStop": 13.79,
+      "initialStop": 13.79,
       "breakevenStop": 0,
-      "trailingStop": 13.97
+      "trailingStop": 13.73
     },
     {
       "id": "1441",
@@ -17827,10 +17827,10 @@
       "rankScore": 19.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 9.17,
-      "initialStop": 9.17,
+      "activeStop": 9.06,
+      "initialStop": 9.03,
       "breakevenStop": 0,
-      "trailingStop": 9.15
+      "trailingStop": 9.06
     },
     {
       "id": "1434",
@@ -17852,10 +17852,10 @@
       "rankScore": 19.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 15.23,
-      "initialStop": 15.16,
+      "activeStop": 14.6,
+      "initialStop": 14.57,
       "breakevenStop": 0,
-      "trailingStop": 15.23
+      "trailingStop": 14.6
     },
     {
       "id": "1474",
@@ -17902,10 +17902,10 @@
       "rankScore": 19.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 38.27,
-      "initialStop": 38.27,
+      "activeStop": 38.29,
+      "initialStop": 38.23,
       "breakevenStop": 0,
-      "trailingStop": 38.27
+      "trailingStop": 38.29
     },
     {
       "id": "6838",
@@ -18127,10 +18127,10 @@
       "rankScore": 18.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 7.94,
-      "initialStop": 7.94,
+      "activeStop": 7.84,
+      "initialStop": 7.84,
       "breakevenStop": 0,
-      "trailingStop": 7.91
+      "trailingStop": 7.82
     },
     {
       "id": "1227",
@@ -18152,10 +18152,10 @@
       "rankScore": 18.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 27.72,
-      "initialStop": 27.72,
+      "activeStop": 27.69,
+      "initialStop": 27.48,
       "breakevenStop": 0,
-      "trailingStop": 27.72
+      "trailingStop": 27.69
     },
     {
       "id": "6230",
@@ -18277,10 +18277,10 @@
       "rankScore": 17.0,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 44.27,
-      "initialStop": 44.27,
+      "activeStop": 44.34,
+      "initialStop": 43.66,
       "breakevenStop": 0,
-      "trailingStop": 44.0
+      "trailingStop": 44.34
     },
     {
       "id": "2534",
@@ -18377,10 +18377,10 @@
       "rankScore": 16.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 24.2,
-      "initialStop": 24.2,
+      "activeStop": 23.94,
+      "initialStop": 23.94,
       "breakevenStop": 0,
-      "trailingStop": 24.12
+      "trailingStop": 23.9
     },
     {
       "id": "2904",
@@ -18452,10 +18452,10 @@
       "rankScore": 16.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 31.56,
-      "initialStop": 31.28,
+      "activeStop": 29.56,
+      "initialStop": 29.14,
       "breakevenStop": 0,
-      "trailingStop": 31.56
+      "trailingStop": 29.56
     },
     {
       "id": "4119",
@@ -18477,10 +18477,10 @@
       "rankScore": 16.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 40.31,
-      "initialStop": 40.31,
+      "activeStop": 40.25,
+      "initialStop": 40.25,
       "breakevenStop": 0,
-      "trailingStop": 39.99
+      "trailingStop": 39.92
     },
     {
       "id": "5525",
@@ -18577,10 +18577,10 @@
       "rankScore": 16.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 42.85,
-      "initialStop": 42.85,
+      "activeStop": 43.32,
+      "initialStop": 43.32,
       "breakevenStop": 0,
-      "trailingStop": 42.58
+      "trailingStop": 43.04
     },
     {
       "id": "1702",
@@ -18677,10 +18677,10 @@
       "rankScore": 16.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 13.53,
-      "initialStop": 13.53,
+      "activeStop": 13.27,
+      "initialStop": 13.27,
       "breakevenStop": 0,
-      "trailingStop": 13.53
+      "trailingStop": 13.26
     },
     {
       "id": "1452",
@@ -18777,10 +18777,10 @@
       "rankScore": 16.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 39.54,
-      "initialStop": 39.54,
+      "activeStop": 37.98,
+      "initialStop": 37.98,
       "breakevenStop": 0,
-      "trailingStop": 39.34
+      "trailingStop": 37.95
     },
     {
       "id": "2705",
@@ -18801,11 +18801,11 @@
       "triggerWarnings": "強烈過熱量、爆量長上影疑似出貨",
       "rankScore": 16.12,
       "group": "hidden",
-      "positionAction": "續抱觀察",
-      "activeStop": 14.95,
-      "initialStop": 14.93,
+      "positionAction": "過熱減碼30%",
+      "activeStop": 14.68,
+      "initialStop": 14.61,
       "breakevenStop": 0,
-      "trailingStop": 14.95
+      "trailingStop": 14.68
     },
     {
       "id": "2430",
@@ -18877,10 +18877,10 @@
       "rankScore": 16.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 18.19,
-      "initialStop": 18.19,
+      "activeStop": 17.86,
+      "initialStop": 17.74,
       "breakevenStop": 0,
-      "trailingStop": 18.06
+      "trailingStop": 17.86
     },
     {
       "id": "2536",
@@ -18977,10 +18977,10 @@
       "rankScore": 13.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 9.06,
-      "initialStop": 9.06,
+      "activeStop": 9.02,
+      "initialStop": 8.87,
       "breakevenStop": 0,
-      "trailingStop": 8.98
+      "trailingStop": 9.02
     },
     {
       "id": "2630",
@@ -19002,10 +19002,10 @@
       "rankScore": 13.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 42.17,
-      "initialStop": 41.84,
+      "activeStop": 39.71,
+      "initialStop": 39.68,
       "breakevenStop": 0,
-      "trailingStop": 42.17
+      "trailingStop": 39.71
     },
     {
       "id": "2539",
@@ -19027,10 +19027,10 @@
       "rankScore": 13.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 35.14,
-      "initialStop": 34.69,
+      "activeStop": 34.68,
+      "initialStop": 34.68,
       "breakevenStop": 0,
-      "trailingStop": 35.14
+      "trailingStop": 34.3
     },
     {
       "id": "1906",
@@ -19077,10 +19077,10 @@
       "rankScore": 13.5,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 36.77,
-      "initialStop": 36.77,
+      "activeStop": 35.11,
+      "initialStop": 34.34,
       "breakevenStop": 0,
-      "trailingStop": 36.7
+      "trailingStop": 35.11
     },
     {
       "id": "6885",
@@ -19177,10 +19177,10 @@
       "rankScore": 13.12,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 16.05,
-      "initialStop": 15.86,
+      "activeStop": 16.08,
+      "initialStop": 16.08,
       "breakevenStop": 0,
-      "trailingStop": 16.05
+      "trailingStop": 15.97
     },
     {
       "id": "3701",
@@ -19352,10 +19352,10 @@
       "rankScore": 8.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 7.31,
-      "initialStop": 7.23,
+      "activeStop": 7.22,
+      "initialStop": 7.22,
       "breakevenStop": 0,
-      "trailingStop": 7.31
+      "trailingStop": 7.16
     },
     {
       "id": "2424",
@@ -19402,10 +19402,10 @@
       "rankScore": 8.75,
       "group": "hidden",
       "positionAction": "續抱觀察",
-      "activeStop": 5.7,
-      "initialStop": 5.7,
+      "activeStop": 4.29,
+      "initialStop": 4.29,
       "breakevenStop": 0,
-      "trailingStop": 5.36
+      "trailingStop": 3.92
     },
     {
       "id": "2530",
