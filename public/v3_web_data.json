@@ -1,0 +1,194 @@
+{
+  "engine": "V3_LONG_TERM_SWING",
+  "version": "0.6",
+  "groups": {
+    "main_watch": [
+      {
+        "stock_id": "2409",
+        "stock_name": "友達",
+        "engine": "V3_LONG_TERM_SWING",
+        "raw_score": 72,
+        "adjusted_score": 72,
+        "final_score": 72,
+        "score_ceiling": 100,
+        "phase1_penalty": 0,
+        "extra_penalty": 0,
+        "market_reason": "大盤多頭，評分正常",
+        "phase1_reasons": [],
+        "bad_signals": [],
+        "scores": {
+          "trend_direction": 30,
+          "entry_position": 28,
+          "fuel": 14
+        },
+        "metrics": {
+          "distance20": 1.12,
+          "bias60": 4.65,
+          "slope20_pct": 1.71,
+          "slope60_pct": 0.58,
+          "rs_10d": 4.0,
+          "atr_safe_distance": 1.39,
+          "market_mode": "bull"
+        },
+        "status": "🟢 中長期可觀察",
+        "strategy": "結構尚可，可列觀察，不宜追高。"
+      }
+    ],
+    "follow_watch": [
+      {
+        "stock_id": "2367",
+        "stock_name": "燿華",
+        "engine": "V3_LONG_TERM_SWING",
+        "raw_score": 57,
+        "adjusted_score": 57,
+        "final_score": 57,
+        "score_ceiling": 100,
+        "phase1_penalty": 0,
+        "extra_penalty": 0,
+        "market_reason": "大盤多頭，評分正常",
+        "phase1_reasons": [],
+        "bad_signals": [],
+        "scores": {
+          "trend_direction": 17,
+          "entry_position": 20,
+          "fuel": 20
+        },
+        "metrics": {
+          "distance20": 3.28,
+          "bias60": 8.62,
+          "slope20_pct": 0.33,
+          "slope60_pct": 0.0,
+          "rs_10d": 5.0,
+          "atr_safe_distance": 1.67,
+          "market_mode": "bull"
+        },
+        "status": "⏳ 打底觀察",
+        "strategy": "有部分條件，但尚不足以重倉。"
+      }
+    ],
+    "hidden": [
+      {
+        "stock_id": "2355",
+        "stock_name": "敬鵬",
+        "engine": "V3_LONG_TERM_SWING",
+        "raw_score": 53,
+        "adjusted_score": 48,
+        "final_score": 48,
+        "score_ceiling": 100,
+        "phase1_penalty": 0,
+        "extra_penalty": 0,
+        "market_reason": "大盤震盪，總分乘以0.9",
+        "phase1_reasons": [],
+        "bad_signals": [],
+        "scores": {
+          "trend_direction": 17,
+          "entry_position": 20,
+          "fuel": 16
+        },
+        "metrics": {
+          "distance20": 3.64,
+          "bias60": 11.76,
+          "slope20_pct": 0.36,
+          "slope60_pct": 0.0,
+          "rs_10d": 3.0,
+          "atr_safe_distance": 1.58,
+          "market_mode": "neutral"
+        },
+        "status": "🚫 暫不考慮",
+        "strategy": "分數不足或風險過高，等待結構改善。"
+      }
+    ]
+  },
+  "all_results": [
+    {
+      "stock_id": "2409",
+      "stock_name": "友達",
+      "engine": "V3_LONG_TERM_SWING",
+      "raw_score": 72,
+      "adjusted_score": 72,
+      "final_score": 72,
+      "score_ceiling": 100,
+      "phase1_penalty": 0,
+      "extra_penalty": 0,
+      "market_reason": "大盤多頭，評分正常",
+      "phase1_reasons": [],
+      "bad_signals": [],
+      "scores": {
+        "trend_direction": 30,
+        "entry_position": 28,
+        "fuel": 14
+      },
+      "metrics": {
+        "distance20": 1.12,
+        "bias60": 4.65,
+        "slope20_pct": 1.71,
+        "slope60_pct": 0.58,
+        "rs_10d": 4.0,
+        "atr_safe_distance": 1.39,
+        "market_mode": "bull"
+      },
+      "status": "🟢 中長期可觀察",
+      "strategy": "結構尚可，可列觀察，不宜追高。"
+    },
+    {
+      "stock_id": "2367",
+      "stock_name": "燿華",
+      "engine": "V3_LONG_TERM_SWING",
+      "raw_score": 57,
+      "adjusted_score": 57,
+      "final_score": 57,
+      "score_ceiling": 100,
+      "phase1_penalty": 0,
+      "extra_penalty": 0,
+      "market_reason": "大盤多頭，評分正常",
+      "phase1_reasons": [],
+      "bad_signals": [],
+      "scores": {
+        "trend_direction": 17,
+        "entry_position": 20,
+        "fuel": 20
+      },
+      "metrics": {
+        "distance20": 3.28,
+        "bias60": 8.62,
+        "slope20_pct": 0.33,
+        "slope60_pct": 0.0,
+        "rs_10d": 5.0,
+        "atr_safe_distance": 1.67,
+        "market_mode": "bull"
+      },
+      "status": "⏳ 打底觀察",
+      "strategy": "有部分條件，但尚不足以重倉。"
+    },
+    {
+      "stock_id": "2355",
+      "stock_name": "敬鵬",
+      "engine": "V3_LONG_TERM_SWING",
+      "raw_score": 53,
+      "adjusted_score": 48,
+      "final_score": 48,
+      "score_ceiling": 100,
+      "phase1_penalty": 0,
+      "extra_penalty": 0,
+      "market_reason": "大盤震盪，總分乘以0.9",
+      "phase1_reasons": [],
+      "bad_signals": [],
+      "scores": {
+        "trend_direction": 17,
+        "entry_position": 20,
+        "fuel": 16
+      },
+      "metrics": {
+        "distance20": 3.64,
+        "bias60": 11.76,
+        "slope20_pct": 0.36,
+        "slope60_pct": 0.0,
+        "rs_10d": 3.0,
+        "atr_safe_distance": 1.58,
+        "market_mode": "neutral"
+      },
+      "status": "🚫 暫不考慮",
+      "strategy": "分數不足或風險過高，等待結構改善。"
+    }
+  ]
+}
