@@ -5,15 +5,17 @@ export default async function handler(req: any, res: any) {
       return res.status(400).json({
         error: "MISSING_CODE",
         message: "缺少股票代號",
+        count: 0,
         data: [],
       });
     }
   
     try {
       const rows: any[] = [];
+  
       const today = new Date();
   
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 10; i++) {
         const targetDate = new Date(
           today.getFullYear(),
           today.getMonth() - i,
@@ -25,7 +27,7 @@ export default async function handler(req: any, res: any) {
         const date = `${year}${month}01`;
   
         const url =
-          `https://www.twse.com.tw/exchangeReport/STOCK_DAY` +
+          "https://www.twse.com.tw/exchangeReport/STOCK_DAY" +
           `?response=json&date=${date}&stockNo=${code}`;
   
         try {
@@ -69,21 +71,33 @@ export default async function handler(req: any, res: any) {
             low > 0 &&
             close > 0
           );
-        })
-        .sort((a, b) => {
-          return normalizeDate(a[0]).localeCompare(normalizeDate(b[0]));
         });
+  
+      const uniqueMap = new Map<string, any[]>();
+  
+      cleanRows.forEach((row) => {
+        const dateKey = normalizeDate(row[0]);
+  
+        if (dateKey) {
+          uniqueMap.set(dateKey, row);
+        }
+      });
+  
+      const sortedRows = Array.from(uniqueMap.entries())
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map((entry) => entry[1]);
   
       return res.status(200).json({
         code,
-        source: "TWSE_STOCK_DAY",
-        count: cleanRows.length,
-        data: cleanRows,
+        source: "TWSE_STOCK_DAY_MULTI_MONTH",
+        count: sortedRows.length,
+        data: sortedRows,
       });
     } catch (error: any) {
       return res.status(500).json({
         error: "HISTORY_API_ERROR",
         message: error?.message || "歷史資料讀取失敗",
+        count: 0,
         data: [],
       });
     }
