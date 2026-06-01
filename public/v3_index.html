@@ -7,7 +7,6 @@
 <title>V3 中長期波段戰報</title>
 
 <style>
-
 body{
     background:#0f172a;
     color:#f8fafc;
@@ -23,6 +22,31 @@ h1{
 .subtitle{
     color:#cbd5e1;
     margin-bottom:24px;
+}
+
+.nav-buttons{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-v2{
+    background:#334155;
+    color:white;
+}
+
+.btn-v3{
+    background:#f59e0b;
+    color:white;
 }
 
 .summary,
@@ -61,6 +85,25 @@ select{
     font-weight:bold;
 }
 
+.status{
+    margin:16px 0;
+    padding:14px;
+    border-radius:10px;
+    background:#020617;
+    border:1px solid #334155;
+    color:#cbd5e1;
+    line-height:1.7;
+}
+
+.status.ok{
+    border-color:#22c55e;
+}
+
+.status.error{
+    border-color:#ef4444;
+    color:#fecaca;
+}
+
 .card{
     background:#1e293b;
     border-radius:14px;
@@ -77,7 +120,7 @@ select{
 }
 
 .hidden{
-    border-left:6px solid #ef4444;
+    border-left:6px solid #64748b;
 }
 
 .score{
@@ -110,16 +153,6 @@ select{
     background:#334155;
 }
 
-.tag-warning{
-    background:#7c2d12;
-    color:#fed7aa;
-}
-
-.tag-danger{
-    background:#7f1d1d;
-    color:#fecaca;
-}
-
 .metric{
     margin-top:12px;
     color:#cbd5e1;
@@ -149,57 +182,34 @@ select{
     color:#f87171;
     font-weight:bold;
 }
-
 </style>
 </head>
 
 <body>
 
-    <div style="
-    display:flex;
-    gap:12px;
-    margin-bottom:20px;
-    flex-wrap:wrap;
-    ">
-    
-    <button
-    onclick="window.location.href='/'"
-    style="
-    padding:10px 18px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-    background:#22c55e;
-    color:white;
-    ">
-    🔥 返回 V2 短線爆發
+<div class="nav-buttons">
+    <button class="btn-v2" onclick="window.location.href='/'">
+        返回 V2 短線爆發
     </button>
-    
-    <button
-    style="
-    padding:10px 18px;
-    border:none;
-    border-radius:8px;
-    font-weight:bold;
-    background:#f59e0b;
-    color:white;
-    ">
-    🚀 V3 中長期波段
+
+    <button class="btn-v3">
+        V3 中長期波段
     </button>
-    
-    </div>
-    
-    <h1>V3 中長期波段戰報</h1>
+</div>
+
+<h1>V3 中長期波段戰報</h1>
 
 <div class="subtitle">
 盤後策略版｜RS + ATR + 大盤濾網 + Trigger + Failed Breakout + 持有管理
 </div>
 
+<div class="status" id="loadStatus">
+正在讀取 v3_web_light.json...
+</div>
+
 <div class="summary" id="summary"></div>
 
 <div class="filters">
-
     <div class="box">
         狀態篩選
         <select id="groupFilter">
@@ -217,9 +227,8 @@ select{
 
     <div class="box">
         搜尋代號 / 名稱
-        <input id="keywordFilter" placeholder="例如 4562 或 穎漢">
+        <input id="keywordFilter" placeholder="例如 5522 或 遠雄">
     </div>
-
 </div>
 
 <div class="count" id="count"></div>
@@ -227,11 +236,16 @@ select{
 <div id="list"></div>
 
 <script>
+let allItems = [];
 
-let allItems=[];
+function setStatus(message, type = ""){
+    const el = document.getElementById("loadStatus");
+    el.className = `status ${type}`;
+    el.innerHTML = message;
+}
 
-function fmt(value,digits=2){
-    const num=Number(value);
+function fmt(value, digits = 2){
+    const num = Number(value);
     if(Number.isNaN(num)){
         return "-";
     }
@@ -239,21 +253,25 @@ function fmt(value,digits=2){
 }
 
 function text(value){
-    if(value===undefined || value===null){
+    if(value === undefined || value === null){
         return "無";
     }
 
-    const t=String(value).trim();
+    const t = String(value).trim();
 
-    if(t==="" || t==="nan" || t==="None"){
+    if(t === "" || t === "nan" || t === "None"){
         return "無";
     }
 
     return t;
 }
 
+function getGroup(item){
+    return item.group || item.category || item.status || "follow_watch";
+}
+
 function warningClass(flags){
-    const value=text(flags);
+    const value = text(flags);
 
     if(value.includes("SERIOUS_BREAKOUT_TRAP")){
         return "warning-red";
@@ -267,224 +285,205 @@ function warningClass(flags){
 }
 
 function warningLabel(flags){
-    const value=text(flags);
+    const value = text(flags);
 
     if(value.includes("SERIOUS_BREAKOUT_TRAP")){
-        return "🚨 嚴重假突破陷阱";
+        return "嚴重假突破陷阱";
     }
 
     if(value.includes("MULTIPLE_FAILED_BREAKOUT")){
-        return "⚠ 多次假突破";
+        return "多次假突破";
     }
 
     return "無";
 }
 
 function renderSummary(data){
+    const summary = data.summary || {};
 
-    document.getElementById("summary").innerHTML=`
+    document.getElementById("summary").innerHTML = `
+        <div class="box">
+            主觀察<br>
+            <b>${summary.main_watch ?? 0}</b>
+        </div>
 
-    <div class="box">
-        🟢 主觀察<br>
-        <b>${data.summary.main_watch}</b>
-    </div>
+        <div class="box">
+            追蹤<br>
+            <b>${summary.follow_watch ?? 0}</b>
+        </div>
 
-    <div class="box">
-        🟡 追蹤<br>
-        <b>${data.summary.follow_watch}</b>
-    </div>
-
-    <div class="box">
-        🔴 隱藏<br>
-        <b>${data.summary.hidden}</b>
-    </div>
-
+        <div class="box">
+            隱藏<br>
+            <b>${summary.hidden ?? 0}</b>
+        </div>
     `;
 }
 
 function renderList(items){
+    document.getElementById("count").innerText =
+        `目前顯示：${items.length} 檔`;
 
-    document.getElementById("count").innerText=
-    `目前顯示：${items.length} 檔`;
+    const list = document.getElementById("list");
+    list.innerHTML = "";
 
-    const list=document.getElementById("list");
+    if(items.length === 0){
+        list.innerHTML = `
+            <div class="status error">
+                沒有符合條件的資料。請檢查最低分數、狀態篩選，或確認 v3_web_light.json 的 items 是否有資料。
+            </div>
+        `;
+        return;
+    }
 
-    list.innerHTML="";
+    items.forEach(item => {
+        const card = document.createElement("div");
+        const group = getGroup(item);
 
-    items.forEach(item=>{
+        card.className = `card ${group}`;
 
-        const card=document.createElement("div");
+        const flags = text(item.warningFlags);
+        const triggerWarnings = text(item.triggerWarnings);
 
-        card.className=`card ${item.group}`;
+        card.innerHTML = `
+            <h2>${text(item.id)} ${text(item.name)}</h2>
 
-        const flags=text(item.warningFlags);
-        const triggerWarnings=text(item.triggerWarnings);
+            <div class="score">
+                Rank：${fmt(item.rankScore ?? item.score)}
+            </div>
 
-        card.innerHTML=`
+            <div>
+                V3：${fmt(item.score)}
+            </div>
 
-        <h2>${item.id} ${item.name}</h2>
+            <div class="trigger">
+                Trigger：${fmt(item.triggerScore)}
+                (${text(item.triggerLevel)})
+            </div>
 
-        <div class="score">
-            Rank：${fmt(item.rankScore)}
-        </div>
+            <div class="section">
+                <span class="tag">
+                    Compression：${fmt(item.compressionScore,0)}
+                </span>
 
-        <div>
-            V3：${fmt(item.score)}
-        </div>
+                <span class="tag">
+                    Ignition：${fmt(item.ignitionScore,0)}
+                </span>
 
-        <div class="trigger">
-            Trigger：${fmt(item.triggerScore)}
-            (${item.triggerLevel})
-        </div>
+                <span class="tag">
+                    Confirmation：${fmt(item.confirmationScore,0)}
+                </span>
 
-        <div class="section">
+                <span class="tag">
+                    Event：${fmt(item.eventBonus,0)}
+                </span>
 
-            <span class="tag">
-                Compression：${fmt(item.compressionScore,0)}
-            </span>
+                <span class="tag">
+                    Raw Event：${fmt(item.eventRawBonus,0)}
+                </span>
+            </div>
 
-            <span class="tag">
-                Ignition：${fmt(item.ignitionScore,0)}
-            </span>
+            <div class="warning-box">
+                <b>Failed Breakout 假突破記憶</b><br>
 
-            <span class="tag">
-                Confirmation：${fmt(item.confirmationScore,0)}
-            </span>
+                假突破次數：${fmt(item.failedBreakoutCount,0)} 次<br>
+                假突破扣分：-${fmt(item.failedBreakoutPenalty,0)}<br>
+                最後試壓高點：${fmt(item.lastTestHigh)}<br>
 
-            <span class="tag">
-                Event：${fmt(item.eventBonus,0)}
-            </span>
+                警示旗標：
+                <span class="${warningClass(flags)}">
+                    ${warningLabel(flags)}
+                </span><br>
 
-            <span class="tag">
-                Raw Event：${fmt(item.eventRawBonus,0)}
-            </span>
+                Trigger 警示：
+                <span class="${warningClass(triggerWarnings)}">
+                    ${triggerWarnings}
+                </span>
+            </div>
 
-        </div>
+            <div class="position">
+                持有建議：${text(item.positionAction)}
+            </div>
 
-        <div class="warning-box">
-
-            <b>Failed Breakout 假突破記憶</b><br>
-
-            假突破次數：${fmt(item.failedBreakoutCount,0)} 次<br>
-            假突破扣分：-${fmt(item.failedBreakoutPenalty,0)}<br>
-            最後試壓高點：${fmt(item.lastTestHigh)}<br>
-
-            警示旗標：
-            <span class="${warningClass(flags)}">
-                ${warningLabel(flags)}
-            </span><br>
-
-            Trigger 警示：
-            <span class="${warningClass(triggerWarnings)}">
-                ${triggerWarnings}
-            </span>
-
-        </div>
-
-        <div class="position">
-            持有建議：${item.positionAction}
-        </div>
-
-        <div class="metric">
-
-            股價：${fmt(item.price)}<br>
-            啟動停損：${fmt(item.activeStop)}<br>
-            初始停損：${fmt(item.initialStop)}<br>
-            成本保護：${fmt(item.breakevenStop)}<br>
-            移動停利：${fmt(item.trailingStop)}
-
-        </div>
-
+            <div class="metric">
+                股價：${fmt(item.price)}<br>
+                啟動停損：${fmt(item.activeStop)}<br>
+                初始停損：${fmt(item.initialStop)}<br>
+                成本保護：${fmt(item.breakevenStop)}<br>
+                移動停利：${fmt(item.trailingStop)}
+            </div>
         `;
 
         list.appendChild(card);
-
     });
-
 }
 
 function applyFilters(){
+    const group = document.getElementById("groupFilter").value;
+    const score = Number(document.getElementById("scoreFilter").value);
+    const keyword = document.getElementById("keywordFilter").value.trim();
 
-    const group=
-    document.getElementById("groupFilter").value;
+    const result = allItems.filter(item => {
+        const itemGroup = getGroup(item);
 
-    const score=
-    Number(
-        document.getElementById("scoreFilter").value
-    );
+        const okGroup =
+            group === "all" ||
+            itemGroup === group;
 
-    const keyword=
-    document.getElementById("keywordFilter")
-    .value
-    .trim();
+        const okScore =
+            Number(item.score) >= score;
 
-    const result=allItems.filter(item=>{
+        const okKeyword =
+            keyword === "" ||
+            String(item.id).includes(keyword) ||
+            String(item.name).includes(keyword);
 
-        const okGroup=
-        group==="all" ||
-        item.group===group;
-
-        const okScore=
-        Number(item.score)>=score;
-
-        const okKeyword=
-        keyword==="" ||
-        String(item.id).includes(keyword) ||
-        String(item.name).includes(keyword);
-
-        return (
-            okGroup &&
-            okScore &&
-            okKeyword
-        );
-
+        return okGroup && okScore && okKeyword;
     });
 
     renderList(result);
-
 }
 
 async function loadData(){
+    try{
+        const url = "/v3_web_light.json?ts=" + Date.now();
 
-    const res=
-    await fetch(
-        "v3_web_light.json?ts="+Date.now()
-    );
+        const res = await fetch(url);
 
-    const data=
-    await res.json();
+        if(!res.ok){
+            throw new Error(`讀取失敗 HTTP ${res.status}，請確認 public/v3_web_light.json 存在`);
+        }
 
-    allItems=data.items || [];
+        const data = await res.json();
 
-    renderSummary(data);
+        allItems = Array.isArray(data) ? data : (data.items || []);
 
-    renderList(allItems);
+        renderSummary(
+            Array.isArray(data)
+                ? { summary: { main_watch: 0, follow_watch: allItems.length, hidden: 0 } }
+                : data
+        );
 
-    document
-    .getElementById("groupFilter")
-    .addEventListener(
-        "change",
-        applyFilters
-    );
+        renderList(allItems);
 
-    document
-    .getElementById("scoreFilter")
-    .addEventListener(
-        "input",
-        applyFilters
-    );
+        setStatus(
+            `讀取成功。引擎：${text(data.engine)}｜版本：${text(data.version)}｜資料筆數：${allItems.length}`,
+            "ok"
+        );
 
-    document
-    .getElementById("keywordFilter")
-    .addEventListener(
-        "input",
-        applyFilters
-    );
+        document.getElementById("groupFilter").addEventListener("change", applyFilters);
+        document.getElementById("scoreFilter").addEventListener("input", applyFilters);
+        document.getElementById("keywordFilter").addEventListener("input", applyFilters);
+    }catch(error){
+        console.error(error);
 
+        setStatus(
+            `V3 資料讀取失敗：${error.message}<br>請檢查 v3_web_light.json 是否放在 public，或直接打開 /v3_web_light.json 測試。`,
+            "error"
+        );
+    }
 }
 
 loadData();
-
 </script>
 
 </body>
